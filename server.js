@@ -1,32 +1,14 @@
-var express = require('express');
-var compression = require('compression');
-var proxy = require('http-proxy-middleware');
-var API_HOST = process.env.API_HOST || 'localhost:8080';
-var PORT = process.env.PORT || 8080
+const express = require('express');
+const path = require('path');
+const app = express();
 
-var buildPath = 'dist/angular-demo'
+// Serve static files....
+app.use(express.static(__dirname + '/dist/IT-academy-project-front-end'));
 
-// Initialize
-var app = express();
-
-// Serve static resources from 'build' folder
-app.use(express.static(buildPath));
-
-// Enable gzip response compression
-app.use(compression());
-
-// Enable proxy to api
-app.use('/api', proxy({
-    target: API_HOST,
-    changeOrigin: true,
-    pathRewrite: {
-        '^/api': ''
-    }
-}));
-
-// Otherwise serve index.html
-app.get('*', function (req, res) {
-    res.sendFile(__dirname + buildPath + "/index.html");
+// Send all requests to index.html
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/IT-academy-project-front-end/index.html'));
 });
 
-app.listen(PORT);
+// default Heroku PORT
+app.listen(process.env.PORT || 3000);
