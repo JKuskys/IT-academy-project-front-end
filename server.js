@@ -1,19 +1,32 @@
-//Install express server
-const express = require('express');
-const path = require('path');
+var express = require('express');
+var compression = require('compression');
+var proxy = require('http-proxy-middleware');
+var API_HOST = process.env.API_HOST || 'localhost:8080';
+var PORT = process.env.PORT || 8080
 
-const app = express();
+var buildPath = 'dist/angular-demo'
 
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist'));
+// Initialize
+var app = express();
 
-app.get('/*', function(req,res) {
+// Serve static resources from 'build' folder
+app.use(express.static(buildPath));
 
-res.sendFile(path.join(__dirname+'/dist/index.html'));
+// Enable gzip response compression
+app.use(compression());
+
+// Enable proxy to api
+app.use('/api', proxy({
+    target: API_HOST,
+    changeOrigin: true,
+    pathRewrite: {
+        '^/api': ''
+    }
+}));
+
+// Otherwise serve index.html
+app.get('*', function (req, res) {
+    res.sendFile(__dirname + buildPath + "/index.html");
 });
 
-// Start the app by listening on the default Heroku port
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log('Express server listening on port', port)
-});
+app.listen(PORT);
