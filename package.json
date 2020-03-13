@@ -1,14 +1,15 @@
 {
-  "name": "it-academy-project-front-end",
+  "name": "angular-demo",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "serve": "ng serve --proxy-config proxy.conf.json",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -30,15 +31,15 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.900.6",
-    "@angular/cli": "^9.0.6",
-    "@angular/compiler-cli": "^9.0.6",
-    "@angular/language-service": "~9.0.1",
-    "@types/jasmine": "~3.5.0",
+    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular/cli": "~7.3.1",
+    "@angular/compiler-cli": "~7.2.0",
+    "@angular/language-service": "~7.2.0",
+    "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.11.1",
-    "codelyzer": "^5.1.2",
-    "jasmine-core": "~3.5.0",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~4.5.0",
+    "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.3.0",
     "karma-chrome-launcher": "~3.1.0",
