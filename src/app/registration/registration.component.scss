@@ -1,0 +1,19 @@
+//for textareas
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+.resize {
+  resize:none
+}
+//to add padding to all blocks of input
+.container-colored{
+  margin: auto;
+
+  padding: 10px;
+  background: rgba(235, 239, 242, 0);
+  border-radius: 5px;
+}
+//to show items in one line(phone number)
+.inline{
+  display : inline;
+}

@@ -10,6 +10,8 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegistrationComponent } from './registration/registration.component';
+import {HttpClientModule} from '@angular/common/http';
+
 
 
 
@@ -30,7 +32,7 @@ const appRoutes: Routes = [
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
-
+    HttpClientModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes, {anchorScrolling: 'enabled'}),
     AppRoutingModule,

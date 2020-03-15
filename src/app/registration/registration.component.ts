@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Info} from '../shared/registration';
+import {UserService} from '../Services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,6 +16,7 @@ export class RegistrationComponent implements OnInit {
       Validators.required,
       Validators.minLength(1),
     ]],
+    phoneCode: ['', []],
     phoneNumber: ['', [
       Validators.required,
       Validators.pattern('[0-9 ]{8}'),
@@ -25,21 +29,28 @@ export class RegistrationComponent implements OnInit {
 
     schoolName: ['', [
       Validators.required,
+      Validators.maxLength(200)
     ]],
     hobbies: ['', [
       Validators.required,
+      Validators.maxLength(1500)
     ]],
-    contract: ['', [
-      Validators.required,
+    contract: [false, []],
+    contractDescription: ['', [
+      Validators.maxLength(1500)
     ]],
+    workTime: [false, []],
     drive: ['', [
       Validators.required,
+      Validators.maxLength(1500)
     ]],
     experience: ['', [
       Validators.required,
+      Validators.maxLength(1500)
     ]],
     fromWhere: ['', [
       Validators.required,
+      Validators.maxLength(1500)
     ]],
     passwordReg: ['', [
       Validators.required,
@@ -51,45 +62,99 @@ export class RegistrationComponent implements OnInit {
     ]]
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService) {
   }
 
+  arrCodes: string[];
+  info: Info;
+  serverErrorMessage: string;
+
   ngOnInit(): void {
-    //make all values zero
+    this.httpService.get('./assets/phone-codes.json').subscribe(
+      data => {
+        this.arrCodes = data as string[];
+        // console.log(this.arrCodes);
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      });
   }
 
   onSubmit() {
-    // this.post = {
-    //   title: this.blogTitle.value,
-    //   author: this.blogAuthor.value,
-    //   email: this.blogEmail.value,
-    //   content: this.blogContent.value
-    // };
+    this.info = {
+      firstAndLastName: this.firstAndLastName.value,
+      phoneNumber: this.phoneCode.value + this.phoneNum.value,
+      schoolName: this.schoolName.value,
+      hobbies: this.hobbies.value,
+      contract: this.contract.value,
+      contractDescription: this.contractDescription.value,
+      workTime: this.workTime.value,
+      drive: this.drive.value,
+      experience: this.experience.value,
+      fromWhere: this.fromWhere.value,
+      passwordReg: this.passwordReg.value,
+      passwordRepeatReg: this.passwordRepeatReg.value
+    };
+
+    this.userService.submitRegistration(this.info).subscribe(
+      () => {
+        // this.post = {author: '', content: '', email: '', title: ''};
+        this.serverErrorMessage = '';
+      },
+      error => (this.serverErrorMessage = error)
+    );
   }
 
-  //   this.postsService.addPost(this.post).subscribe(
-  //     () => {
-  //       // this.post = {author: '', content: '', email: '', title: ''};
-  //       this.serverErrorMessage = '';
-  //     },
-  //     error => (this.serverErrorMessage = error)
-  //   );
-  // }
 
-  // get blogTitle() {
-  //   return this.postForm.get('blogTitle');
-  // }
-  //
-  // get blogEmail() {
-  //   return this.postForm.get('blogEmail');
-  // }
-  //
-  // get blogAuthor() {
-  //   return this.postForm.get('blogAuthor');
-  // }
-  //
-  // get blogContent() {
-  //   return this.postForm.get('blogContent');
-  // }
+  get firstAndLastName() {
+    return this.registrationForm.get('firstAndLastName');
+  }
 
+  get phoneCode() {
+    return this.registrationForm.get('phoneCode');
+  }
+
+  get phoneNum() {
+    return this.registrationForm.get('phoneNumber');
+  }
+
+  get schoolName() {
+    return this.registrationForm.get('schoolName');
+  }
+
+  get hobbies() {
+    return this.registrationForm.get('hobbies');
+  }
+
+  get workTime() {
+    return this.registrationForm.get('workTime');
+  }
+
+  get contractDescription() {
+    return this.registrationForm.get('contractDescription');
+  }
+
+  get drive() {
+    return this.registrationForm.get('drive');
+  }
+
+  get experience() {
+    return this.registrationForm.get('experience');
+  }
+
+  get fromWhere() {
+    return this.registrationForm.get('fromWhere');
+  }
+
+  get contract() {
+    return this.registrationForm.get('contract');
+  }
+
+  get passwordReg() {
+    return this.registrationForm.get('passwordReg');
+  }
+
+  get passwordRepeatReg() {
+    return this.registrationForm.get('passwordRepeatReg');
+  }
 }
