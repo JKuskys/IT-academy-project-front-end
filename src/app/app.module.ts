@@ -4,10 +4,14 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomePageComponent} from './home-page/home-page.component';
-import {RegistrationComponent} from './registration/registration.component';
+import {ModalComponent} from './modal/modal.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RegistrationComponent } from './registration/registration.component';
+
+
 
 const appRoutes: Routes = [
   {path: 'home', component: HomePageComponent},
@@ -19,15 +23,19 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomePageComponent,
-    RegistrationComponent,
+    ModalComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RegistrationComponent
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [
+
     BrowserModule,
     RouterModule.forRoot(appRoutes, {anchorScrolling: 'enabled'}),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

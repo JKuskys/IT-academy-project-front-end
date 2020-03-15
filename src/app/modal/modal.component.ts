@@ -1,14 +1,15 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy} from '@angular/core';
 import {ModalService} from '../Services/modal/modal.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  selector: 'jw-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
   private element: any;
 
@@ -17,8 +18,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let modal = this;
-
     // ensure id attribute exists
     if (!this.id) {
       console.error('modal must have an id');
@@ -29,9 +28,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     document.body.appendChild(this.element);
 
     // close modal on background click
-    this.element.addEventListener('click', function(e: any) {
-      if (e.target.className === 'jw-modal') {
-        modal.close();
+    this.element.addEventListener('click', el => {
+      if (el.target.className === 'jw-modal') {
+        this.close();
       }
     });
 
@@ -39,7 +38,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.modalService.add(this);
   }
 
-  // remove self from modal service when directive is destroyed
+  // remove self from modal service when component is destroyed
   ngOnDestroy(): void {
     this.modalService.remove(this.id);
     this.element.remove();

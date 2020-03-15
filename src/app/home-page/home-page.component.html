@@ -17,7 +17,12 @@
     darbo dienomis (14-18 val.).
     · Puikiai kalbi ir rašai angliškai.
     <div class="container">
-      <button type="button" class="btn btn-success btn-rounded">Register</button>
+      <button (click)="openModal('registration')"  class="btn btn-success btn-rounded">Registruotis</button>
     </div>
+
   </div>
 </div>
+<jw-modal id="registration">
+   <button class="button float-right"(click)="closeModal('registration')">x</button>
+  <app-registration></app-registration>
+</jw-modal>
