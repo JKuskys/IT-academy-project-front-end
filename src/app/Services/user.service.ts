@@ -16,7 +16,7 @@ export class UserService {
 
   submitRegistration(info: Info): Observable<Info> {
     return this.httpClient
-      .post<Info>(`${this.apiPath}/registration`, info)
+      .post<Info>(`https://academy-project-back.herokuapp.com/api/applications`, info)
       .pipe(catchError(this.errorHandler));
   }
 
