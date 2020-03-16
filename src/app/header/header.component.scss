@@ -2,13 +2,8 @@
     font-family: Arial, Helvetica, sans-serif;
     background:  #f5f5ef;
 }
-.btn{
-    background: #5471BA;
-    font-size: 20px;
-    color: white;
-    border: 2px solid #435ea3;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-  }
-  
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
