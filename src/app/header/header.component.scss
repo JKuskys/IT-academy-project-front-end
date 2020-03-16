@@ -2,3 +2,42 @@
     font-family: Arial, Helvetica, sans-serif;
     background:  #f5f5ef;
 }
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+  
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+  }
+  
+  .container-colored{
+    margin: auto;
+    max-width: 850px;
+    min-width: 400px;
+    padding: 25px;
+    background: #EBEFF2;
+    border-radius: 25px;
+  }
+  
+  
+  .container-text{
+    color: #5471BA;
+    font-size: 20px;
+    text-align: justify;
+  }
+  
+  .container-text2{
+    background-color: #b7c3e1;
+    font-size: 20px;
+    color: white;
+  }
+  
+  .prisijunk{
+    text-align: center;
+    font-size: 24px;
+    color: #5471BA;
+  }
+  
