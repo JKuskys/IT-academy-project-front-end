@@ -19,7 +19,8 @@ export class RegistrationComponent implements OnInit {
     phoneCode: ['', []],
     phoneNumber: ['', [
       Validators.required,
-      Validators.pattern('[0-9 ]{8}'),
+      Validators.maxLength(8),
+      Validators.pattern('[0-9 ]{1,8}'),
     ]],
     emailReg: ['', [
       Validators.required,

@@ -11,7 +11,7 @@
         maxlength="80"
       />
       <div
-        [hidden]="registrationForm.controls.firstAndLastName.valid || registrationForm.controls.firstAndLastName.pristine|| registrationForm.controls.firstAndLastName.touched"
+        [hidden]="registrationForm.controls.firstAndLastName.valid || registrationForm.controls.firstAndLastName.pristine"
         class="alert alert-danger"
       >
         <div *ngIf="registrationForm.controls.firstAndLastName.errors?.required">
@@ -44,7 +44,7 @@
         class="alert alert-danger"
       >
         <div
-          *ngIf="(registrationForm.controls.phoneNumber.errors?.minlength||registrationForm.controls.phoneNumber.errors?.maxlength )&&!registrationForm.controls.phoneNumber.touched ">
+          *ngIf="(registrationForm.controls.phoneNumber.errors?.maxlength )&&!registrationForm.controls.phoneNumber.touched ">
           Telefono numeris privalo būti 8 skaičių ilgumo
         </div>
 
@@ -53,7 +53,7 @@
           Telefono numeris yra privalomas
         </div>
         <div
-          *ngIf="registrationForm.controls.phoneNumber.errors?.pattern &&!registrationForm.controls.phoneNumber.touched ">
+          *ngIf="registrationForm.controls.phoneNumber.errors?.pattern &&!registrationForm.controls.phoneNumber.touched||registrationForm.controls.phoneNumber.dirty">
           Telefono numeris tūrėtų būti tik iš skaičių
         </div>
       </div>
