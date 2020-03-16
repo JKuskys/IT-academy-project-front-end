@@ -9,6 +9,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     ModalComponent,
     HeaderComponent,
     FooterComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

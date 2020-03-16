@@ -7,11 +7,13 @@ import {ModalService} from '../Services/modal/modal.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  private bodyText: string;
 
   constructor(private modalService: ModalService) {
   }
 
   ngOnInit(): void {
+    this.bodyText = 'This text can be updated in modal 1';
   }
 
   openModal(id: string) {
