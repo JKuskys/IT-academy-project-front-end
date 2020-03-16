@@ -1,6 +1,6 @@
 <div class="container well">
   <h2 class="text-center">Registracija</h2>
-  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(); registrationForm.reset()">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit(); ">
     <div class="form-group container-colored">
       <label for="name">Vardas, pavardė</label>
       <input
@@ -11,7 +11,7 @@
         maxlength="80"
       />
       <div
-        [hidden]="registrationForm.controls.firstAndLastName.valid || registrationForm.controls.firstAndLastName.pristine"
+        [hidden]="registrationForm.controls.firstAndLastName.valid || registrationForm.controls.firstAndLastName.pristine|| registrationForm.controls.firstAndLastName.touched"
         class="alert alert-danger"
       >
         <div *ngIf="registrationForm.controls.firstAndLastName.errors?.required">
@@ -24,7 +24,8 @@
       <div class="row" id="sel1">
         <div class="col-md-3 pr-0">
           <select formControlName="phoneCode" class="form-control inline">
-            <option   [value]="name.dial_code" *ngFor="let name of arrCodes">{{name.code + " | " + name.dial_code}}</option>
+            <option [value]="name.dial_code"
+                    *ngFor="let name of arrCodes">{{name.code + " | " + name.dial_code}}</option>
           </select>
         </div>
         <div class="col-md-9 pl-0"
@@ -221,7 +222,7 @@
         formControlName="passwordRepeatReg"
       />
       <div
-        [hidden]="registrationForm.controls.passwordRepeatReg.valid || registrationForm.controls.passwordRepeatReg.pristine"
+        [hidden]="(registrationForm.controls.passwordRepeatReg.valid || registrationForm.controls.passwordRepeatReg.pristine)&&validatePasswords()"
         class="alert alert-danger"
       >
         <div *ngIf="registrationForm.controls.passwordRepeatReg.errors?.required">
@@ -232,6 +233,9 @@
         </div>
         <div *ngIf="registrationForm.controls.passwordRepeatReg.errors?.maxlength">
           Slaptažodis privalo būti trumpesnis nei 30 symbolių
+        </div>
+        <div *ngIf="this.passwordReg.value!=this.passwordRepeatReg.value">
+          Slaptažodžiai turi sutapti
         </div>
       </div>
     </div>

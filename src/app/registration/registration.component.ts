@@ -68,6 +68,8 @@ export class RegistrationComponent implements OnInit {
   arrCodes: string[];
   info: Info;
   serverErrorMessage: string;
+  passwordNotMatch: boolean;
+  submission: boolean;
 
   ngOnInit(): void {
     this.httpService.get('./assets/phone-codes.json').subscribe(
@@ -80,7 +82,17 @@ export class RegistrationComponent implements OnInit {
       });
   }
 
+  validatePasswords(): boolean {
+    if (this.passwordReg.value !== this.passwordRepeatReg.value && this.passwordReg.value !== '' && this.passwordRepeatReg.value !== '') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   onSubmit() {
+    this.passwordNotMatch = false;
+    this.submission = false;
     this.info = {
       firstAndLastName: this.firstAndLastName.value,
       phoneNumber: this.phoneCode.value + this.phoneNum.value,
@@ -96,13 +108,18 @@ export class RegistrationComponent implements OnInit {
       passwordRepeatReg: this.passwordRepeatReg.value
     };
 
-    this.userService.submitRegistration(this.info).subscribe(
-      () => {
-        // this.post = {author: '', content: '', email: '', title: ''};
-        this.serverErrorMessage = '';
-      },
-      error => (this.serverErrorMessage = error)
-    );
+    if (this.info.passwordReg == this.info.passwordRepeatReg) {
+      this.userService.submitRegistration(this.info).subscribe(
+        () => {
+          this.serverErrorMessage = '';
+        },
+        error => (this.serverErrorMessage = error)
+      );
+      this.registrationForm.reset();
+    } else {
+      this.passwordNotMatch = true;
+      this.submission = false;
+    }
   }
 
 
