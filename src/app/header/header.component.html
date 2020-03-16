@@ -1,13 +1,24 @@
-<nav class="navbar navbar-light bg-light" id="site-header">
-  <a class="navbar-brand" href="#">
-    <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-    IT Akademija
-  </a>
+<!--<mat-toolbar id="site-header">-->
+<!--  <mat-toolbar color="primary">-->
+<!--    <span></span>-->
+
+<!--    &lt;!&ndash; This fills the remaining space of the current row &ndash;&gt;-->
+<!--    <span class="example-fill-remaining-space"></span>-->
+
+<!--    <span><button (click)="openModal('registration')" class="btn mat-button btn-rounded">Registruotis</button>-->
+
+<!--    <button type="button" class="btn btn-info btn-rounded">Prisijungti</button></span>-->
+<!--  </mat-toolbar>-->
 
 
-  <div class="d-flex justify-content-right">
-    <button (click)="openModal('registration')" class="btn btn-success btn-rounded float-center">Registruotis</button>
-
-    <button type="button" class="btn btn-success btn-rounded">Prisijungti</button>
+<nav class="navbar navbar-dark bg-primary">
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">IT akademija</a>
+  </div>
+  <ul class="nav navbar-nav navbar-right">
+    <div><button (click)="openModal('registration')" class="btn btn-success">Registruotis</button>
+    <button type="button" class="btn btn-secondary">Prisijungti</button></div>
+  </ul>
   </div>
 </nav>
