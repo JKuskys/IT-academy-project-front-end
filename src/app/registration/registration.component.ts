@@ -55,10 +55,14 @@ export class RegistrationComponent implements OnInit {
     ]],
     passwordReg: ['', [
       Validators.required,
-      Validators.maxLength(30)
+      Validators.minLength(7),
+      Validators.maxLength(30),
+
+      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{7,30}')
     ]],
     passwordRepeatReg: ['', [
       Validators.required,
+      Validators.minLength(7),
       Validators.maxLength(30)
     ]]
   });
@@ -95,21 +99,26 @@ export class RegistrationComponent implements OnInit {
     this.passwordNotMatch = false;
     this.submission = false;
     this.info = {
-      firstAndLastName: this.firstAndLastName.value,
-      phoneNumber: this.phoneCode.value + this.phoneNum.value,
-      schoolName: this.schoolName.value,
-      hobbies: this.hobbies.value,
-      contract: this.contract.value,
-      contractDescription: this.contractDescription.value,
-      workTime: this.workTime.value,
-      drive: this.drive.value,
-      experience: this.experience.value,
-      fromWhere: this.fromWhere.value,
-      passwordReg: this.passwordReg.value,
-      passwordRepeatReg: this.passwordRepeatReg.value
+      full_name: this.firstAndLastName.value,
+      phone_number: this.phoneCode.value + this.phoneNum.value,
+      education: this.schoolName.value,
+      free_time: this.hobbies.value,
+      agreement: this.contract.value,
+      comment: this.contractDescription.value,
+      academy_time: this.workTime.value,
+      reason: this.drive.value,
+      technologies: this.experience.value,
+      source: this.fromWhere.value,
+      application_date: new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0') + '-' + String(new Date().getDate()).padStart(2, '0'),
+      user: {
+        email: this.email.value,
+        password: this.passwordReg.value,
+        passwordRepeat: this.passwordRepeatReg.value,
+        admin: false
+      }
     };
 
-    if (this.info.passwordReg == this.info.passwordRepeatReg) {
+    if (this.info.user.password == this.info.user.passwordRepeat) {
       this.userService.submitRegistration(this.info).subscribe(
         () => {
           this.serverErrorMessage = '';
@@ -126,6 +135,10 @@ export class RegistrationComponent implements OnInit {
 
   get firstAndLastName() {
     return this.registrationForm.get('firstAndLastName');
+  }
+
+  get email() {
+    return this.registrationForm.get('emailReg');
   }
 
   get phoneCode() {

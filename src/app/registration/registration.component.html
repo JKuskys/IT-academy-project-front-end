@@ -205,8 +205,8 @@
         <div *ngIf="registrationForm.controls.passwordReg.errors?.required">
           Šis laukas yra privalomas
         </div>
-        <div *ngIf="registrationForm.controls.passwordReg.errors?.minlength">
-          Slaptažodis privalo būti ilgesnis nei 7 symboliai
+        <div *ngIf="registrationForm.controls.passwordReg.errors?.pattern">
+          Slaptažodis privalo turėti bent vieną skaičių, didžiają raidę ir ilgesnis nei 7 symboliai
         </div>
         <div *ngIf="registrationForm.controls.passwordReg.errors?.maxlength">
           Slaptažodis privalo būti trumpesnis nei 30 symbolių
@@ -228,9 +228,7 @@
         <div *ngIf="registrationForm.controls.passwordRepeatReg.errors?.required">
           Šis laukas yra privalomas
         </div>
-        <div *ngIf="registrationForm.controls.passwordRepeatReg.errors?.minlength">
-          Slaptažodis privalo būti ilgesnis nei 7 symboliai
-        </div>
+
         <div *ngIf="registrationForm.controls.passwordRepeatReg.errors?.maxlength">
           Slaptažodis privalo būti trumpesnis nei 30 symbolių
         </div>
