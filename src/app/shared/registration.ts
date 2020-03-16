@@ -1,5 +1,6 @@
 export interface Info {
-  full_name: string;
+  id?: number;
+  name: string;
   phone_number: string;
   education: string;
   free_time: string;
@@ -11,6 +12,7 @@ export interface Info {
   source: string;
   application_date: string;
   user: {
+    id?: number;
     email: string;
     password: string;
     passwordRepeat: string;

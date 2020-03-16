@@ -99,7 +99,8 @@ export class RegistrationComponent implements OnInit {
     this.passwordNotMatch = false;
     this.submission = false;
     this.info = {
-      full_name: this.firstAndLastName.value,
+      id: Math.floor(Math.random() * 10),
+      name: this.firstAndLastName.value,
       phone_number: this.phoneCode.value + this.phoneNum.value,
       education: this.schoolName.value,
       free_time: this.hobbies.value,
@@ -109,8 +110,12 @@ export class RegistrationComponent implements OnInit {
       reason: this.drive.value,
       technologies: this.experience.value,
       source: this.fromWhere.value,
-      application_date: new Date().getFullYear() + '-' + String(new Date().getMonth() + 1).padStart(2, '0') + '-' + String(new Date().getDate()).padStart(2, '0'),
+      application_date:
+        new Date().getFullYear() + '-' +
+        String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
+        String(new Date().getDate()).padStart(2, '0'),
       user: {
+        id: Math.floor(Math.random() * 10),
         email: this.email.value,
         password: this.passwordReg.value,
         passwordRepeat: this.passwordRepeatReg.value,
