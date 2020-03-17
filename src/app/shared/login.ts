@@ -1,5 +1,4 @@
-export interface Info {
-    emailReg:string,
-    passwordReg: string;
-  }
-  
+export interface LoginInfo {
+  email: string,
+  password: string;
+};

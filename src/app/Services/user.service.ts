@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Info} from '../shared/registration';
+import {LoginInfo} from '../shared/login';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserService {
   private url = 'https://academy-project-back.herokuapp.com/';
   private readonly apiPath = '/api';
 
-  constructor(private httpClient: HttpClient ) {
+  constructor(private httpClient: HttpClient) {
   }
 
 
@@ -19,6 +20,12 @@ export class UserService {
 
     return this.httpClient
       .post<Info>((this.url + `api/applications`), info)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  submitLogin(loginInfo: LoginInfo): Observable<LoginInfo> {
+    return this.httpClient
+      .post <LoginInfo>((this.url + `api/applications`), loginInfo)
       .pipe(catchError(this.errorHandler));
   }
 
