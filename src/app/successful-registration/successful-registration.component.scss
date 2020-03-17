@@ -1,14 +1,6 @@
-//for textareas
-.scroll::-webkit-scrollbar {
-  display: none;
-}
-.resize {
-  resize:none
-}
-//to add padding to all blocks of input
 .container-uncolored{
   margin: auto;
-  max-width: 800px;
+  max-width: 350px;
   min-width: 300px;
   padding: 10px;
   background: rgba(235, 239, 242, 0);
@@ -19,11 +11,11 @@
   display : inline;
 }
 
-.container-reg-colored{
+.container-succ-colored{
   margin: auto;
-  max-width: 850px;
+  max-width: 450px;
   min-width: 400px;
   padding: 25px;
-  background: rgba(0, 222, 242, 0.9);
+  background: rgba(0, 242, 123, 0.9);
   border-radius: 25px;
 }

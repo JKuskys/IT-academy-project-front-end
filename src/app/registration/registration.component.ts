@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Info} from '../shared/registration';
 import {UserService} from '../Services/user.service';
+import {ModalService} from '../Services/modal/modal.service';
 
 @Component({
   selector: 'app-registration',
@@ -67,7 +68,7 @@ export class RegistrationComponent implements OnInit {
     ]]
   });
 
-  constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService) {
+  constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService, private modalService: ModalService) {
   }
 
   arrCodes: string[];
@@ -123,20 +124,29 @@ export class RegistrationComponent implements OnInit {
       }
     };
 
-    if (this.info.user.password == this.info.user.passwordRepeat) {
+    if (this.info.user.password === this.info.user.passwordRepeat) {
       this.userService.submitRegistration(this.info).subscribe(
         () => {
           this.serverErrorMessage = '';
+          this.registrationForm.reset();
+          this.closeModal('registration');
+          this.openModal('successfulRegistration');
         },
         error => (this.serverErrorMessage = error)
       );
-      this.registrationForm.reset();
     } else {
       this.passwordNotMatch = true;
       this.submission = false;
     }
   }
 
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
 
   get firstAndLastName() {
     return this.registrationForm.get('firstAndLastName');
