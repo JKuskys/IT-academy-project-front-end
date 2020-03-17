@@ -13,10 +13,11 @@ import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SuccessfulRegistrationComponent } from './successful-registration/successful-registration.component';
 
 
 const appRoutes: Routes = [
-
+  {path: 'login', component: LoginComponent},
   {path: 'home', component: HomePageComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home'}
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    SuccessfulRegistrationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
