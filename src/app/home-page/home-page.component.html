@@ -1,41 +1,37 @@
 <div class="jumbotron vertical-center">
-  <div class="container">
-    <div class="container-image">
-      <img src="https://studyin.lt/wp-content/uploads/2018/08/432_50ff31a5fe0159e805be1427e2f392a8-718x320.jpg">
+    <div class="container-info">
+      <div class="container-image">
+        <img src="https://z-p3-scontent.fvno1-1.fna.fbcdn.net/v/t1.15752-9/90292967_934391043646865_725670231153836032_n.jpg?_nc_cat=110&_nc_sid=b96e70&_nc_oc=AQmkHILhaMelZsrXtXJeWSQx7Hxn3jE5YnhShMoy2s1lxp5fU77hieJYHIZHAWxFMIU&_nc_ht=z-p3-scontent.fvno1-1.fna&oh=adfdec35d689ce9840ac584ba1ec19b3&oe=5E9636DD">
+      </div>
+      <div class="container-text">
+        „IT Akademija“ yra dviejų dalių programa, kurią sudaro su studijomis suderinta praktika ir stažuotė mūsų IT 
+        departamente. Programa skirta IT ar susijusių specialybių studentams ir tiems, kas sieja savo ateitį su IT.<br>
+        Programos dalyviai mokosi:<br>
+        · programavimo<br>
+        · duomenų analizės<br>
+        · informacinių sistemų priežiūros<br>
+        · testavimo<br>
+        · komandinio darbo naudojant banko specifines technologijas, procesus ir praktikas<br>
+        · darbo su duomenimis<br>
+        IT Akademijos studentai turi galimybę pasirinkti norimą stažuotės kryptį kurso pabaigoje ir dirbti 
+        su realiais IT projektais.
+      </div>
     </div>
-    <div class="container-text">
-      „IT Akademija“ – tai dviejų dalių programa, kurią sudaro su studijomis suderinta praktika ir stažuotė mūsų IT
-      departamente. Ši programa skirta ne tik informacinių technologijų ar susijusių specialybių studentams, tačiau ir
-      tiems, kurie sieja savo ateitį su IT sritimi ir jau dabar tobulina savo techninius sugebėjimus.<br>
-      Šios programos metu dalyviai mokosi programavimo, duomenų analizės, informacinių sistemų priežiūros ir testavimo,
-      komandinio darbo naudojant banko specifines technologijas, procesus ir praktikas, darbo su duomenimis. IT
-      Akademijos
-      studentai turi galimybę išbandyti ir save atrasti skirtingose IT srityse ir praktikos pabaigoje pasirinkti norimą
-      stažuotės kryptį. Stažuotojai drauge su mūsų IT profesionalais įgyvendina realius IT projektus pasirinktose rolėse
-      bei užtvirtina įvairiapuses kompestencijas.<br>
-    </div>
-    <br>
-    <br>
-    <div class="join"><b>Prisijunk, jeigu tu:</b><br></div>
-    <br>
-    <div class="container-text2">
-      · Sieki su IT susijusio išsilavinimo ar mėgini praktiškai atrasti save šioje srityje.<br>
-      · Ateityje nori būti įvairiapusis IT specialistas, kuris sugeba ne tik programuoti.<br>
-      · Degi noru tobulėti, rodai iniciatyvą ir jau turi bazinius gebėjimus – savo malonumui programuoji, kuri puslapius
-      ar programėles, padedi draugams spręsti technines problemas.<br>
-      · Esi pasiryžusi/-ęs bent pusę dienos laiko skirti teorinėms ir praktinėms užduotims. Praktikai numatytas laikas
-      yra
-      darbo dienomis (14-18 val.).<br>
-      · Puikiai kalbi ir rašai angliškai.<br>
-
-    </div>
-    <br>
-    <br>
-    <div class="d-flex justify-content-center">
-      <button (click)="openModal('registration')" class="btn-xl btn-primary btn-rounded float-center">Registruotis į IT akademiją
-      </button>
-    </div>
-  </div>
+    <div class="container-join">
+      <div class="join"><b>Prisijunk, jeigu tu:</b><br></div>
+      <br>
+      <div class="container-text2">
+        · Sieki su IT susijusio išsilavinimo ar mėgini praktiškai atrasti save šioje srityje.<br>
+        · Ateityje nori būti įvairiapusis IT specialistas, kuris sugeba ne tik programuoti.<br>
+        · Degi noru tobulėti, rodai iniciatyvą ir jau turi bazinius gebėjimu.<br>
+        · Skirsi pusę dienos teorinėms ir praktinėms užduotims. Praktikai numatytas laikas yra
+          darbo dienomis (14-18 val.).<br>
+        · Puikiai kalbi ir rašai angliškai.<br>
+        <div class="d-flex justify-content-center">
+          <button (click)="openModal('registration')" class="btn-xl btn-primary btn-rounded float-center">Registruotis</button>
+        </div>
+      </div>
+    </div> 
 </div>
 <jw-modal id="registration">
   <app-registration></app-registration>
