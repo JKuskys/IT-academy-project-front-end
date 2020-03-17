@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         console.log(err.message);
-      });
+      }); 
   }
 
   onSubmit() {
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.info = {
       emailReg: this.emailReg.value,
       passwordReg: this.passwordReg.value,
-    };
+    };  
 }
 
   get emailReg(){
