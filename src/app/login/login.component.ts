@@ -11,12 +11,12 @@ import {UserService} from '../Services/user.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = this.fb.group({
-    emailReg: ['', [
+    emailLogin: ['', [
       Validators.required,
       Validators.maxLength(30),
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
     ]],
-    passwordReg: ['', [
+    passwordLogin: ['', [
       Validators.required,
       Validators.maxLength(30)
     ]],
