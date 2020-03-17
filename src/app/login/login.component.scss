@@ -18,3 +18,12 @@
   .inline{
     display : inline;
   }
+
+.container-login-colored{
+  margin: auto;
+  max-width: 450px;
+  min-width: 400px;
+  padding: 25px;
+  background: rgba(15, 213, 242, 0.9);
+  border-radius: 25px;
+}

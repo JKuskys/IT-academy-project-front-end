@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Info} from '../shared/login';
+import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
+import {ModalService} from '../Services/modal/modal.service';
 
 @Component({
   selector: 'app-login',
@@ -23,40 +23,48 @@ export class LoginComponent implements OnInit {
 
   });
 
-  constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private modalService: ModalService) {
   }
 
-  arrCodes: string[];
-  info: Info;
+  loginInfo: LoginInfo;
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
 
   ngOnInit(): void {
-    this.httpService.get('./assets/phone-codes.json').subscribe(
-      data => {
-        this.arrCodes = data as string[];
-        // console.log(this.arrCodes);
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err.message);
-      });
+    this.serverErrorMessage = '';
   }
 
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
-    this.info = {
-      emailReg: this.emailReg.value,
-      passwordReg: this.passwordReg.value,
+    this.loginInfo = {
+      email: this.emailLogin.value,
+      password: this.passwordLogin.value,
     };
-}
-
-  get emailReg(){
-    return this.loginForm.get('emailReg');
+    this.userService.submitLogin(this.loginInfo).subscribe(
+      () => {
+        this.serverErrorMessage = '';
+        this.loginForm.reset();
+        this.closeModal('login');
+      },
+      error => (this.serverErrorMessage = error)
+    );
   }
-  get passwordReg() {
-    return this.loginForm.get('passwordReg');
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+  get emailLogin() {
+    return this.loginForm.get('emailLogin');
+  }
+
+  get passwordLogin() {
+    return this.loginForm.get('passwordLogin');
   }
 
 
