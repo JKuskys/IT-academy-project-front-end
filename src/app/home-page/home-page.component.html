@@ -3,48 +3,50 @@
     <div class="container-image">
       <img src="https://studyin.lt/wp-content/uploads/2018/08/432_50ff31a5fe0159e805be1427e2f392a8-718x320.jpg">
     </div>
-      <div class="container-text">
-          „IT Akademija“ – tai dviejų dalių programa, kurią sudaro su studijomis suderinta praktika ir stažuotė mūsų IT
-          departamente. Ši programa skirta ne tik informacinių technologijų ar susijusių specialybių studentams, tačiau ir
-          tiems, kurie sieja savo ateitį su IT sritimi ir jau dabar tobulina savo techninius sugebėjimus.<br>
-          Šios programos metu dalyviai mokosi programavimo, duomenų analizės, informacinių sistemų priežiūros ir testavimo,
-          komandinio darbo naudojant banko specifines technologijas, procesus ir praktikas, darbo su duomenimis. IT Akademijos
-          studentai turi galimybę išbandyti ir save atrasti skirtingose IT srityse ir praktikos pabaigoje pasirinkti norimą
-          stažuotės kryptį. Stažuotojai drauge su mūsų IT profesionalais įgyvendina realius IT projektus pasirinktose rolėse
-          bei užtvirtina įvairiapuses kompestencijas.<br>
-      </div>
-      <br>
-      <br>
-      <div class="join"><b>Prisijunk, jeigu tu:</b><br></div>
-      <br>
-      <div class="container-text2">
-        · Sieki su IT susijusio išsilavinimo ar mėgini praktiškai atrasti save šioje srityje.<br>
-        · Ateityje nori būti įvairiapusis IT specialistas, kuris sugeba ne tik programuoti.<br>
-        · Degi noru tobulėti, rodai iniciatyvą ir jau turi bazinius gebėjimus – savo malonumui programuoji, kuri puslapius
-        ar programėles, padedi draugams spręsti technines problemas.<br>
-        · Esi pasiryžusi/-ęs bent pusę dienos laiko skirti teorinėms ir praktinėms užduotims. Praktikai numatytas laikas yra
-        darbo dienomis (14-18 val.).<br>
-        · Puikiai kalbi ir rašai angliškai.<br>
-
-      </div>
-      <br>
-      <br>
-    <div class="d-flex justify-content-center">
-      <button (click)="openModal('registration')" class="btn-xl btn-primary btn-rounded float-center">Registruotis</button>
+    <div class="container-text">
+      „IT Akademija“ – tai dviejų dalių programa, kurią sudaro su studijomis suderinta praktika ir stažuotė mūsų IT
+      departamente. Ši programa skirta ne tik informacinių technologijų ar susijusių specialybių studentams, tačiau ir
+      tiems, kurie sieja savo ateitį su IT sritimi ir jau dabar tobulina savo techninius sugebėjimus.<br>
+      Šios programos metu dalyviai mokosi programavimo, duomenų analizės, informacinių sistemų priežiūros ir testavimo,
+      komandinio darbo naudojant banko specifines technologijas, procesus ir praktikas, darbo su duomenimis. IT
+      Akademijos
+      studentai turi galimybę išbandyti ir save atrasti skirtingose IT srityse ir praktikos pabaigoje pasirinkti norimą
+      stažuotės kryptį. Stažuotojai drauge su mūsų IT profesionalais įgyvendina realius IT projektus pasirinktose rolėse
+      bei užtvirtina įvairiapuses kompestencijas.<br>
     </div>
+    <br>
+    <br>
+    <div class="join"><b>Prisijunk, jeigu tu:</b><br></div>
+    <br>
+    <div class="container-text2">
+      · Sieki su IT susijusio išsilavinimo ar mėgini praktiškai atrasti save šioje srityje.<br>
+      · Ateityje nori būti įvairiapusis IT specialistas, kuris sugeba ne tik programuoti.<br>
+      · Degi noru tobulėti, rodai iniciatyvą ir jau turi bazinius gebėjimus – savo malonumui programuoji, kuri puslapius
+      ar programėles, padedi draugams spręsti technines problemas.<br>
+      · Esi pasiryžusi/-ęs bent pusę dienos laiko skirti teorinėms ir praktinėms užduotims. Praktikai numatytas laikas
+      yra
+      darbo dienomis (14-18 val.).<br>
+      · Puikiai kalbi ir rašai angliškai.<br>
 
+    </div>
+    <br>
+    <br>
+    <div class="d-flex justify-content-center">
+      <button (click)="openModal('registration')" class="btn-xl btn-primary btn-rounded float-center">Registruotis į IT akademiją
+      </button>
+    </div>
+  </div>
 </div>
 <jw-modal id="registration">
-  <div class="container-colored">
-    <button type="button" class="close float-right" aria-label="Close" (click)="closeModal('registration')"><span
-      aria-hidden="true">&times;</span></button>
-    <app-registration></app-registration>
-  </div> 
+  <app-registration></app-registration>
+</jw-modal>
+<jw-modal id="successfulRegistration">
+  <app-successful-registration></app-successful-registration>
 </jw-modal>
 <jw-modal id="login">
-  <div class="container-colored">
+  <div class="container-login-colored">
     <button type="button" class="close float-right" aria-label="Close" (click)="closeModal('login')"><span
       aria-hidden="true">&times;</span></button>
     <app-login></app-login>
-  </div> 
+  </div>
 </jw-modal>
