@@ -51,7 +51,7 @@ export class RegistrationComponent implements OnInit {
     ]],
     fromWhere: ['', [
       Validators.required,
-      Validators.maxLength(1500)
+      Validators.maxLength(256)
     ]],
     passwordReg: ['', [
       Validators.required,
@@ -99,7 +99,7 @@ export class RegistrationComponent implements OnInit {
     this.passwordNotMatch = false;
     this.submission = false;
     this.info = {
-      id: Math.floor(Math.random() * 10),
+      // id: Math.floor(Math.random() * 10),
       name: this.firstAndLastName.value,
       phone_number: this.phoneCode.value + this.phoneNum.value,
       education: this.schoolName.value,
@@ -115,7 +115,7 @@ export class RegistrationComponent implements OnInit {
         String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
         String(new Date().getDate()).padStart(2, '0'),
       user: {
-        id: Math.floor(Math.random() * 10),
+        // id: Math.floor(Math.random() * 10),
         email: this.email.value,
         password: this.passwordReg.value,
         passwordRepeat: this.passwordRepeatReg.value,

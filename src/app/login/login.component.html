@@ -1,46 +1,45 @@
 <div class="container well">
-    <h2 class="text-center">Prisijungimas</h2>
+    <h1 class="text-center">Prisijungimas</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit(); ">
-      <div class="form-group container-colored">
-        <label for="email">Elektroninis paštas</label>
+      <div class="form-group container-uncolored">
+        <label for="emailLogin">Elektroninis paštas</label>
         <input
-          type="email"
+          type="emailLogin"
           class="form-control"
-          id="email"
+          id="emailLogin"
           placeholder="vardas@paštas.com"
-          formControlName="emailReg"
+          formControlName="emailLogin"
         />
-        <div
-          [hidden]="loginForm.controls.emailReg.valid || loginForm.controls.emailReg.pristine"
-          class="alert alert-danger">
-          <div *ngIf="loginForm.controls.emailReg.errors?.required">
-            Elektroninis paštas yra privalomas
-          </div>
-          <div *ngIf="loginForm.controls.emailReg.errors?.pattern">
-            Neteisingas elektroninis parašas
-          </div>
-        </div>
+<!--        <div-->
+<!--          [hidden]="loginForm.controls.emailLogin.valid || loginForm.controls.emailLogin.pristine"-->
+<!--          class="alert alert-danger">-->
+<!--          <div *ngIf="loginForm.controls.emailLogin.errors?.required">-->
+<!--            Elektroninis paštas yra privalomas-->
+<!--          </div>-->
+<!--          <div *ngIf="loginForm.controls.emailLogin.errors?.pattern">-->
+<!--            Neteisingas elektroninis parašas-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
-      <div class="form-group container-colored">
-        <label for="password1">Slaptažodis</label>
+      <div class="form-group container-uncolored">
+        <label for="passwordLogin">Slaptažodis</label>
         <input
-          type="password"
+          type="passwordLogin"
           class="form-control"
-          id="password1"
-          formControlName="passwordReg"
+          id="passwordLogin"
+          formControlName="passwordLogin"
         />
-        <div
-          [hidden]="loginForm.controls.passwordReg.valid || loginForm.controls.passwordReg.pristine"
-          class="alert alert-danger">
-          <div *ngIf="loginForm.controls.passwordReg.errors?.required">
-            Šis laukas yra privalomas
-          </div>
-        </div>
+<!--        <div-->
+<!--          [hidden]="loginForm.controls.passwordLogin.valid || loginForm.controls.passwordLogin.pristine"-->
+<!--          class="alert alert-danger">-->
+<!--          <div *ngIf="loginForm.controls.passwordLogin.errors?.required">-->
+<!--            Šis laukas yra privalomas-->
+<!--          </div>-->
+<!--        </div>-->
     </div>
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Prisijungti</button>
       </div>
     </form>
   </div>
-  
-  
+

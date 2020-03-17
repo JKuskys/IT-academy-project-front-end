@@ -6,9 +6,9 @@
     resize:none
   }
   //to add padding to all blocks of input
-  .container-colored{
+  .container-uncolored{
     margin: auto;
-    max-width: 800px;
+    max-width: 400px;
     min-width: 300px;
     padding: 10px;
     background: rgba(235, 239, 242, 0);
@@ -18,4 +18,3 @@
   .inline{
     display : inline;
   }
-  
