@@ -131,7 +131,7 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule
   ],
   providers: [
     { provide: MatDialogRef, useValue: {} }

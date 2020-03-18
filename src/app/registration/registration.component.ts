@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Info} from '../shared/registration';
 import {UserService} from '../Services/user.service';
 import {ModalService} from '../Services/modal/modal.service';
-import {MatDialogRef} from '@angular/material/dialog'
+import {MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -71,6 +71,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService, private modalService: ModalService, private dialog: MatDialogRef<any>) {
   }
 
+
   arrCodes: string[];
   info: Info;
   serverErrorMessage: string;
@@ -96,6 +97,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
@@ -139,6 +141,7 @@ export class RegistrationComponent implements OnInit {
       this.submission = false;
     }
   }
+  
   closeDialog(id: string){
 
     this.dialog.close(id)

@@ -1,31 +1,31 @@
 //for textareas
 .scroll::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 .resize {
-  resize:none
+    resize: none;
 }
 //to add padding to all blocks of input
-.container-uncolored{
-  margin: auto;
-  max-width: 800px;
-  min-width: 300px;
-  padding: 10px;
-  background: rgba(235, 239, 242, 0);
-  border-radius: 5px;
+.container-uncolored {
+    margin: auto;
+    max-width: 800px;
+    min-width: 300px;
+    padding: 10px;
+    background: rgba(235, 239, 242, 0);
+    border-radius: 5px;
 }
 //to show items in one line(phone number)
-.inline{
-  display : inline;
+.inline {
+    display: inline;
 }
 
-.container-reg-colored{
-  margin: auto;
-  max-width: 850px;
-  min-width: 400px;
-  padding: 25px;
-  background: rgba(0, 222, 242, 0.9);
-  border-radius: 25px;
+.container-reg-colored {
+    margin: auto;
+    max-width: 850px;
+    min-width: 400px;
+    padding: 25px;
+    background: rgba(0, 222, 242, 0.9);
+    border-radius: 25px;
 }
 html,
 body {
@@ -42,7 +42,6 @@ body {
     height: 400px;
     width: 400px;
     font-family: "Roboto", sans-serif;
-    
 }
 .app-header {
     justify-content: space-between;
@@ -54,8 +53,9 @@ body {
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 .login-wrapper {
-height: 300px;
-    width: 400px;}
+    min-height: 300px;
+    width: 600px;
+}
 .positronx {
     text-decoration: none;
     color: #ffffff;
@@ -127,3 +127,10 @@ height: 300px;
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
     padding: 0.8375em 0;
 }
+.text-area{
+    width:100px;
+    height:100px;
+}
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 10px
+  }
