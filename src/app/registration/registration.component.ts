@@ -14,7 +14,7 @@ export class RegistrationComponent implements OnInit {
 
 
 
-  
+
   registrationForm: FormGroup;
   arrCodes: string[];
   info: Info;
@@ -49,7 +49,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  
+
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
@@ -83,7 +83,7 @@ export class RegistrationComponent implements OnInit {
         () => {
           this.serverErrorMessage = '';
           this.registrationForm.reset();
-          this.closeModal('registration');
+          this.closeDialog();
           this.openModal('successfulRegistration');
         },
         error => (this.serverErrorMessage = error)
@@ -93,11 +93,11 @@ export class RegistrationComponent implements OnInit {
       this.submission = false;
     }
   }
-  
-  closeDialog(id: string){
 
-    this.dialog.close(id)
-       
+  closeDialog(){
+
+    this.dialog.close(RegistrationComponent);
+
   }
   openModal(id: string) {
     this.modalService.open(id);
