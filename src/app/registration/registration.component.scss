@@ -10,7 +10,6 @@
     margin: auto;
     max-width: 800px;
     min-width: 300px;
-    padding: 10px;
     background: rgba(235, 239, 242, 0);
     border-radius: 5px;
 }
@@ -103,7 +102,7 @@ body {
     width: 100%;
 }
 .login-wrapper .example-full-width,
-.login-wrapper .btn-block {
+.login-wrapper .btn-block .divas{
     width: 100%;
 }
 .login-wrapper mat-card-header {
@@ -134,3 +133,9 @@ body {
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 10px
   }
+  .close{
+    font-size: 50px;
+}
+.exit{
+    outline: none;
+}
