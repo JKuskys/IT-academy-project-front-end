@@ -12,7 +12,7 @@ export class UserService {
   private url = 'https://academy-project-back.herokuapp.com/';
   private readonly apiPath = '/api';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient ) {
   }
 
 

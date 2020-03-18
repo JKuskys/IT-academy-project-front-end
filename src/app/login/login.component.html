@@ -1,41 +1,64 @@
-<div class="container-login-colored">
-  <button type="button" class="close float-right" aria-label="Close" (click)="closeModal('login')"><span
-    aria-hidden="true">&times;</span></button>
-  <div class="container well">
-    <h1 class="text-center">Prisijungimas</h1>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(); ">
-      <div class="form-group container-uncolored">
-        <label for="emailLogin">Elektroninis paštas</label>
-        <input
-          type="email"
-          class="form-control"
-          id="emailLogin"
-          placeholder="vardas@paštas.com"
-          formControlName="emailLogin"
-        />
-        <!--        <div-->
-        <!--          [hidden]="loginForm.controls.emailLogin.valid || loginForm.controls.emailLogin.pristine"-->
-        <!--          class="alert alert-danger">-->
-        <!--          <div *ngIf="loginForm.controls.emailLogin.errors?.required">-->
-        <!--            Elektroninis paštas yra privalomas-->
-        <!--          </div>-->
-        <!--          <div *ngIf="loginForm.controls.emailLogin.errors?.pattern">-->
-        <!--            Neteisingas elektroninis parašas-->
-        <!--          </div>-->
-        <!--        </div>-->
-      </div>
-      <div class="form-group container-uncolored">
-        <label for="passwordLogin">Slaptažodis</label>
-        <input
-          type="passwordLogin"
-          class="form-control"
-          id="passwordLogin"
-          formControlName="passwordLogin"
-        />
-      </div>
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Prisijungti</button>
-      </div>
+
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog('login')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <mat-card-header>
+        <h1 class="text-center">Prisijungimas</h1>
+    </mat-card-header>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+            <mat-form-field class="example-full-width">
+                <input
+                    matInput
+                    placeholder="El. paštas"
+                    type="emailLogin"
+                    class="form-control"
+                    id="emailLogin"
+                    formControlName="emailLogin"
+                />
+            </mat-form-field>
+            <div
+                [hidden]="loginForm.controls.emailLogin.valid || loginForm.controls.emailLogin.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="loginForm.controls.emailLogin.errors?.required">
+                    Elektroninis paštas yra privalomas
+                </div>
+                <div *ngIf="loginForm.controls.emailLogin.errors?.pattern">
+                    Neteisingas elektroninis parašas
+                </div>
+            </div>
+            <mat-form-field class="example-full-width">
+                <input
+                    matInput
+                    placeholder="Slaptažodis"
+                    type="password"
+                    class="form-control"
+                    formControlName="passwordLogin"
+                />
+            </mat-form-field>
+            <div
+                [hidden]="loginForm.controls.passwordLogin.valid || loginForm.controls.passwordLogin.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="loginForm.controls.passwordLogin.errors?.required">
+                    Slaptažodis yra privalomas
+                </div>
+            </div>
+        </mat-card-content>
+        <span class="align-bottom">
+            <button
+                mat-stroked-button
+                color="primary"
+                type="submit"
+                class="btn-block mt-10"
+                [disabled]="!loginForm.valid"
+            >
+                Prisijungti
+            </button></span
+        >
+
     </form>
-  </div>
 </div>
