@@ -1,67 +1,54 @@
-.vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+.fit {
+  min-height: 90%; /* Fallback for browsers do NOT support vh unit */
   min-height: 100vh; /* These two lines are counted as one :-)       */
-
-  display: flex;
-  align-items: center;
-
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
 }
 
-.container-image{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  object-fit: cover;
+
+
+.container-padding{
+  min-height: 95%; /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
+  padding: 40px;
+  padding-left: 18%;
+  padding-right: 18%;
+}
+
+img {
+  width: 100%;
   height: auto;
-  }
 
-.container-text{
-  color: #5471BA;
-  font-size: 20px;
-  text-align: justify;
-  line-height: 1.5;
-  letter-spacing: 1.5px;
-  padding: 10px;
+  overflow: hidden;
 }
 
-.container-text2{
-  padding: 10px;
-  background-color: #b7c3e1;
-  font-size: 20px;
-  color: white;
-  position:relative;
-  margin-left: auto;
-  margin-right: auto;
-  width:700px;
-  max-height: 500px;
-  text-align: left;
-  line-height: 2;
-  font-weight: bold;
-  border-radius: 5px;
+.divider_vertical{
+  border-right-color: rgba(169, 169, 169, 0.69);
+  border-right-width:5px ;
 }
 
-.join{
-  text-align: center;
-  font-size: 26px;
-  color: #5471BA;
+
+.container-image {
+  padding-bottom: 30px;
 }
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 
 .btn-xl {
-  width:50%;
+  width: 50%;
   height: 45px;
-  font-family:"Helvetica";
+  font-family: "Helvetica";
   border-radius: 5px;
   font-weight: bold;
 }
 
-.container-info{
-  float: left;
-  width: 720px;
-}
 
-.container-join{
-  float: right;
-  padding: 70px;
-}
