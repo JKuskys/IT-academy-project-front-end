@@ -17,6 +17,7 @@
         su realiais IT projektais.
       </div>
     </div>
+    
     <div class="container-join">
       <div class="join"><b>Prisijunk, jeigu tu:</b><br></div>
       <br>
@@ -28,17 +29,12 @@
           darbo dienomis (14-18 val.).<br>
         · Puikiai kalbi ir rašai angliškai.<br>
         <div class="d-flex justify-content-center">
-          <button (click)="openModal('registration')" class="btn-xl btn-primary btn-rounded float-center">Registruotis</button>
+          <button (click)="openDialog()" class="btn-xl btn-primary btn-rounded float-center">Registruotis</button>
         </div>
       </div>
     </div> 
 </div>
-<jw-modal id="registration">
-  <app-registration></app-registration>
-</jw-modal>
 <jw-modal id="successfulRegistration">
   <app-successful-registration></app-successful-registration>
 </jw-modal>
-<jw-modal id="login">
-  <app-login></app-login>
-</jw-modal>
+

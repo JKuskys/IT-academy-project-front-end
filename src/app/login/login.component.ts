@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
 import {ModalService} from '../Services/modal/modal.service';
-
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,16 +23,16 @@ export class LoginComponent implements OnInit {
 
   });
 
-  constructor(private fb: FormBuilder, private userService: UserService, private modalService: ModalService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private modalService: ModalService, private dialog: MatDialogRef<any>) {
+    
   }
-
   loginInfo: LoginInfo;
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
-
+ 
   ngOnInit(): void {
-    this.serverErrorMessage = '';
+    this.serverErrorMessage = '';  
   }
 
   onSubmit() {
@@ -51,7 +51,13 @@ export class LoginComponent implements OnInit {
       error => (this.serverErrorMessage = error)
     );
   }
+  
 
+ closeDialog(id: string){
+
+   this.dialog.close(id)
+      
+ }
   openModal(id: string) {
     this.modalService.open(id);
   }
