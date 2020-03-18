@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomePageComponent} from './home-page/home-page.component';
@@ -56,6 +55,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -135,6 +135,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     { provide: MatDialogRef, useValue: {} }
+
   ],
   bootstrap: [AppComponent]
 })
