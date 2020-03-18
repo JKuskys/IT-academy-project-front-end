@@ -1,23 +1,132 @@
-.fit {
-  min-height: 90%; /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
+@media only screen and (max-width: 1000px){
+  img {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    max-height: 30vh;
+    object-fit: cover;
+  }
+  .content-container{
+    flex-direction: column;
+  }
+  .container-padding{
+    width: 100vw;
+  }
+  .content-left{
+    padding-bottom: 0;
+  }
+  .content-right{
+    padding-bottom: 2.5vh;
+  }
+  .content{
+    width: 100%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .intro-container{
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+  .container-button button{
+    max-width: 30%;
+    min-width: 30%;
+  }
+}
+@media only screen and (min-width: 1001px){
+  @media only screen and (max-width: 1300px){
+    .container-padding{
+      width: 70vw;
+    }
+  }
+  @media only screen and (min-width: 1301px){
+    .container-padding{
+      width: 60vw;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-height: 30vh;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  .content-container{
+    flex-direction: row;
+  }
+  .content{
+    width: 50%;
+    padding-bottom: 2.5vh;
+  }
+
+  .content-left{
+    padding-left: 2.5vw;
+    padding-right: 1.25vw;
+  }
+
+  .content-right{
+    padding-right: 2.5vw;
+    padding-left: 1.25vw;
+  }
+
+  .intro-container{
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+  }
+  .container-button button{
+    max-width: 20%;
+    min-width: 20%;
+  }
 }
 
+.container-button button{
+  background: #6486C4;
+  width: 50%;
+  height: 45px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #fff;
+  border-color: #5D7EB8;
+}
 
+.intro-container{
+  padding-top: 2.5vh;
+}
+
+.content{
+  padding-top: 2.5vh;
+
+  display: flex;
+  align-items: center;
+}
+
+.container-image{
+  max-height: 30vh;
+}
 
 .container-padding{
-  min-height: 95%; /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh;
-  padding: 40px;
-  padding-left: 18%;
-  padding-right: 18%;
+  background: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  min-height: 85vh;
+  box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
 }
 
-img {
-  width: 100%;
-  height: auto;
+ul{
+  padding-left: 10px;
+}
 
-  overflow: hidden;
+ul li{
+  list-style-type: none;
+  position: relative;
+  padding-left: 5px;
+}
+
+ul li:before{
+  content:"\25BA \0020";
+  font-size: 7.5px;
+  position: absolute;
+  left: -10px;
 }
 
 .divider_vertical{
@@ -26,8 +135,8 @@ img {
 }
 
 
-.container-image {
-  padding-bottom: 30px;
+.content-container{
+  display: flex;
 }
 
 .column {
@@ -46,9 +155,22 @@ img {
 .btn-xl {
   width: 50%;
   height: 45px;
-  font-family: "Helvetica";
   border-radius: 5px;
   font-weight: bold;
 }
 
+.container-image{
+  width: 100%;
+}
+
+.container-button{
+  padding-bottom: 7.5vh;
+  width: 100%;
+}
+
+
+
+.container-text p{
+font-size: 18px;
+}
 
