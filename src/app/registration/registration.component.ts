@@ -143,11 +143,13 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.maxLength(1500)
       ]],
-      contract: [false, []],
+      contract: ['', [
+        Validators.required]],
       contractDescription: ['', [
         Validators.maxLength(1500)
       ]],
-      workTime: [false, []],
+      workTime: ['', [
+        Validators.required]],
       drive: ['', [
         Validators.required,
         Validators.maxLength(1500)
