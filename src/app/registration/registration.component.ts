@@ -12,14 +12,18 @@ import {ModalService} from '../Services/modal/modal.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  registrationForm:  FormGroup;
+  registrationForm: FormGroup;
   arrCodes: string[];
   info: Info;
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
 
-  constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService, private modalService: ModalService) {
+  constructor(
+    private fb: FormBuilder,
+    private httpService: HttpClient,
+    private userService: UserService,
+    private modalService: ModalService) {
     this.registrationForm = this.setForm();
   }
 
@@ -47,24 +51,24 @@ export class RegistrationComponent implements OnInit {
     this.info = {
       // id: Math.floor(Math.random() * 10),
       name: this.registrationForm.get('firstAndLastName').value,
-      phone_number: this.phoneCode.value + this.phoneNum.value,
-      education: this.schoolName.value,
-      free_time: this.hobbies.value,
-      agreement: this.contract.value,
-      comment: this.contractDescription.value,
-      academy_time: this.workTime.value,
-      reason: this.drive.value,
-      technologies: this.experience.value,
-      source: this.fromWhere.value,
+      phone_number: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
+      education: this.registrationForm.get('schoolName').value,
+      free_time: this.registrationForm.get('hobbies').value,
+      agreement: this.registrationForm.get('contract').value,
+      comment: this.registrationForm.get('contractDescription').value,
+      academy_time: this.registrationForm.get('workTime').value,
+      reason: this.registrationForm.get('drive').value,
+      technologies: this.registrationForm.get('experience').value,
+      source: this.registrationForm.get('contract').value,
       application_date:
         new Date().getFullYear() + '-' +
         String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
         String(new Date().getDate()).padStart(2, '0'),
       user: {
         // id: Math.floor(Math.random() * 10),
-        email: this.email.value,
-        password: this.passwordReg.value,
-        passwordRepeat: this.passwordRepeatReg.value,
+        email: this.registrationForm.get('emailReg').value,
+        password: this.registrationForm.get('passwordReg').value,
+        passwordRepeat: this.registrationForm.get('passwordRepeatReg').value,
         admin: false
       }
     };
@@ -150,54 +154,6 @@ export class RegistrationComponent implements OnInit {
         Validators.maxLength(30)
       ]]
     });
-  }
-
-  get firstAndLastName() {
-    return this.registrationForm.get('firstAndLastName');
-  }
-
-  get email() {
-    return this.registrationForm.get('emailReg');
-  }
-
-  get phoneCode() {
-    return this.registrationForm.get('phoneCode');
-  }
-
-  get phoneNum() {
-    return this.registrationForm.get('phoneNumber');
-  }
-
-  get schoolName() {
-    return this.registrationForm.get('schoolName');
-  }
-
-  get hobbies() {
-    return this.registrationForm.get('hobbies');
-  }
-
-  get workTime() {
-    return this.registrationForm.get('workTime');
-  }
-
-  get contractDescription() {
-    return this.registrationForm.get('contractDescription');
-  }
-
-  get drive() {
-    return this.registrationForm.get('drive');
-  }
-
-  get experience() {
-    return this.registrationForm.get('experience');
-  }
-
-  get fromWhere() {
-    return this.registrationForm.get('fromWhere');
-  }
-
-  get contract() {
-    return this.registrationForm.get('contract');
   }
 
   get passwordReg() {
