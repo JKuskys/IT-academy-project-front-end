@@ -134,9 +134,23 @@ ul li:before{
   border-right-width:5px ;
 }
 
+
 .content-container{
   display: flex;
 }
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 
 .btn-xl {
   width: 50%;
@@ -159,7 +173,4 @@ ul li:before{
 .container-text p{
 font-size: 18px;
 }
-
-
-
 

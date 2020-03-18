@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
 import {ModalService} from '../Services/modal/modal.service';
@@ -10,20 +10,13 @@ import {ModalService} from '../Services/modal/modal.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm = this.fb.group({
-    emailLogin: ['', [
-      Validators.required,
-      Validators.maxLength(30),
-      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
-    ]],
-    passwordLogin: ['', [
-      Validators.required,
-      Validators.maxLength(30)
-    ]],
+  loginForm: FormGroup;
 
-  });
-
-  constructor(private fb: FormBuilder, private userService: UserService, private modalService: ModalService) {
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private modalService: ModalService) {
+    this.loginForm = this.setForm();
   }
 
   loginInfo: LoginInfo;
@@ -39,13 +32,12 @@ export class LoginComponent implements OnInit {
     this.passwordNotMatch = false;
     this.submission = false;
     this.loginInfo = {
-      email: this.emailLogin.value,
-      password: this.passwordLogin.value,
+      email: this.loginForm.get('emailLogin').value,
+      password: this.loginForm.get('passwordLogin').value,
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
       () => {
         this.serverErrorMessage = '';
-        this.loginForm.reset();
         this.closeModal('login');
       },
       error => (this.serverErrorMessage = error)
@@ -58,14 +50,22 @@ export class LoginComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
-  }
-  get emailLogin() {
-    return this.loginForm.get('emailLogin');
-  }
-
-  get passwordLogin() {
-    return this.loginForm.get('passwordLogin');
+    this.loginForm.reset();
+    this.loginForm = this.setForm();
   }
 
+  setForm() {
+    return this.fb.group({
+      emailLogin: ['', [
+        Validators.required,
+        Validators.maxLength(30),
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
+      ]],
+      passwordLogin: ['', [
+        Validators.required,
+        Validators.maxLength(30)
+      ]],
 
+    });
+  }
 }

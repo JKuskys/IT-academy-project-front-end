@@ -28,9 +28,11 @@
         <label for="sel1">Telefono numeris</label>
         <div class="row" id="sel1">
           <div class="col-md-3 pr-0">
-            <select formControlName="phoneCode" class="form-control inline">
-              <option [value]="name.dial_code"
-                      *ngFor="let name of arrCodes">{{name.code + " | " + name.dial_code}}</option>
+            <select formControlName="phoneCode" class="form-control">
+              <option
+                *ngFor="let name of arrCodes"
+                [value]="name.dial_code"
+                >{{name.code + " | " + name.dial_code}}</option>
             </select>
           </div>
           <div class="col-md-9 pl-0"
