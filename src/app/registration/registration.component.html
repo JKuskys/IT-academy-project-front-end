@@ -1,6 +1,8 @@
-
 <mat-dialog-content>
-    <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" id="red-form">
+    <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+      <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
+        <span aria-hidden="true">&times;</span>
+      </button>
         <mat-card-header>
             <h1 class="text-center">Registracija</h1>
         </mat-card-header>
@@ -29,7 +31,7 @@
                 </div>
             </div>
 
-            <div class="form-group container-uncolored">
+            <div class="form-group container-uncolored ">
                 <label for="sel1">Telefono numeris</label>
                 <div class="row" id="sel1">
                     <div class="col-md-3 pr-0">
@@ -82,15 +84,14 @@
                 </div>
             </div>
 
-
             <!-- <mat-form-field class="example-full-width">
-                <label for="sel1">Telefono numeris</label>
-                        <mat-select ng-model="selectedOption" formControlName="phoneCode" class="form-control inline">
-                            <mat-option *ngFor="let name of arrCodes" [value]="name.dial_code">
-                                {{ name.code + " | " + name.dial_code }}
-                            </mat-option>
-                        </mat-select>
-            </mat-form-field> -->
+          <label for="sel1">Telefono numeris</label>
+                  <mat-select ng-model="selectedOption" formControlName="phoneCode" class="form-control inline">
+                      <mat-option *ngFor="let name of arrCodes" [value]="name.dial_code">
+                          {{ name.code + " | " + name.dial_code }}
+                      </mat-option>
+                  </mat-select>
+      </mat-form-field> -->
 
             <mat-form-field class="example-full-width">
                 <label for="name">El. paštas</label>
@@ -151,10 +152,18 @@
             <mat-form-field class="example-full-width">
                 <label>Ar bus galimybė pasirašyti trišalę praktikos sutartį, jei ne pakomentuok plačiau</label>
                 <br />
-                <mat-radio-group aria-label="Select an option">
-                    <mat-radio-button value="yes" color="primary">Taip</mat-radio-button>
-                    <mat-radio-button value="no" color="primary">Ne </mat-radio-button>
+                <mat-radio-group aria-label="Select an option" formControlName="contract">
+                    <mat-radio-button value="true" color="primary">Taip</mat-radio-button>
+                    <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
                 </mat-radio-group>
+                <div
+                    [hidden]="registrationForm.controls.contract.valid || registrationForm.controls.drive.pristine"
+                    class="alert alert-danger"
+                >
+                    <div *ngIf="registrationForm.controls.contract.errors?.required">
+                        Šis laukas privalomas
+                    </div>
+                </div>
                 <textarea
                     matInput
                     rows="5"
@@ -166,10 +175,18 @@
             </mat-form-field>
             <label>Numatytas praktikos laikas darbo dienomis 14-18 val. Ar galėsi akademijai skirti tiek laiko?</label>
             <br />
-            <mat-radio-group aria-label="Select an option">
-                <mat-radio-button value="yes" color="primary">Taip</mat-radio-button>
-                <mat-radio-button value="no" color="primary">Ne </mat-radio-button>
+            <mat-radio-group aria-label="Select an option" formControlName="workTime" required>
+                <mat-radio-button value="true" color="primary">Taip</mat-radio-button>
+                <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
             </mat-radio-group>
+            <div
+                [hidden]="registrationForm.controls.workTime.valid || registrationForm.controls.drive.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.workTime.errors?.required">
+                    Šis laukas privalomas
+                </div>
+            </div>
             <mat-form-field class="example-full-width">
                 <label for="hobbies">Kodėl nori dalyvauti IT akademijoje? Kas tave „veža“ joje dalyvauti?</label>
                 <textarea
@@ -281,7 +298,7 @@
                 </div>
             </div>
             <span class="align-bottom">
-              <p>{{this.serverErrorMessage}}</p>
+                <p>{{ this.serverErrorMessage }}</p>
                 <button
                     mat-stroked-button
                     color="primary"
@@ -290,8 +307,8 @@
                     [disabled]="!registrationForm.valid"
                 >
                     Registruotis
-                </button></span
-            >
+                </button>
+            </span>
         </form>
     </div>
 </mat-dialog-content>

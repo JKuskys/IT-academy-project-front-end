@@ -140,7 +140,7 @@ body {
 }
 
 .login-wrapper .example-full-width,
-.login-wrapper .btn-block {
+.login-wrapper .btn-block .divas{
     width: 100%;
 }
 .login-wrapper mat-card-header {
@@ -171,7 +171,6 @@ body {
 .mat-radio-button ~ .mat-radio-button {
     margin-left: 10px
   }
-
 /* Let's get this party started */
 ::-webkit-scrollbar {
   width: 12px;
@@ -193,4 +192,10 @@ body {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0);
+}
+  .close{
+    font-size: 50px;
+}
+.exit{
+    outline: none;
 }

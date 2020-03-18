@@ -5,14 +5,13 @@ import {Info} from '../shared/registration';
 import {UserService} from '../Services/user.service';
 import {ModalService} from '../Services/modal/modal.service';
 import {MatDialogRef} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
-
 
 
   registrationForm: FormGroup;
@@ -27,7 +26,7 @@ export class RegistrationComponent implements OnInit {
     private httpService: HttpClient,
     private userService: UserService,
     private modalService: ModalService,
-  private dialog: MatDialogRef<any>) {
+    private dialog: MatDialogRef<any>) {
     this.registrationForm = this.setForm();
   }
 
@@ -59,12 +58,12 @@ export class RegistrationComponent implements OnInit {
       phone_number: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
       education: this.registrationForm.get('schoolName').value,
       free_time: this.registrationForm.get('hobbies').value,
-      agreement: this.registrationForm.get('contract').value,
+      agreement: this.getTrueFalse('contract'),
       comment: this.registrationForm.get('contractDescription').value,
-      academy_time: this.registrationForm.get('workTime').value,
+      academy_time: this.getTrueFalse('workTime'),
       reason: this.registrationForm.get('drive').value,
       technologies: this.registrationForm.get('experience').value,
-      source: this.registrationForm.get('contract').value,
+      source: this.registrationForm.get('fromWhere').value,
       application_date:
         new Date().getFullYear() + '-' +
         String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
@@ -94,11 +93,12 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  closeDialog(){
+  closeDialog() {
 
     this.dialog.close(RegistrationComponent);
 
   }
+
   openModal(id: string) {
     this.modalService.open(id);
   }
@@ -107,6 +107,15 @@ export class RegistrationComponent implements OnInit {
     this.modalService.close(id);
     this.registrationForm.reset();
     this.registrationForm = this.setForm();
+  }
+
+  getTrueFalse(id: string) {
+    const value = this.registrationForm.get(id).value;
+    if (value === 'true') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   setForm() {
@@ -134,11 +143,13 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.maxLength(1500)
       ]],
-      contract: [false, []],
+      contract: ['', [
+        Validators.required]],
       contractDescription: ['', [
         Validators.maxLength(1500)
       ]],
-      workTime: [false, []],
+      workTime: ['', [
+        Validators.required]],
       drive: ['', [
         Validators.required,
         Validators.maxLength(1500)
