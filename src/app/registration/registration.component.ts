@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Info} from '../shared/registration';
 import {UserService} from '../Services/user.service';
@@ -12,76 +12,21 @@ import {ModalService} from '../Services/modal/modal.service';
 })
 export class RegistrationComponent implements OnInit {
 
-  registrationForm = this.fb.group({
-    firstAndLastName: ['', [
-      Validators.required,
-      Validators.minLength(1),
-    ]],
-    phoneCode: ['', []],
-    phoneNumber: ['', [
-      Validators.required,
-      Validators.maxLength(8),
-      Validators.pattern('[0-9 ]{1,8}'),
-    ]],
-    emailReg: ['', [
-      Validators.required,
-      Validators.maxLength(30),
-      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
-    ]],
-
-    schoolName: ['', [
-      Validators.required,
-      Validators.maxLength(200)
-    ]],
-    hobbies: ['', [
-      Validators.required,
-      Validators.maxLength(1500)
-    ]],
-    contract: [false, []],
-    contractDescription: ['', [
-      Validators.maxLength(1500)
-    ]],
-    workTime: [false, []],
-    drive: ['', [
-      Validators.required,
-      Validators.maxLength(1500)
-    ]],
-    experience: ['', [
-      Validators.required,
-      Validators.maxLength(1500)
-    ]],
-    fromWhere: ['', [
-      Validators.required,
-      Validators.maxLength(256)
-    ]],
-    passwordReg: ['', [
-      Validators.required,
-      Validators.minLength(7),
-      Validators.maxLength(30),
-
-      Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{7,30}')
-    ]],
-    passwordRepeatReg: ['', [
-      Validators.required,
-      Validators.minLength(7),
-      Validators.maxLength(30)
-    ]]
-  });
-
-  constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService, private modalService: ModalService) {
-  }
-
+  registrationForm:  FormGroup;
   arrCodes: string[];
   info: Info;
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
 
+  constructor(private fb: FormBuilder, private httpService: HttpClient, private userService: UserService, private modalService: ModalService) {
+    this.registrationForm = this.setForm();
+  }
+
   ngOnInit(): void {
     this.httpService.get('./assets/phone-codes.json').subscribe(
       data => {
         this.arrCodes = data as string[];
-        // console.log(this.arrCodes);
       },
       (err: HttpErrorResponse) => {
         console.log(err.message);
@@ -101,7 +46,7 @@ export class RegistrationComponent implements OnInit {
     this.submission = false;
     this.info = {
       // id: Math.floor(Math.random() * 10),
-      name: this.firstAndLastName.value,
+      name: this.registrationForm.get('firstAndLastName').value,
       phone_number: this.phoneCode.value + this.phoneNum.value,
       education: this.schoolName.value,
       free_time: this.hobbies.value,
@@ -146,6 +91,65 @@ export class RegistrationComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+    this.registrationForm.reset();
+    this.registrationForm = this.setForm();
+  }
+
+  setForm() {
+    return this.fb.group({
+      firstAndLastName: ['', [
+        Validators.required,
+        Validators.minLength(1),
+      ]],
+      phoneCode: ['+370', []],
+      phoneNumber: ['', [
+        Validators.required,
+        Validators.maxLength(8),
+        Validators.pattern('[0-9 ]{1,8}'),
+      ]],
+      emailReg: ['', [
+        Validators.required,
+        Validators.maxLength(30),
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
+      ]],
+      schoolName: ['', [
+        Validators.required,
+        Validators.maxLength(200)
+      ]],
+      hobbies: ['', [
+        Validators.required,
+        Validators.maxLength(1500)
+      ]],
+      contract: [false, []],
+      contractDescription: ['', [
+        Validators.maxLength(1500)
+      ]],
+      workTime: [false, []],
+      drive: ['', [
+        Validators.required,
+        Validators.maxLength(1500)
+      ]],
+      experience: ['', [
+        Validators.required,
+        Validators.maxLength(1500)
+      ]],
+      fromWhere: ['', [
+        Validators.required,
+        Validators.maxLength(256)
+      ]],
+      passwordReg: ['', [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(30),
+
+        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z\d$@$!%*?&].{7,30}')
+      ]],
+      passwordRepeatReg: ['', [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(30)
+      ]]
+    });
   }
 
   get firstAndLastName() {
