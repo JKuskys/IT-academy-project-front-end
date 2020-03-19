@@ -153,8 +153,8 @@
                 <label>Ar bus galimybė pasirašyti trišalę praktikos sutartį, jei ne pakomentuok plačiau</label>
                 <br />
                 <mat-radio-group aria-label="Select an option" formControlName="contract">
-                    <mat-radio-button value="true" color="primary">Taip</mat-radio-button>
-                    <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
+                    <mat-radio-button value="true" [checked]="true" color="primary">Taip</mat-radio-button>
+                    <mat-radio-button value="false"  color="primary">Ne</mat-radio-button>
                 </mat-radio-group>
                 <div
                     [hidden]="registrationForm.controls.contract.valid || registrationForm.controls.drive.pristine"
@@ -175,18 +175,10 @@
             </mat-form-field>
             <label>Numatytas praktikos laikas darbo dienomis 14-18 val. Ar galėsi akademijai skirti tiek laiko?</label>
             <br />
-            <mat-radio-group aria-label="Select an option" formControlName="workTime" required>
-                <mat-radio-button value="true" color="primary">Taip</mat-radio-button>
+            <mat-radio-group aria-label="Select an option" formControlName="workTime" >
+                <mat-radio-button value="true" [checked]="true"  color="primary">Taip</mat-radio-button>
                 <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
             </mat-radio-group>
-            <div
-                [hidden]="registrationForm.controls.workTime.valid || registrationForm.controls.drive.pristine"
-                class="alert alert-danger"
-            >
-                <div *ngIf="registrationForm.controls.workTime.errors?.required">
-                    Šis laukas privalomas
-                </div>
-            </div>
             <mat-form-field class="example-full-width">
                 <label for="hobbies">Kodėl nori dalyvauti IT akademijoje? Kas tave „veža“ joje dalyvauti?</label>
                 <textarea
@@ -269,7 +261,7 @@
                 </div>
             </div>
             <mat-form-field class="example-full-width">
-                <label for="password2">Slaptažodis</label>
+                <label for="password2">Pakartoti slaptažodį</label>
                 <input
                     matInput
                     type="password"
