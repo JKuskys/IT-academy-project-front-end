@@ -1,14 +1,14 @@
 <mat-dialog-content>
     <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-      <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <mat-card-header>
             <h1 class="text-center">Registracija</h1>
         </mat-card-header>
 
         <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="name">Vardas, pavardė</label>
                 <input
                     matInput
@@ -18,7 +18,7 @@
                     formControlName="firstAndLastName"
                     maxlength="80"
                 />
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="
                     registrationForm.controls.firstAndLastName.valid ||
@@ -52,6 +52,7 @@
                     </div>
                 </div>
             </div>
+            <br />
             <div
                 [hidden]="registrationForm.controls.phoneNumber.valid || registrationForm.controls.phoneNumber.pristine"
                 class="alert alert-danger"
@@ -93,11 +94,11 @@
                   </mat-select>
       </mat-form-field> -->
 
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="name">El. paštas</label>
 
                 <input matInput type="email" class="form-control" id="email" formControlName="emailReg" />
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="registrationForm.controls.emailReg.valid || registrationForm.controls.emailReg.pristine"
                 class="alert alert-danger"
@@ -109,7 +110,7 @@
                     Neteisingas elektroninis paštas
                 </div>
             </div>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="name">Mokymosi įstaiga, kurioje šiuo metu mokaisi</label>
 
                 <input
@@ -120,7 +121,7 @@
                     formControlName="schoolName"
                     maxlength="80"
                 />
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="registrationForm.controls.schoolName.valid || registrationForm.controls.schoolName.pristine"
                 class="alert alert-danger"
@@ -129,7 +130,7 @@
                     Šis laukas privalomas
                 </div>
             </div>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="hobbies">Ką veiki kai nesimokai? Kokie tavo pomėgiai?</label>
                 <textarea
                     matInput
@@ -140,7 +141,7 @@
                     formControlName="hobbies"
                     maxlength="1500"
                 ></textarea>
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="registrationForm.controls.hobbies.valid || registrationForm.controls.hobbies.pristine"
                 class="alert alert-danger"
@@ -149,12 +150,12 @@
                     Šis laukas privalomas
                 </div>
             </div>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label>Ar bus galimybė pasirašyti trišalę praktikos sutartį, jei ne pakomentuok plačiau</label>
                 <br />
                 <mat-radio-group aria-label="Select an option" formControlName="contract">
                     <mat-radio-button value="true" [checked]="true" color="primary">Taip</mat-radio-button>
-                    <mat-radio-button value="false"  color="primary">Ne</mat-radio-button>
+                    <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
                 </mat-radio-group>
                 <div
                     [hidden]="registrationForm.controls.contract.valid || registrationForm.controls.drive.pristine"
@@ -172,14 +173,14 @@
                     formControlName="contractDescription"
                     maxlength="1500"
                 ></textarea>
-            </mat-form-field>
+            </div>
             <label>Numatytas praktikos laikas darbo dienomis 14-18 val. Ar galėsi akademijai skirti tiek laiko?</label>
             <br />
-            <mat-radio-group aria-label="Select an option" formControlName="workTime" >
-                <mat-radio-button value="true" [checked]="true"  color="primary">Taip</mat-radio-button>
+            <mat-radio-group aria-label="Select an option" formControlName="workTime">
+                <mat-radio-button value="true" [checked]="true" color="primary">Taip</mat-radio-button>
                 <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
             </mat-radio-group>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="hobbies">Kodėl nori dalyvauti IT akademijoje? Kas tave „veža“ joje dalyvauti?</label>
                 <textarea
                     matInput
@@ -190,7 +191,7 @@
                     formControlName="drive"
                     maxlength="1500"
                 ></textarea>
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="registrationForm.controls.drive.valid || registrationForm.controls.drive.pristine"
                 class="alert alert-danger"
@@ -199,7 +200,7 @@
                     Šis laukas privalomas
                 </div>
             </div>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="experience"
                     >Kokios technologijos tau labiausiai patinka ir su kokiomis iš jų jau turi patirties? Jei teko
                     dirbti prie konkretaus projekto, pasidalink jo nuoroda</label
@@ -213,7 +214,7 @@
                     formControlName="experience"
                     maxlength="1500"
                 ></textarea>
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="registrationForm.controls.experience.valid || registrationForm.controls.experience.pristine"
                 class="alert alert-danger"
@@ -222,7 +223,7 @@
                     Šis laukas privalomas
                 </div>
             </div>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="fromWhere">Iš kur sužinojai apie IT akademiją?</label>
                 <textarea
                     matInput
@@ -233,7 +234,7 @@
                     formControlName="fromWhere"
                     maxlength="1500"
                 ></textarea>
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="registrationForm.controls.fromWhere.valid || registrationForm.controls.fromWhere.pristine"
                 class="alert alert-danger"
@@ -242,10 +243,10 @@
                     Šis laukas privalomas
                 </div>
             </div>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="password1">Slaptažodis</label>
                 <input matInput type="password" id="password1" class="form-control" formControlName="passwordReg" />
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="registrationForm.controls.passwordReg.valid || registrationForm.controls.passwordReg.pristine"
                 class="alert alert-danger"
@@ -260,7 +261,7 @@
                     Slaptažodis privalo būti trumpesnis nei 30 symbolių
                 </div>
             </div>
-            <mat-form-field class="example-full-width">
+            <div class="form-group">
                 <label for="password2">Pakartoti slaptažodį</label>
                 <input
                     matInput
@@ -269,7 +270,7 @@
                     class="form-control"
                     formControlName="passwordRepeatReg"
                 />
-            </mat-form-field>
+            </div>
             <div
                 [hidden]="
                     (registrationForm.controls.passwordRepeatReg.valid ||
