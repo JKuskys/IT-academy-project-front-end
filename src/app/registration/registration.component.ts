@@ -116,7 +116,7 @@ export class RegistrationComponent implements OnInit {
 
   getTrueFalse(id: string) {
     const value = this.registrationForm.get(id).value;
-    if (value === 'true') {
+    if (value === 'true'||value === true) {
       return true;
     } else {
       return false;
