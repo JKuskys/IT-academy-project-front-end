@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalService} from '../Services/modal/modal.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-successful-registration',
@@ -8,7 +9,8 @@ import {ModalService} from '../Services/modal/modal.service';
 })
 export class SuccessfulRegistrationComponent implements OnInit {
 
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService,
+              private dialog: MatDialogRef<any>) { }
 
   ngOnInit(): void {
   }
@@ -16,4 +18,8 @@ export class SuccessfulRegistrationComponent implements OnInit {
   closeModal(id: string) {
     this.modalService.close(id);
   }
+  closeDialog() {
+    this.dialog.close(SuccessfulRegistrationComponent);
+  }
 }
+

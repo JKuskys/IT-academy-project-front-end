@@ -55,7 +55,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-
+import { NgxLinkifyjsModule } from 'ngx-linkifyjs';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -77,6 +77,7 @@ const appRoutes: Routes = [
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
+    NgxLinkifyjsModule.forRoot(),
     HttpClientModule,
     BrowserModule,
     RouterModule.forRoot(appRoutes, {anchorScrolling: 'enabled'}),

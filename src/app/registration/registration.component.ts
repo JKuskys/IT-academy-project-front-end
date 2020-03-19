@@ -4,7 +4,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Info} from '../shared/registration';
 import {UserService} from '../Services/user.service';
 import {ModalService} from '../Services/modal/modal.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {SuccessfulRegistrationComponent} from '../successful-registration/successful-registration.component';
 
 @Component({
   selector: 'app-registration',
@@ -26,7 +27,8 @@ export class RegistrationComponent implements OnInit {
     private httpService: HttpClient,
     private userService: UserService,
     private modalService: ModalService,
-    private dialog: MatDialogRef<any>) {
+    private dialog: MatDialogRef<any>,
+    private dialogNew: MatDialog) {
     this.registrationForm = this.setForm();
   }
 
@@ -83,7 +85,7 @@ export class RegistrationComponent implements OnInit {
           this.serverErrorMessage = '';
           this.registrationForm.reset();
           this.closeDialog();
-          this.openModal('successfulRegistration');
+          this.openDialog();
         },
         error => (this.serverErrorMessage = error)
       );
@@ -93,10 +95,14 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  openDialog() {
+    this.dialogNew.open(SuccessfulRegistrationComponent);
+  }
+
   closeDialog() {
-
+    this.registrationForm.reset();
+    this.registrationForm = this.setForm();
     this.dialog.close(RegistrationComponent);
-
   }
 
   openModal(id: string) {
@@ -105,8 +111,7 @@ export class RegistrationComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
-    this.registrationForm.reset();
-    this.registrationForm = this.setForm();
+
   }
 
   getTrueFalse(id: string) {
@@ -143,13 +148,11 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.maxLength(1500)
       ]],
-      contract: ['', [
-        Validators.required]],
+      contract: [true, []],
       contractDescription: ['', [
         Validators.maxLength(1500)
       ]],
-      workTime: ['', [
-        Validators.required]],
+      workTime: [true, []],
       drive: ['', [
         Validators.required,
         Validators.maxLength(1500)
