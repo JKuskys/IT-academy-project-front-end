@@ -1,0 +1,47 @@
+<div id="application-details-wrapper" *ngIf="application$ | async as application">
+  <div class="application-header">Aplikacija nr. {{application.id}}</div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Vardas ir pavardė</div>
+    <div class="application-details-content form-control">{{application.name}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">El. paštas</div>
+    <div class="application-details-content form-control">{{application.user.email}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Telefono numeris</div>
+    <div class="application-details-content form-control">{{application.phone_number}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Mokymosi įstaiga</div>
+    <div class="application-details-content form-control">{{application.education}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Pomėgiai</div>
+    <div class="application-details-content form-control">{{application.free_time}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Galimybė pasirašyti sutartį</div>
+    <div class="application-details-content form-control">{{application.agreement ? "Taip (" + application.comment + ")":"Ne (" + application.comment + ")"}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Galimybė ateiti akademijos laiku (14-18 val. darbo dienomis)</div>
+    <div class="application-details-content form-control">{{application.academy_time ? "Taip":"Ne"}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Ėjimo į akademiją priežastis</div>
+    <div class="application-details-content form-control">{{application.reason}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Patinkančios technologijos</div>
+    <div class="application-details-content form-control">{{application.technologies}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Iš kur sužinota apie akademiją</div>
+    <div class="application-details-content form-control">{{application.source}}</div>
+  </div>
+  <div class="application-detail-container form-group">
+    <div class="application-details-header">Užpildymo data</div>
+    <div class="application-details-content form-control">{{application.application_date}}</div>
+  </div>
+</div>
