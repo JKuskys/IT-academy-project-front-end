@@ -56,11 +56,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
+import { AdminApplicationDetailsComponent } from './admin-application-details/admin-application-details.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomePageComponent},
-  {path: 'applications/:id', component: ApplicationDetailsComponent},
+  {path: 'applications/:id', component: AdminApplicationDetailsComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home'}
 ];
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     RegistrationComponent,
     LoginComponent,
     SuccessfulRegistrationComponent,
-    ApplicationDetailsComponent
+    ApplicationDetailsComponent,
+    AdminApplicationDetailsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
