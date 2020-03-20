@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<mat-dialog-content id="dialog">
     <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
         <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
             <span aria-hidden="true">&times;</span>
@@ -60,7 +60,7 @@
                 <div
                     *ngIf="
                         registrationForm.controls.phoneNumber.errors?.maxlength &&
-                        !registrationForm.controls.phoneNumber.touched
+                        registrationForm.controls.phoneNumber.touched
                     "
                 >
                     Telefono numeris privalo būti 8 skaičių ilgumo
@@ -76,9 +76,8 @@
                 </div>
                 <div
                     *ngIf="
-                        (registrationForm.controls.phoneNumber.errors?.pattern &&
-                            !registrationForm.controls.phoneNumber.touched) ||
-                        registrationForm.controls.phoneNumber.dirty
+                        registrationForm.controls.phoneNumber.errors?.pattern &&
+                        !registrationForm.controls.phoneNumber.touched
                     "
                 >
                     Telefono numeris tūrėtų būti tik iš skaičių
@@ -97,7 +96,7 @@
             <div class="form-group">
                 <label for="name">El. paštas</label>
 
-                <input matInput type="email" class="form-control" id="email" formControlName="emailReg" />
+                <input matInput type="email" class="form-control" id="email" formControlName="emailReg" maxlength="255"/>
             </div>
             <div
                 [hidden]="registrationForm.controls.emailReg.valid || registrationForm.controls.emailReg.pristine"
@@ -109,6 +108,10 @@
                 <div *ngIf="registrationForm.controls.emailReg.errors?.pattern">
                     Neteisingas elektroninis paštas
                 </div>
+                <div
+                    *ngIf="registrationForm.controls.emailReg.errors?.maxLength">
+                    Per ilgas elektroninis paštas
+                </div>
             </div>
             <div class="form-group">
                 <label for="name">Mokymosi įstaiga, kurioje šiuo metu mokaisi</label>
@@ -119,7 +122,7 @@
                     class="form-control"
                     id="school"
                     formControlName="schoolName"
-                    maxlength="80"
+                    maxlength="255"
                 />
             </div>
             <div
@@ -275,13 +278,16 @@
             <div
                 [hidden]="validatePasswords()"
                 class="alert alert-danger">
+
                 <div *ngIf="this.passwordReg.value != this.passwordRepeatReg.value">
                     Slaptažodžiai turi sutapti
                 </div>
             </div>
-            <span class="align-bottom">
+            <span class="align-bottom mt-4">
                 <p>{{ this.serverErrorMessage }}</p>
-                <button
+                <mat-hint>Registruotis galėsit užpildę visus laukus</mat-hint>
+                <button         
+                    hintLabel="Max 10 characters"
                     mat-stroked-button
                     color="primary"
                     type="submit"
