@@ -137,12 +137,12 @@ export class RegistrationComponent implements OnInit {
       ]],
       emailReg: ['', [
         Validators.required,
-        Validators.maxLength(30),
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
+        Validators.maxLength(255),
+        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\.[a-zA-z]{2,4}$'),
       ]],
       schoolName: ['', [
         Validators.required,
-        Validators.maxLength(200)
+        Validators.maxLength(255)
       ]],
       hobbies: ['', [
         Validators.required,
@@ -163,7 +163,7 @@ export class RegistrationComponent implements OnInit {
       ]],
       fromWhere: ['', [
         Validators.required,
-        Validators.maxLength(256)
+        Validators.maxLength(255)
       ]],
       passwordReg: ['', [
         Validators.required,
