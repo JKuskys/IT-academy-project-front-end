@@ -58,8 +58,10 @@ import {MatTreeModule} from '@angular/material/tree';
 import { ApplicationBlockComponent } from './application-block/application-block.component';
 
 const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
   {path: 'home', component: HomePageComponent},
+  {path: 'applications', },
+  {path: 'applications/:id', },
+  {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home'}
 ];
