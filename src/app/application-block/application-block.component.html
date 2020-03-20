@@ -3,26 +3,20 @@
     <div class="col-auto align-self-center">
       <div align="right">
         {{application.name}} | {{application.application_date.substring(5)}}
-
       </div>
-
-
     </div>
     <div class="col-sm align-self-center ">
       <div *ngIf="application.status === 'accepted'" class=" p-1 status-passed">Patvirtinta</div>
       <div *ngIf="application.status === 'declined'" class=" p-1 status-declined">Atmesta</div>
       <div *ngIf="application.status === 'possible'" class=" p-1 status-possible">Potenciali</div>
       <div *ngIf="application.status === ''" class=" p-1 status-null">Nenustatyta</div>
-
     </div>
     <div class="col-sm align-self-center " align="right">
-
-          {{application.comment_count}}
-          <i class="fas fa-comment" ></i>
-          <i *ngIf="!application.seen" class="fas fa-eye-slash not-seen-style"></i>
-          <i *ngIf="application.seen" class="fas fa-eye seen-style"></i>
-          <button class="fas fa-info-circle"></button>
-
+      {{application.comment_count}}
+      <i class="fas fa-comment"></i>
+      <i *ngIf="!application.seen" class="fas fa-eye-slash not-seen-style"></i>
+      <i *ngIf="application.seen" class="fas fa-eye seen-style"></i>
+      <button class="fas fa-info-circle"></button>
     </div>
   </div>
 </mat-card>

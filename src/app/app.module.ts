@@ -59,8 +59,8 @@ import { ApplicationBlockComponent } from './application-block/application-block
 
 const appRoutes: Routes = [
   {path: 'home', component: HomePageComponent},
-  {path: 'applications', },
-  {path: 'applications/:id', },
+  {path: 'applications', component: HomePageComponent },
+  {path: 'applications/:id', component: HomePageComponent },
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home'}
