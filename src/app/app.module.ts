@@ -55,6 +55,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { ApplicationBlockComponent } from './application-block/application-block.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -72,7 +73,8 @@ const appRoutes: Routes = [
     FooterComponent,
     RegistrationComponent,
     LoginComponent,
-    SuccessfulRegistrationComponent
+    SuccessfulRegistrationComponent,
+    ApplicationBlockComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

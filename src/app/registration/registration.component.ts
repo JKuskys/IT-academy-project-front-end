@@ -43,7 +43,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   validatePasswords(): boolean {
-    if (this.passwordReg.value !== this.passwordRepeatReg.value && this.passwordReg.value !== '' && this.passwordRepeatReg.value !== '') {
+    if (this.passwordReg.value !== this.passwordRepeatReg.value &&
+      this.passwordRepeatReg.value !== '') {
       return false;
     } else {
       return true;
@@ -105,14 +106,6 @@ export class RegistrationComponent implements OnInit {
     this.dialog.close(RegistrationComponent);
   }
 
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
-
-  }
 
   getTrueFalse(id: string) {
     const value = this.registrationForm.get(id).value;
