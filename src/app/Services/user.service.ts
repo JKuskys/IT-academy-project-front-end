@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Info} from '../shared/registration';
 import {LoginInfo} from '../shared/login';
+import {JwtHelper} from './JwtHelper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class UserService {
   private url = 'https://academy-project-back.herokuapp.com/';
   private proxyurl = 'https://cors-anywhere.herokuapp.com/';
 
+
   constructor(private httpClient: HttpClient) {
+
   }
 
 
