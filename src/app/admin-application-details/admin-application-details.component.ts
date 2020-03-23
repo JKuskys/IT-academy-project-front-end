@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {from, Observable} from 'rxjs';
+import {Info} from '../shared/registration';
+import {ActivatedRoute} from '@angular/router';
+import {ApplicationService} from '../Services/application.service';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-application-details',
@@ -7,9 +12,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminApplicationDetailsComponent implements OnInit {
 
-  constructor() { }
+  public application$: Observable<Info>;
+
+  constructor(private route: ActivatedRoute, private applicationService: ApplicationService) { }
 
   ngOnInit(): void {
+    this.application$ = from(this.route.paramMap).pipe(
+      switchMap(params => {
+        return this.applicationService.getApplication({ id: params.get('id') });
+      })
+    );
   }
-
 }

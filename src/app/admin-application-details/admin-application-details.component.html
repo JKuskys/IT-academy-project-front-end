@@ -1,5 +1,5 @@
 <div id="admin-application-details-wrapper">
-  <app-application-details></app-application-details>
+  <app-application-details [application]="application$ | async"></app-application-details>
   <div id="admin-action-container">
     <div class="admin-action-header">Aplikacijos būsena</div>
     <mat-radio-group aria-label="Select an option">
