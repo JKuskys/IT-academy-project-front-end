@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Info} from '../shared/registration';
 import {UserService} from '../Services/user.service';
-import {ModalService} from '../Services/modal/modal.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SuccessfulRegistrationComponent} from '../successful-registration/successful-registration.component';
 
@@ -26,7 +25,6 @@ export class RegistrationComponent implements OnInit {
     private fb: FormBuilder,
     private httpService: HttpClient,
     private userService: UserService,
-    private modalService: ModalService,
     private dialog: MatDialogRef<any>,
     private dialogNew: MatDialog) {
     this.registrationForm = this.setForm();
@@ -57,17 +55,17 @@ export class RegistrationComponent implements OnInit {
     this.submission = false;
     this.info = {
       // id: Math.floor(Math.random() * 10),
-      name: this.registrationForm.get('firstAndLastName').value,
-      phone_number: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
+      fullName: this.registrationForm.get('firstAndLastName').value,
+      phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
       education: this.registrationForm.get('schoolName').value,
-      free_time: this.registrationForm.get('hobbies').value,
+      hobbies: this.registrationForm.get('hobbies').value,
       agreement: this.getTrueFalse('contract'),
       comment: this.registrationForm.get('contractDescription').value,
       academy_time: this.getTrueFalse('workTime'),
       reason: this.registrationForm.get('drive').value,
       technologies: this.registrationForm.get('experience').value,
       source: this.registrationForm.get('fromWhere').value,
-      application_date:
+      applicationDate:
         new Date().getFullYear() + '-' +
         String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
         String(new Date().getDate()).padStart(2, '0'),
@@ -76,11 +74,11 @@ export class RegistrationComponent implements OnInit {
         email: this.registrationForm.get('emailReg').value,
         password: this.registrationForm.get('passwordReg').value,
         passwordRepeat: this.registrationForm.get('passwordRepeatReg').value,
-        admin: false
+        admin: false,
       }
     };
 
-    if (this.info.user.password === this.info.user.passwordRepeat) {
+    if (this.info.user.password === this.registrationForm.get('passwordRepeatReg').value) {
       this.userService.submitRegistration(this.info).subscribe(
         () => {
           this.serverErrorMessage = '';
@@ -109,7 +107,7 @@ export class RegistrationComponent implements OnInit {
 
   getTrueFalse(id: string) {
     const value = this.registrationForm.get(id).value;
-    if (value === 'true'||value === true) {
+    if (value === 'true' || value === true) {
       return true;
     } else {
       return false;

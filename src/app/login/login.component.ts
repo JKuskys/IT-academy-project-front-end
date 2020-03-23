@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
-import {ModalService} from '../Services/modal/modal.service';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +15,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private modalService: ModalService,
     private dialog: MatDialogRef<any>) {
     this.loginForm = this.setForm();
   }
@@ -25,9 +23,9 @@ export class LoginComponent implements OnInit {
   passwordNotMatch: boolean;
   submission: boolean;
 
- 
+
   ngOnInit(): void {
-    this.serverErrorMessage = '';  
+    this.serverErrorMessage = '';
   }
 
   onSubmit() {
@@ -38,29 +36,21 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('passwordLogin').value,
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
-      () => {
+      response => {
+        console.log(response);
         this.serverErrorMessage = '';
-        this.closeModal('login');
+        this.closeDialog('login');
       },
       error => (this.serverErrorMessage = error)
     );
   }
-  
+
 
  closeDialog(id: string){
 
    this.dialog.close(id)
-      
- }
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
 
-  closeModal(id: string) {
-    this.modalService.close(id);
-    this.loginForm.reset();
-    this.loginForm = this.setForm();
-  }
+ }
 
   setForm() {
     return this.fb.group({
