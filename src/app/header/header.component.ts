@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../Services/modal/modal.service';
 import {MatDialog} from '@angular/material/dialog'
 import {LoginComponent } from '../login/login.component';
 @Component({
@@ -10,7 +9,7 @@ import {LoginComponent } from '../login/login.component';
 export class HeaderComponent implements OnInit {
   private bodyText: string;
 
-  constructor(private modalService: ModalService, private dialog: MatDialog) {
+  constructor( private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -19,8 +18,6 @@ export class HeaderComponent implements OnInit {
   openDialog(){
     this.dialog.open(LoginComponent);
   }
- 
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
+
+
 }

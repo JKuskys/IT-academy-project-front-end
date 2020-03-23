@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalService} from '../Services/modal/modal.service';
 import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
@@ -9,15 +8,11 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class SuccessfulRegistrationComponent implements OnInit {
 
-  constructor(private modalService: ModalService,
-              private dialog: MatDialogRef<any>) { }
+  constructor(private dialog: MatDialogRef<any>) { }
 
   ngOnInit(): void {
   }
 
-  closeModal(id: string) {
-    this.modalService.close(id);
-  }
   closeDialog() {
     this.dialog.close(SuccessfulRegistrationComponent);
   }

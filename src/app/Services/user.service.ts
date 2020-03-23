@@ -4,28 +4,30 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Info} from '../shared/registration';
 import {LoginInfo} from '../shared/login';
+import {JwtHelper} from './JwtHelper.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private url = 'https://academy-project-back.herokuapp.com/';
-  private readonly apiPath = '/api';
+  private proxyurl = 'https://cors-anywhere.herokuapp.com/';
 
-  constructor(private httpClient: HttpClient ) {
+  constructor(private httpClient: HttpClient,
+              private jwtHelper: JwtHelper) {
   }
 
 
   submitRegistration(info: Info): Observable<Info> {
 
     return this.httpClient
-      .post<Info>((this.url + `api/applications`), info)
+      .post<Info>((this.proxyurl + this.url + `api/applications`), info)
       .pipe(catchError(this.errorHandler));
   }
 
   submitLogin(loginInfo: LoginInfo): Observable<LoginInfo> {
     return this.httpClient
-      .post <LoginInfo>((this.url + `api/applications`), loginInfo)
+      .post <LoginInfo>((this.proxyurl + this.url + `auth/login`), loginInfo)
       .pipe(catchError(this.errorHandler));
   }
 

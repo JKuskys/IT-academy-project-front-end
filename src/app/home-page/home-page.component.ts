@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalService} from '../Services/modal/modal.service';
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationComponent} from '../registration/registration.component';
 import {Application} from '../shared/application';
@@ -14,7 +13,7 @@ export class HomePageComponent implements OnInit {
   //data for testing
   applications: Application[];
 
-  constructor(private modalService: ModalService, private dialog: MatDialog) {
+  constructor( private dialog: MatDialog) {
     this.applications = [{
       name: 'Testas Testauskas',
       application_date: '2020-09-01',
