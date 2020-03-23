@@ -4,7 +4,7 @@ import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-
+//comment
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
