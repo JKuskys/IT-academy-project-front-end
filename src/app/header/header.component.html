@@ -1,6 +1,7 @@
 
 <mat-toolbar class="header"><i class="material-icons mr-1"> school </i><a href="#">IT Academy</a>
     <div class="spacer"></div>
-    <button mat-raised-button (click)="openDialog()" class="menu-button">Prisijungti</button>
+  <button *ngIf="logInCheck()" mat-raised-button (click)="onLogOut()" class="menu-button">Atsijungti</button>
+  <button *ngIf="!logInCheck()" mat-raised-button (click)="openDialog()" class="menu-button">Prisijungti</button>
 </mat-toolbar>
 

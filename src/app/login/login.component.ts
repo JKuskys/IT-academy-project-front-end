@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
-import { MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,9 +18,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private router: Router,
     private dialog: MatDialogRef<any>) {
     this.loginForm = this.setForm();
   }
+
   loginInfo: LoginInfo;
   serverErrorMessage: string;
   passwordNotMatch: boolean;
@@ -37,7 +42,7 @@ export class LoginComponent implements OnInit {
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
       response => {
-        console.log(response);
+        localStorage.setItem('token', response.token);
         this.serverErrorMessage = '';
         this.closeDialog('login');
       },
@@ -45,12 +50,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  closeDialog(id: string) {
+    this.dialog.close(id);
+  }
 
- closeDialog(id: string){
-
-   this.dialog.close(id)
-
- }
 
   setForm() {
     return this.fb.group({
