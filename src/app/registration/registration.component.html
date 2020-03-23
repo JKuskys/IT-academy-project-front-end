@@ -96,7 +96,14 @@
             <div class="form-group">
                 <label for="name">El. paštas</label>
 
-                <input matInput type="email" class="form-control" id="email" formControlName="emailReg" maxlength="255"/>
+                <input
+                    matInput
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="emailReg"
+                    maxlength="255"
+                />
             </div>
             <div
                 [hidden]="registrationForm.controls.emailReg.valid || registrationForm.controls.emailReg.pristine"
@@ -108,8 +115,7 @@
                 <div *ngIf="registrationForm.controls.emailReg.errors?.pattern">
                     Neteisingas elektroninis paštas
                 </div>
-                <div
-                    *ngIf="registrationForm.controls.emailReg.errors?.maxLength">
+                <div *ngIf="registrationForm.controls.emailReg.errors?.maxLength">
                     Per ilgas elektroninis paštas
                 </div>
             </div>
@@ -295,9 +301,8 @@
             </div>
             <span class="align-bottom mt-4">
                 <p>{{ this.serverErrorMessage }}</p>
-                <mat-hint>Registruotis galėsit užpildę visus laukus</mat-hint>
+                <mat-hint>Registruotis galėsite užpildę visus laukus</mat-hint>
                 <button
-                    
                     hintLabel="Max 10 characters"
                     mat-stroked-button
                     color="primary"

@@ -13,7 +13,6 @@ body {
     height: 400px;
     width: 400px;
     font-family: "Roboto", sans-serif;
-
 }
 .app-header {
     justify-content: space-between;
@@ -24,9 +23,19 @@ body {
     z-index: 2;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
-.login-wrapper {
-    min-height: 300px;
-    min-width: 450px;
+
+@media only screen and (min-width: 1001px) {
+    .login-wrapper {
+        min-height: 300px;
+        min-width: 400px;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .login-wrapper {
+        min-height: 40vh;
+        min-width: 70vw;
+    }
+ 
 }
 .positronx {
     text-decoration: none;
@@ -103,14 +112,14 @@ body {
     font-size: 35px;
     bottom: 3px;
     position: relative;
-  }
-  .exit {
+}
+.exit {
     outline: none;
-  }
-  
+}
+
 input.mat-input-element {
-  border: 1px solid #6486c4;
+    border: 1px solid #6486c4;
 }
 .form-control {
-  border: 1px solid #6486c4;
+    border: 1px solid #6486c4;
 }
