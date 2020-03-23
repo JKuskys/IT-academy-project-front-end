@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       emailLogin: ['', [
         Validators.required,
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\.[a-zA-z]{2,4}$'),
+        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\\.[a-zA-z]{2,4}$'),
       ]],
       passwordLogin: ['', [
         Validators.required,
