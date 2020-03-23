@@ -11,7 +11,6 @@ import {LoginInfo} from '../shared/login';
 export class UserService {
   private url = 'https://academy-project-back.herokuapp.com/';
   private proxyurl = 'https://cors-anywhere.herokuapp.com/';
-
   constructor(private httpClient: HttpClient) {
   }
 

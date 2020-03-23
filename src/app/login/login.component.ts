@@ -4,7 +4,8 @@ import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-//comment
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
   passwordNotMatch: boolean;
   submission: boolean;
 
+
   ngOnInit(): void {
     this.serverErrorMessage = '';
   }
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
       response => {
+
         localStorage.setItem('token', response.token);
         this.serverErrorMessage = '';
         this.closeDialog('login');
@@ -47,7 +50,6 @@ export class LoginComponent implements OnInit {
       error => (this.serverErrorMessage = error)
     );
   }
-
 
   closeDialog(id: string) {
 
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit {
       emailLogin: ['', [
         Validators.required,
         Validators.maxLength(30),
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
+        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\\.[a-zA-z]{2,4}$'),
       ]],
       passwordLogin: ['', [
         Validators.required,
