@@ -15,7 +15,15 @@
     padding-right: 5vw;
   }
 }
-
+table {
+  width: 100%;
+}
+.status-passed{
+  background-color: rgba(46,183,3,0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
 @media only screen and (max-width: 1000px){
   .container-padding{
     width: 100vw;
@@ -44,4 +52,42 @@
   font-size: 16px;
   min-height: 85vh;
   box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+}
+.seen-style{
+  padding-left: 7px;
+  padding-right: 1px;
+}
+.not-seen-style{
+  padding-left: 6px
+}
+.status-null{
+  background-color: rgba(105, 105, 105, 0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-passed{
+  background-color: rgba(46,183,3,0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-declined{
+  background-color: rgba(255, 0, 10, 0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-possible{
+  background-color: rgba(255, 127, 0, 0.81);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.seen-style{
+  padding-left: 7px;
+  padding-right: 1px;
+}
+.not-seen-style{
+  padding-left: 6px
 }

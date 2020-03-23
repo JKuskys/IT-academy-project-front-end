@@ -1,8 +1,51 @@
 <div class="mx-auto container-padding ">
-    <mat-list>
-      <div class="container-title">Paraiškos</div>
-      <div class="container-content" *ngFor="let application of applications">
-            <app-application-block [application] = application></app-application-block>
-        </div>
-    </mat-list>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Vardas Pavardė</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="application_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Aplikacijos data</th>
+            <td mat-cell *matCellDef="let element">{{ element.application_date }}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="comment_count">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Komentarų skaičius</th>
+            <td mat-cell *matCellDef="let element">{{ element.comment_count }}</td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="seen">
+            <th mat-header-cell *matHeaderCellDef>Peržiūrėta</th>
+            <td mat-cell *matCellDef="let element">
+                <i *ngIf="!element.seen" class="fas fa-eye-slash not-seen-style"></i>
+                <i *ngIf="element.seen" class="fas fa-eye seen-style"></i>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Statusas</th>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.status === 'accepted'" class=" p-1 status-passed">Patvirtinta</div>
+                <div *ngIf="element.status === 'declined'" class=" p-1 status-declined">Atmesta</div>
+                <div *ngIf="element.status === 'possible'" class=" p-1 status-possible">Potenciali</div>
+                <div *ngIf="element.status === ''" class=" p-1 status-null">Nenustatyta</div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef='action'>
+            <th mat-header-cell *matHeaderCellDef>Daugiau</th>
+             <td mat-cell *matCellDef="let element">
+                <mat-icon>launch</mat-icon>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
 </div>
