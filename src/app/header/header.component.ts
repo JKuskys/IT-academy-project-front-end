@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
   onLogOut() {
     this.router.navigate(['home']).catch();
     localStorage.setItem('token', '');
+
   }
 
   ngOnInit(): void {

@@ -59,9 +59,13 @@ import {AuthGuardService} from './Services/auth-guard.service';
 import {AuthServiceService} from './Services/auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RoleGuardService} from './Services/role-guard-service.service';
+import {ApplicationsComponent} from './applications/applications.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomePageComponent},
+
+
+
   {path: 'login', component: LoginComponent},
   {path: 'applications',
     component: HomePageComponent,
@@ -87,6 +91,7 @@ const appRoutes: Routes = [
     LoginComponent,
     SuccessfulRegistrationComponent,
     ApplicationBlockComponent,
+    ApplicationsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
