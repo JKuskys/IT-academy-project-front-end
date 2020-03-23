@@ -54,13 +54,25 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import { ApplicationBlockComponent } from './application-block/application-block.component';
+import {ApplicationBlockComponent} from './application-block/application-block.component';
+import {AuthGuardService} from './Services/auth-guard.service';
+import {AuthServiceService} from './Services/auth-service.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {RoleGuardService} from './Services/role-guard-service.service';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomePageComponent},
-  {path: 'applications', component: HomePageComponent },
-  {path: 'applications/:id', component: HomePageComponent },
   {path: 'login', component: LoginComponent},
+  {path: 'applications',
+    component: HomePageComponent,
+    data: {
+      expectedRole: 'ADMIN'
+    },
+    canActivate: [RoleGuardService] },
+  {path: 'applications/:id',
+    component: HomePageComponent,
+    canActivate: [AuthGuardService] },
+
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: '**', redirectTo: '/home'}
 ];
@@ -135,6 +147,10 @@ const appRoutes: Routes = [
     ScrollingModule
   ],
   providers: [
+    RoleGuardService,
+    AuthServiceService,
+    AuthGuardService,
+    JwtHelperService,
     { provide: MatDialogRef, useValue: {} }
 
   ],
