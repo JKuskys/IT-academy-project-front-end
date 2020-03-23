@@ -55,10 +55,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { ApplicationBlockComponent } from './application-block/application-block.component';
+import { ApplicationsComponent } from './applications/applications.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomePageComponent},
-  {path: 'applications', component: HomePageComponent },
+  {path: 'applications', component: ApplicationsComponent },
   {path: 'applications/:id', component: HomePageComponent },
   {path: 'login', component: LoginComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
     RegistrationComponent,
     LoginComponent,
     SuccessfulRegistrationComponent,
-    ApplicationBlockComponent
+    ApplicationBlockComponent,
+    ApplicationsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
