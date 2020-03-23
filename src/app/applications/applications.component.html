@@ -2,7 +2,7 @@
     <mat-list>
       <div class="container-title">Paraiškos</div>
       <div class="container-content" *ngFor="let application of applications">
-            <app-application-block></app-application-block>
+            <app-application-block [application] = application></app-application-block>
         </div>
     </mat-list>
 </div>
