@@ -1,9 +1,13 @@
 <div id="admin-application-details-wrapper">
   <app-application-details></app-application-details>
   <div id="admin-action-container">
-    <button>Priimti</button>
-    <button>Paversti potencialiu kandidatu</button>
-    <button>Atmesti</button>
+    <div class="admin-action-header">Aplikacijos būsena</div>
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1" color="primary">Priimta</mat-radio-button>
+      <mat-radio-button value="2" color="primary">Atmesta</mat-radio-button>
+      <mat-radio-button value="3" color="primary">Potencialus kandidatas</mat-radio-button>
+    </mat-radio-group>
+    <button>Išsaugoti būseną</button>
   </div>
 </div>
 

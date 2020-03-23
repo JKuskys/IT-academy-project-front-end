@@ -1,5 +1,5 @@
 <div id="application-details-wrapper" *ngIf="application$ | async as application">
-  <div class="application-header">Aplikacija nr. {{application.id}}</div>
+  <div class="application-header">Aplikacija {{application.id}}</div>
   <div class="application-detail-container form-group">
     <div class="application-details-header">Vardas ir pavardė</div>
     <div class="application-details-content form-control">{{application.name}}</div>

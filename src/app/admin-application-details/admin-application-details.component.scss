@@ -3,30 +3,31 @@
   margin: 0 auto;
   background: white;
   padding-bottom: 2.5vh;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
 }
 
 #admin-action-container{
   display: flex;
   width: 100%;
-  padding-bottom: 2.5vh;
+  padding: .375rem .75rem;
+  flex-direction: column;
 }
 
 #admin-action-container button{
-  margin-top: 2.5vh;
   background: #6486C4;
-  height: 45px;
+  height: 40px;
   border-radius: 5px;
   color: #fff;
   border-color: #5D7EB8;
+  width: 13vw;
+  min-width: 150px;
 }
-
 @media only screen and (max-width: 1000px){
   #admin-application-details-wrapper{
     width: 100%;
   }
-  #admin-action-container{
-    flex-direction: column;
-  }
+
 }
 
 @media only screen and (min-width: 1001px){
@@ -36,8 +37,11 @@
     padding-left: 2.5vw;
     padding-top: 2.5vh;
   }
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
 
-  #admin-action-container{
-    justify-content: space-evenly;
-  }
+.admin-action-header{
+  padding-bottom: .5rem;
 }
