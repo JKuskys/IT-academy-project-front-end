@@ -4,6 +4,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {RegistrationComponent} from '../registration/registration.component';
 import {Application} from '../shared/application';
 
+//Change for production branch
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
