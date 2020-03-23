@@ -68,7 +68,7 @@ const appRoutes: Routes = [
 
   {path: 'login', component: LoginComponent},
   {path: 'applications',
-    component: HomePageComponent,
+    component: ApplicationsComponent,
     data: {
       expectedRole: 'ADMIN'
     },

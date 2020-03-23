@@ -4,53 +4,21 @@ import {RegistrationComponent} from '../registration/registration.component';
 import {Application} from '../shared/application';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+    selector: 'app-home-page',
+    templateUrl: './home-page.component.html',
+    styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  private bodyText: string;
-  //data for testing
-  applications: Application[];
+    private bodyText: string;
 
-  constructor( private dialog: MatDialog) {
-    this.applications = [{
-      name: 'Testas Testauskas',
-      application_date: '2020-09-01',
-      comment_count: '0',
-      seen: false,
-      status: '',
-    },
-      {
-        name: 'Testas Testauskas',
-        application_date: '2020-09-01',
-        comment_count: '10',
-        seen: true,
-        status: 'accepted',
-      },
-      {
-        name: 'Testas Testauskas',
-        application_date: '2020-09-01',
-        comment_count: '3',
-        seen: true,
-        status: 'declined',
-      },
-      {
-        name: 'Testas Testauskas',
-        application_date: '2020-09-01',
-        comment_count: '0',
-        seen: false,
-        status: 'possible',
-      },
-    ];
+    constructor(private dialog: MatDialog) {
+    }
 
-  }
+    ngOnInit(): void {
+        this.bodyText = 'This text can be updated in modal 1';
+    }
 
-  ngOnInit(): void {
-    this.bodyText = 'This text can be updated in modal 1';
-  }
-
-  openDialog() {
-    this.dialog.open(RegistrationComponent);
-  }
+    openDialog() {
+        this.dialog.open(RegistrationComponent);
+    }
 }
