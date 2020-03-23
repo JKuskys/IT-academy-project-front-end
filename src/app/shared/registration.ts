@@ -1,3 +1,5 @@
+import {User} from './user';
+
 export interface Info {
   id?: number;
   name: string;
@@ -11,11 +13,5 @@ export interface Info {
   technologies: string;
   source: string;
   application_date: string;
-  user: {
-    id?: number;
-    email: string;
-    password: string;
-    passwordRepeat: string;
-    admin: boolean;
-  };
+  user: User;
 }
