@@ -20,11 +20,13 @@ export class JwtHelper {
         // tslint:disable-next-line:no-string-throw
         throw 'Illegal base64url string!';
     }
-    return decodeURIComponent((<any>window).escape(window.atob(output)));
+    return decodeURIComponent((<any> window).escape(window.atob(output)));
   }
 
   public decodeToken(token: string = '') {
-    if (token === null || token === '') { return { 'upn': '' }; }
+    if (token === null || token === '') {
+      return {'upn': ''};
+    }
     const parts = token.split('.');
     if (parts.length !== 3) {
 

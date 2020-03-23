@@ -55,17 +55,17 @@ export class RegistrationComponent implements OnInit {
     this.submission = false;
     this.info = {
       // id: Math.floor(Math.random() * 10),
-      name: this.registrationForm.get('firstAndLastName').value,
-      phone_number: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
+      fullName: this.registrationForm.get('firstAndLastName').value,
+      phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
       education: this.registrationForm.get('schoolName').value,
-      free_time: this.registrationForm.get('hobbies').value,
+      hobbies: this.registrationForm.get('hobbies').value,
       agreement: this.getTrueFalse('contract'),
       comment: this.registrationForm.get('contractDescription').value,
       academy_time: this.getTrueFalse('workTime'),
       reason: this.registrationForm.get('drive').value,
       technologies: this.registrationForm.get('experience').value,
       source: this.registrationForm.get('fromWhere').value,
-      application_date:
+      applicationDate:
         new Date().getFullYear() + '-' +
         String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
         String(new Date().getDate()).padStart(2, '0'),

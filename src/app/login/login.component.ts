@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('passwordLogin').value,
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
-      () => {
+      response => {
+        console.log(response);
         this.serverErrorMessage = '';
         this.closeDialog('login');
       },
