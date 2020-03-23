@@ -86,7 +86,8 @@ const appRoutes: Routes = [
     RegistrationComponent,
     LoginComponent,
     SuccessfulRegistrationComponent,
-    ApplicationBlockComponent
+    ApplicationBlockComponent,
+    ApplicationsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
