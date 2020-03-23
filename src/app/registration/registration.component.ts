@@ -138,7 +138,7 @@ export class RegistrationComponent implements OnInit {
       emailReg: ['', [
         Validators.required,
         Validators.maxLength(255),
-        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\.[a-zA-z]{2,4}$'),
+        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\\.[a-zA-z]{2,4}$'),
       ]],
       schoolName: ['', [
         Validators.required,
