@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
       response => {
+
         localStorage.setItem('token', response.token);
         this.serverErrorMessage = '';
         this.closeDialog('login');
@@ -51,17 +52,17 @@ export class LoginComponent implements OnInit {
 
 
   closeDialog(id: string) {
-
     this.dialog.close(id);
 
   }
+
 
   setForm() {
     return this.fb.group({
       emailLogin: ['', [
         Validators.required,
         Validators.maxLength(30),
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
+        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\\.[a-zA-z]{2,4}$'),
       ]],
       passwordLogin: ['', [
         Validators.required,
