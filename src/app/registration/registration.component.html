@@ -83,20 +83,8 @@
                     Telefono numeris tūrėtų būti tik iš skaičių
                 </div>
             </div>
-
-            <!-- <mat-form-field class="example-full-width">
-          <label for="sel1">Telefono numeris</label>
-                  <mat-select ng-model="selectedOption" formControlName="phoneCode" class="form-control inline">
-                      <mat-option *ngFor="let name of arrCodes" [value]="name.dial_code">
-                          {{ name.code + " | " + name.dial_code }}
-                      </mat-option>
-                  </mat-select>
-      </mat-form-field> -->
-
             <div class="form-group">
                 <label for="name">El. paštas</label>
-
-
                 <input
                     matInput
                     type="email"
@@ -177,6 +165,7 @@
                     </div>
                 </div>
                 <textarea
+                  [hidden]="getTrueFalse('contract')"
                     matInput
                     rows="5"
                     type="text"
@@ -243,7 +232,7 @@
                     class="form-control resize"
                     id="fromWhere"
                     formControlName="fromWhere"
-                    maxlength="1500"
+                    maxlength="255"
                 ></textarea>
             </div>
             <div
@@ -256,18 +245,19 @@
             </div>
             <div class="form-group">
                 <label for="password1">Slaptažodis</label>
-                <input matInput type="password" id="password1" class="form-control" formControlName="passwordReg" />
+                <input matInput type="password" id="password1" class="form-control" formControlName="passwordReg"  maxlength="30"/>
             </div>
             <div
                 [hidden]="(registrationForm.controls.passwordReg.valid
                 || registrationForm.controls.passwordReg.pristine)&&(this.passwordRepeatReg.value === ''||this.passwordReg.value !== '')"
                 class="alert alert-danger"
             >
+
                 <div *ngIf="registrationForm.controls.passwordReg.errors?.required">
                     Slaptažodis yra privalomas
                 </div>
                 <div *ngIf="registrationForm.controls.passwordReg.errors?.pattern">
-                    Slaptažodis privalo turėti bent vieną skaičių, didžiają raidę ir ilgesnis nei 7 symboliai
+                    Slaptažodis privalo turėti bent vieną skaičių, didžiają raidę, ilgesnis nei 7 symboliai ir negali turėti tarpų
                 </div>
                 <div *ngIf="registrationForm.controls.passwordReg.errors?.maxlength">
                     Slaptažodis privalo būti trumpesnis nei 30 symbolių
@@ -281,6 +271,7 @@
                     id="password2"
                     class="form-control"
                     formControlName="passwordRepeatReg"
+                    maxlength="30"
                 />
             </div>
             <div
