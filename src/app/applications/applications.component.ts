@@ -17,7 +17,7 @@ import {ApplicationService} from '../Services/application.service';
 })
 
 export class ApplicationsComponent implements OnInit {
-
+  isLoading = true;
 
   displayedColumns: string[] = ['applicationDate', 'fullName', 'status', 'commentCount', 'action'];
 
@@ -35,14 +35,20 @@ export class ApplicationsComponent implements OnInit {
   ngOnInit(): void {
     this.applicationService.getApplications().subscribe(data => {
       console.log(data);
+      this.isLoading = false;
       this.dataSource.data = data;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    });
+    },
+    error => this.isLoading = false
+
+    );
   }
 
   openApplication(element: Application) {
     this.router.navigate(['applications/' + element.id]);
   }
+
+  
 
 }

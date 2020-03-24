@@ -84,6 +84,18 @@ table {
   width: 100px;
   text-align: center;
 }
+.status-seen{
+  background-color: rgba(206, 205, 195, 0.81);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-new{
+  background-color: rgba(0, 81, 255, 0.81);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
 .seen-style{
   padding-left: 7px;
   padding-right: 1px;

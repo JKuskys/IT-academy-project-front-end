@@ -12,8 +12,6 @@ import {SuccessfulRegistrationComponent} from '../successful-registration/succes
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
-
   registrationForm: FormGroup;
   arrCodes: string[];
   info: Info;
@@ -154,7 +152,7 @@ export class RegistrationComponent implements OnInit {
       ]],
       fromWhere: ['', [
         Validators.required,
-        Validators.maxLength(255)
+        Validators.maxLength(1500)
       ]],
       passwordReg: ['', [
         Validators.required,

@@ -96,7 +96,6 @@
             <div class="form-group">
                 <label for="name">El. paštas</label>
 
-
                 <input
                     matInput
                     type="email"
@@ -105,7 +104,6 @@
                     formControlName="emailReg"
                     maxlength="255"
                 />
-
             </div>
             <div
                 [hidden]="registrationForm.controls.emailReg.valid || registrationForm.controls.emailReg.pristine"
@@ -259,8 +257,10 @@
                 <input matInput type="password" id="password1" class="form-control" formControlName="passwordReg" />
             </div>
             <div
-                [hidden]="(registrationForm.controls.passwordReg.valid
-                || registrationForm.controls.passwordReg.pristine)&&(this.passwordRepeatReg.value === ''||this.passwordReg.value !== '')"
+                [hidden]="
+                    (registrationForm.controls.passwordReg.valid || registrationForm.controls.passwordReg.pristine) &&
+                    (this.passwordRepeatReg.value === '' || this.passwordReg.value !== '')
+                "
                 class="alert alert-danger"
             >
                 <div *ngIf="registrationForm.controls.passwordReg.errors?.required">
@@ -283,10 +283,7 @@
                     formControlName="passwordRepeatReg"
                 />
             </div>
-            <div
-
-                [hidden]="validatePasswords()"
-                class="alert alert-danger">
+            <div [hidden]="validatePasswords()" class="alert alert-danger">
                 <div *ngIf="this.passwordReg.value != this.passwordRepeatReg.value">
                     Slaptažodžiai turi sutapti
                 </div>
