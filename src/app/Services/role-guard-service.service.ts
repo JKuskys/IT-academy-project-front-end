@@ -17,6 +17,28 @@ export class RoleGuardService implements CanActivate {
   constructor(public router: Router) {
   }
 
+  hasPermissions(permission: string): boolean {
+    // this will be passed from the route config
+    // on the data property
+    const expectedRole = permission;
+    const token: string = localStorage.getItem('token');
+    // decode the token to get its payload
+    const tokenPayload = this.jwtHelper.decodeToken(token);
+    let roles: string;
+    if (isNotNullOrUndefined(tokenPayload)) {
+      roles = JSON.stringify(tokenPayload.roles);
+    } else {
+      roles = '';
+    }
+    if (
+      roles.includes(expectedRole) && this.auth.isAuthenticated()
+    ) {
+      return true;
+    }
+    this.router.navigate(['home']).catch();
+    return false;
+  }
+
   canActivate(route: ActivatedRouteSnapshot): boolean {
     // this will be passed from the route config
     // on the data property

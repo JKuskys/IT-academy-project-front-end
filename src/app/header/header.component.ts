@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginComponent} from '../login/login.component';
-import {AuthGuardService} from '../Services/auth-guard.service';
 import {AuthServiceService} from '../Services/auth-service.service';
 import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import {RoleGuardService} from '../Services/role-guard-service.service';
 
 @Component({
   selector: 'app-header',
@@ -14,11 +13,11 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class HeaderComponent implements OnInit {
   private bodyText: string;
-  private jwtHelper: JwtHelperService;
 
   constructor(private dialog: MatDialog,
               private auth: AuthServiceService,
-              private  router: Router) {
+              private  router: Router,
+              private roleGuardService: RoleGuardService) {
   }
 
   logInCheck(): boolean {
@@ -29,30 +28,11 @@ export class HeaderComponent implements OnInit {
   }
 
   adminCheck(): boolean {
-    const expectedRole = 'ADMIN';
-    // decode the token to get its payload
-    let token: string;
-    let tokenPayload: any;
-    // decode the token to get its payload
-    try {
-      token = localStorage.getItem('token');
-      tokenPayload = this.jwtHelper.decodeToken(token);
-    } catch (e) {
-      tokenPayload = null;
-    }
-    let roles: any;
-    if (isNotNullOrUndefined(tokenPayload)) {
-      roles = JSON.stringify(tokenPayload.roles);
-    } else {
-      roles = '';
-    }
-    console.log(roles);
     if (
-      roles.includes(expectedRole) && this.logInCheck()
+      this.roleGuardService.hasPermissions('ADMIN') && this.logInCheck()
     ) {
       return true;
     }
-    return false;
   }
 
   openApplications() {
