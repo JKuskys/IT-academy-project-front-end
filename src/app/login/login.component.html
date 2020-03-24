@@ -8,14 +8,8 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-card-content>
             <div class="form-group">
-              <label>El. paštas</label>
-                <input
-                    matInput
-                    type="emailLogin"
-                    class="form-control"
-                    id="emailLogin"
-                    formControlName="emailLogin"
-                />
+                <label>El. paštas</label>
+                <input matInput type="emailLogin" class="form-control" id="emailLogin" formControlName="emailLogin" />
             </div>
             <div
                 [hidden]="loginForm.controls.emailLogin.valid || loginForm.controls.emailLogin.pristine"
@@ -31,12 +25,7 @@
             <div class="form-group">
                 <label>Slaptažodis</label>
 
-                <input
-                    matInput
-                    type="password"
-                    class="form-control"
-                    formControlName="passwordLogin"
-                />
+                <input matInput type="password" class="form-control" formControlName="passwordLogin" maxlength="30" />
             </div>
             <div
                 [hidden]="loginForm.controls.passwordLogin.valid || loginForm.controls.passwordLogin.pristine"
@@ -58,6 +47,14 @@
             >
                 Prisijungti
             </button>
+
+            <mat-progress-spinner
+                style="display: flex; justify-content: center; align-items: center"
+                color="primary"
+                *ngIf="isLoading"
+                mode="indeterminate"
+            >
+            </mat-progress-spinner>
         </span>
     </form>
 </div>

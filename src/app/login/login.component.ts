@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,9 +36,11 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
+    this.isLoading = true;
     this.loginInfo = {
       email: this.loginForm.get('emailLogin').value,
-      password: this.loginForm.get('passwordLogin').value,
+      password: this.loginForm.get('passwordLogin').value,     
+
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
       response => {
@@ -46,12 +48,14 @@ export class LoginComponent implements OnInit {
         this.serverErrorMessage = '';
         this.closeDialog('login');
       },
+
       error => {
         if (error==='Access Denied'){
           this.serverErrorMessage = 'Neteisingas el. paštas arba slaptažodis';
         } else {
           this.serverErrorMessage = error;
         }
+      this.isLoading = true;
       }
     );
   }
