@@ -3,7 +3,6 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomePageComponent} from './home-page/home-page.component';
-import {ModalComponent} from './modal/modal.component';
 import {RouterModule, Routes} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
@@ -59,21 +58,33 @@ import { ApplicationDetailsComponent } from './application-details/application-d
 import { AdminApplicationDetailsComponent } from './admin-application-details/admin-application-details.component';
 import { AdminCommentComponent } from './admin-comment/admin-comment.component';
 import { AdminCommentWriteComponent } from './admin-comment-write/admin-comment-write.component';
+import {ApplicationBlockComponent} from './application-block/application-block.component';
+import {AuthGuardService} from './Services/auth-guard.service';
+import {AuthServiceService} from './Services/auth-service.service';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {RoleGuardService} from './Services/role-guard-service.service';
+import {ApplicationsComponent} from './applications/applications.component';
 
 const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
   {path: 'home', component: HomePageComponent},
-  {path: 'applications/:id', component: AdminApplicationDetailsComponent},
-
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home'}
+  {path: 'login', component: LoginComponent},
+  {path: 'applications',
+    component: ApplicationsComponent,
+    data: {
+      expectedRole: 'ADMIN'
+    },
+    canActivate: [RoleGuardService] },
+  {path: 'applications/:id',
+    component: AdminApplicationDetailsComponent,
+  canActivate: [AuthGuardService] },
+{path: '', redirectTo: '/home', pathMatch: 'full'},
+{path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    ModalComponent,
     HeaderComponent,
     FooterComponent,
     RegistrationComponent,
@@ -83,6 +94,8 @@ const appRoutes: Routes = [
     AdminApplicationDetailsComponent,
     AdminCommentComponent,
     AdminCommentWriteComponent
+    ApplicationBlockComponent,
+    ApplicationsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -143,6 +156,10 @@ const appRoutes: Routes = [
     ScrollingModule
   ],
   providers: [
+    RoleGuardService,
+    AuthServiceService,
+    AuthGuardService,
+    JwtHelperService,
     { provide: MatDialogRef, useValue: {} }
 
   ],
