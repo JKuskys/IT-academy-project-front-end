@@ -19,6 +19,7 @@ export class RegistrationComponent implements OnInit {
   passwordNotMatch: boolean;
   submission: boolean;
   isLoading = false;
+
   constructor(
     private fb: FormBuilder,
     private httpService: HttpClient,
@@ -27,7 +28,6 @@ export class RegistrationComponent implements OnInit {
     private dialogNew: MatDialog) {
     this.registrationForm = this.setForm();
   }
-
   ngOnInit(): void {
     this.httpService.get('./assets/phone-codes.json').subscribe(
       data => {
@@ -159,7 +159,7 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(7),
         Validators.maxLength(30),
-        Validators.pattern('^[a-zA-Z0-9](?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=\\S+$).{7,30}$')
+        Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$')
       ]],
       passwordRepeatReg: ['', [
         Validators.required,
