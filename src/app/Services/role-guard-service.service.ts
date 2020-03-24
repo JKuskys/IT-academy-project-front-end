@@ -21,7 +21,7 @@ export class RoleGuardService implements CanActivate {
     // this will be passed from the route config
     // on the data property
     const expectedRole = route.data.expectedRole;
-    const token = localStorage.getItem('token');
+    const token: string = localStorage.getItem('token');
     // decode the token to get its payload
     const tokenPayload = this.jwtHelper.decodeToken(token);
     let roles: string;
