@@ -54,6 +54,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { ApplicationDetailsComponent } from './application-details/application-details.component';
+import { AdminApplicationDetailsComponent } from './admin-application-details/admin-application-details.component';
+import { AdminCommentComponent } from './admin-comment/admin-comment.component';
+import { AdminCommentWriteComponent } from './admin-comment-write/admin-comment-write.component';
 import {ApplicationBlockComponent} from './application-block/application-block.component';
 import {AuthGuardService} from './Services/auth-guard.service';
 import {AuthServiceService} from './Services/auth-service.service';
@@ -63,9 +67,6 @@ import {ApplicationsComponent} from './applications/applications.component';
 
 const appRoutes: Routes = [
   {path: 'home', component: HomePageComponent},
-
-
-
   {path: 'login', component: LoginComponent},
   {path: 'applications',
     component: ApplicationsComponent,
@@ -74,11 +75,10 @@ const appRoutes: Routes = [
     },
     canActivate: [RoleGuardService] },
   {path: 'applications/:id',
-    component: HomePageComponent,
-    canActivate: [AuthGuardService] },
-
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home'}
+    component: AdminApplicationDetailsComponent,
+  canActivate: [AuthGuardService] },
+{path: '', redirectTo: '/home', pathMatch: 'full'},
+{path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({
@@ -90,6 +90,10 @@ const appRoutes: Routes = [
     RegistrationComponent,
     LoginComponent,
     SuccessfulRegistrationComponent,
+    ApplicationDetailsComponent,
+    AdminApplicationDetailsComponent,
+    AdminCommentComponent,
+    AdminCommentWriteComponent,
     ApplicationBlockComponent,
     ApplicationsComponent
   ],

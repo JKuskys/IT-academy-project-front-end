@@ -1,0 +1,16 @@
+.admin-comment{
+  //background:  #f0f0f0;
+  margin-bottom: 1.5vh;
+  -webkit-box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+  -moz-box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+  box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+  border-radius: 5px;
+}
+.admin-comment-header{
+  border-bottom: solid #d6d6d6 1px;
+  display: flex;
+  justify-content: space-between;
+}
+.admin-comment-header, .admin-comment-content{
+  padding: .375rem .75rem;
+}
