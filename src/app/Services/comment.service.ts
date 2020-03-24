@@ -19,4 +19,7 @@ export class CommentService {
   getComment({ id }): Observable<Comment> {
     return this.httpClient.get<Comment>(`${this.proxyurl}${this.url}${this.apiPath}/comments/${id}`);
   }
+  addComment(comment: Comment): Observable<Comment> {
+    return this.httpClient.post<Comment>(`${this.proxyurl}${this.url}${this.apiPath}/comments`, comment);
+  }
 }

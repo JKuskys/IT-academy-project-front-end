@@ -6,6 +6,8 @@ import {ActivatedRoute} from '@angular/router';
 import {ApplicationService} from '../Services/application.service';
 import {switchMap} from 'rxjs/operators';
 import {CommentService} from '../Services/comment.service';
+import { JwtHelper } from '../Services/JwtHelper.service';
+import { formatDate } from '@angular/common';
 import {Application} from '../shared/application';
 
 @Component({
@@ -18,7 +20,8 @@ export class AdminApplicationDetailsComponent implements OnInit {
   public application$: Observable<Application>;
   public comments$: Observable<Comment[]>;
 
-  constructor(private route: ActivatedRoute, private applicationService: ApplicationService, private commentService: CommentService) { }
+  constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
+              private commentService: CommentService, private jwtHelper: JwtHelper) { }
 
   ngOnInit(): void {
     this.application$ = from(this.route.paramMap).pipe(
@@ -30,6 +33,15 @@ export class AdminApplicationDetailsComponent implements OnInit {
     this.comments$ = this.commentService.getComments();
   }
   onCommentSaved(input: string): void {
-    console.log('to do call to back to update comment with content: ' + input);
+    let newComment: Comment;
+    newComment = {
+      authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
+      commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+      comment: input,
+      applicationId: 1 // TODO change later
+    };
+    // TODO post to backend here
+    console.log(newComment);
+    this.commentService.addComment(newComment).subscribe(res => { this.comments$ = this.commentService.getComments(); });
   }
 }
