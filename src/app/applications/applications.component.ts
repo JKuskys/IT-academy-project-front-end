@@ -34,7 +34,6 @@ export class ApplicationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.applicationService.getApplications().subscribe(data => {
-      console.log(data);
       this.dataSource.data = data;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

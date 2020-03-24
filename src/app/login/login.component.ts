@@ -46,7 +46,13 @@ export class LoginComponent implements OnInit {
         this.serverErrorMessage = '';
         this.closeDialog('login');
       },
-      error => (this.serverErrorMessage = error)
+      error => {
+        if (error==='Access Denied'){
+          this.serverErrorMessage = 'Neteisingas el. paštas arba slaptažodis';
+        } else {
+          this.serverErrorMessage = error;
+        }
+      }
     );
   }
 
