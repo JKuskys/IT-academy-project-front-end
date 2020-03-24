@@ -18,6 +18,8 @@ export class RegistrationComponent implements OnInit {
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
+  isLoading = false;
+
   constructor(
     private fb: FormBuilder,
     private httpService: HttpClient,
@@ -49,9 +51,9 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
+    this.isLoading=true;
     this.info = {
       // id: Math.floor(Math.random() * 10),
-      fullName: this.registrationForm.get('firstAndLastName').value,
       phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
       education: this.registrationForm.get('schoolName').value,
       hobbies: this.registrationForm.get('hobbies').value,
@@ -70,6 +72,7 @@ export class RegistrationComponent implements OnInit {
         email: this.registrationForm.get('emailReg').value,
         password: this.registrationForm.get('passwordReg').value,
         passwordRepeat: this.registrationForm.get('passwordRepeatReg').value,
+        fullName: this.registrationForm.get('firstAndLastName').value,
         admin: false,
       }
     };
@@ -82,7 +85,7 @@ export class RegistrationComponent implements OnInit {
           this.closeDialog();
           this.openDialog();
         },
-        error => (this.serverErrorMessage = error)
+        error => (this.serverErrorMessage = error, this.isLoading=false)
       );
     } else {
       this.passwordNotMatch = true;

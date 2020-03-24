@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {from, Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {from, Observable, Subscription} from 'rxjs';
 import {Info} from '../shared/registration';
 import {ActivatedRoute} from '@angular/router';
 import {ApplicationService} from '../Services/application.service';
@@ -12,18 +12,23 @@ import {Application} from '../shared/application';
   styleUrls: ['./admin-application-details.component.scss']
 })
 export class AdminApplicationDetailsComponent implements OnInit {
+  isLoading = false;
+  private routeSub: Subscription;
+  public application: Application;
 
-  public application$: Observable<Application>;
-
-  constructor(private route: ActivatedRoute, private applicationService: ApplicationService) { }
+  constructor(private route: ActivatedRoute, private applicationService: ApplicationService) {
+  }
 
   ngOnInit(): void {
-    this.application$ = from(this.route.paramMap).pipe(
-      switchMap(params => {
-        return this.applicationService.getApplication({ id: params.get('id') });
-      })
-    );
+    this.isLoading = true;
+    this.routeSub = this.route.params.subscribe(params => {
+      this.applicationService.getApplication({id: params['id']}).subscribe(data => {
+        this.application = data;
+        this.isLoading=false;
+      });
+    });
   }
+
   onCommentSaved(input: string): void {
     console.log('to do call to back to update comment with content: ' + input);
   }
