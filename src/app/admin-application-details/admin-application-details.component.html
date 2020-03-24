@@ -11,9 +11,9 @@
   </div>
   <div id="admin-comments">
     <div id="admin-comments-header">Komentarai</div>
-    <app-admin-comment></app-admin-comment>
-    <app-admin-comment></app-admin-comment>
-    <app-admin-comment></app-admin-comment>
+    <div class="comment" *ngFor="let comment of comments$ | async">
+      <app-admin-comment [comment]="comment"></app-admin-comment>
+    </div>
     <hr>
     <app-admin-comment-write (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
   </div>

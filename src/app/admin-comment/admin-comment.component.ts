@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Comment} from '../shared/comment';
 
 @Component({
   selector: 'app-admin-comment',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminCommentComponent implements OnInit {
 
+  @Input() comment: Comment;
   constructor() { }
 
   ngOnInit(): void {
