@@ -58,6 +58,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { ApplicationDetailsComponent } from './application-details/application-details.component';
 import { AdminApplicationDetailsComponent } from './admin-application-details/admin-application-details.component';
 import { AdminCommentComponent } from './admin-comment/admin-comment.component';
+import { AdminCommentWriteComponent } from './admin-comment-write/admin-comment-write.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -79,7 +80,8 @@ const appRoutes: Routes = [
     SuccessfulRegistrationComponent,
     ApplicationDetailsComponent,
     AdminApplicationDetailsComponent,
-    AdminCommentComponent
+    AdminCommentComponent,
+    AdminCommentWriteComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

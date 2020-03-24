@@ -23,4 +23,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
       })
     );
   }
+  onCommentSaved(input: string): void {
+    console.log('to do call to back to update comment with content: ' + input);
+  }
 }

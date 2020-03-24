@@ -10,10 +10,12 @@
     <button>Išsaugoti būseną</button>
   </div>
   <div id="admin-comments">
-    <div id="admin-comments-header">Comments</div>
+    <div id="admin-comments-header">Komentarai</div>
     <app-admin-comment></app-admin-comment>
     <app-admin-comment></app-admin-comment>
     <app-admin-comment></app-admin-comment>
+    <hr>
+    <app-admin-comment-write (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
   </div>
 </div>
 
