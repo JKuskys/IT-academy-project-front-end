@@ -18,6 +18,7 @@ export class RegistrationComponent implements OnInit {
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,7 +28,6 @@ export class RegistrationComponent implements OnInit {
     private dialogNew: MatDialog) {
     this.registrationForm = this.setForm();
   }
-
   ngOnInit(): void {
     this.httpService.get('./assets/phone-codes.json').subscribe(
       data => {
@@ -51,9 +51,9 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
+    this.isLoading=true;
     this.info = {
       // id: Math.floor(Math.random() * 10),
-      fullName: this.registrationForm.get('firstAndLastName').value,
       phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
       education: this.registrationForm.get('schoolName').value,
       hobbies: this.registrationForm.get('hobbies').value,
@@ -72,6 +72,7 @@ export class RegistrationComponent implements OnInit {
         email: this.registrationForm.get('emailReg').value,
         password: this.registrationForm.get('passwordReg').value,
         passwordRepeat: this.registrationForm.get('passwordRepeatReg').value,
+        fullName: this.registrationForm.get('firstAndLastName').value,
         admin: false,
       }
     };
@@ -84,7 +85,7 @@ export class RegistrationComponent implements OnInit {
           this.closeDialog();
           this.openDialog();
         },
-        error => (this.serverErrorMessage = error)
+        error => (this.serverErrorMessage = error, this.isLoading=false)
       );
     } else {
       this.passwordNotMatch = true;
@@ -158,7 +159,7 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(7),
         Validators.maxLength(30),
-        Validators.pattern('^[a-zA-Z0-9](?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=\\S+$).{7,30}$')
+        Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$')
       ]],
       passwordRepeatReg: ['', [
         Validators.required,

@@ -1,6 +1,13 @@
-<div id="admin-application-details-wrapper" *ngIf='application$ | async as application'>
-  <app-application-details [application]="application"></app-application-details>
-  <div id="admin-action-container">
+<div id="admin-application-details-wrapper">
+  <mat-progress-spinner
+    style="margin:0 auto;"
+    color="primary"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  >
+  </mat-progress-spinner>
+  <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
+  <div id="admin-action-container" [hidden]="isLoading">
     <div class="admin-action-header">Aplikacijos būsena</div>
     <mat-radio-group aria-label="Select an option" id="status" value='{{application.status}}' (change)="onStatusChange($event.value)">
       <mat-radio-button value="PRIIMTA" color="primary">Priimta</mat-radio-button>
@@ -9,7 +16,7 @@
     </mat-radio-group>
     <button (click)="onStatusSaved(application)">Išsaugoti būseną</button>
   </div>
-  <div id="admin-comments">
+  <div id="admin-comments" [hidden]="isLoading">
     <div id="admin-comments-header">Komentarai</div>
     <div class="comment" *ngFor="let comment of comments$ | async">
       <app-admin-comment [comment]="comment"></app-admin-comment>

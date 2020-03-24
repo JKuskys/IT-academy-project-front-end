@@ -1,16 +1,16 @@
 <div class="mx-auto container-padding ">
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">  
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
         <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header>Statusas</th>
             <td mat-cell *matCellDef="let element">
-                <div *ngIf="element.status === 'priimta'" class=" p-1 status-passed">Patvirtinta</div>
-                <div *ngIf="element.status === 'atmesta'" class=" p-1 status-declined">Atmesta</div>
-                <div *ngIf="element.status === 'potencialus'" class="p-1 status-possible">Potencialus kandidatas</div>
-                <div *ngIf="element.status === 'peržiūrėta'" class="p-1 status-seen">Peržiūrėta</div>
-                <div *ngIf="element.status === 'nauja'" class="p-1 status-new">Naujas</div>
+                <div *ngIf="element.status === 'PRIIMTA'" class=" p-1 status-passed">Patvirtinta</div>
+                <div *ngIf="element.status === 'ATMESTA'" class=" p-1 status-declined">Atmesta</div>
+                <div *ngIf="element.status === 'POTENCIALUS'" class="p-1 status-possible">Potenciali</div>
+                <div *ngIf="element.status === 'PERŽIŪRĖTA'" class="p-1 status-seen">Peržiūrėta</div>
+                <div *ngIf="element.status === 'NAUJA'" class="p-1 status-new">Nauja</div>
 
             </td>
         </ng-container>
@@ -42,12 +42,12 @@
             </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>  
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-card *ngIf="isLoading" 
+    <mat-card *ngIf="isLoading"
    style="display: flex; justify-content: center; align-items: center">
-  <mat-progress-spinner 
-    color="primary" 
+  <mat-progress-spinner
+    color="primary"
     mode="indeterminate">
   </mat-progress-spinner>
 </mat-card>

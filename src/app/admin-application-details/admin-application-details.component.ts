@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {from, Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {from, Observable, Subscription} from 'rxjs';
 import {Info} from '../shared/registration';
 import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
@@ -16,23 +16,27 @@ import {Application} from '../shared/application';
   styleUrls: ['./admin-application-details.component.scss']
 })
 export class AdminApplicationDetailsComponent implements OnInit {
-
-  public application$: Observable<Application>;
+  isLoading = false;
+  private routeSub: Subscription;
+  public application: Application;
   public comments$: Observable<Comment[]>;
   public currentStatus?: string;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
               private commentService: CommentService, private jwtHelper: JwtHelper) { }
-
+  
   ngOnInit(): void {
-    this.application$ = from(this.route.paramMap).pipe(
-      switchMap(params => {
-        return this.applicationService.getApplication({ id: params.get('id') });
-      })
-    );
-    // TODO change to specific application comments later
+    this.isLoading = true;
+    this.routeSub = this.route.params.subscribe(params => {
+      this.applicationService.getApplication({id: params['id']}).subscribe(data => {
+        this.application = data;
+        this.isLoading = false;
+      });
+    });
+ // TODO change to specific application comments later
     this.comments$ = this.commentService.getComments();
   }
+
   onCommentSaved(input: string): void {
     let newComment: Comment;
     newComment = {
