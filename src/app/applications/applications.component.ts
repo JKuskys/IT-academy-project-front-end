@@ -1,6 +1,71 @@
 import {Application} from '../shared/application';
-import {Component, OnInit, Input} from '@angular/core';
-
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+const data: Application[] = [
+  {name: 'Bestas Testausk',
+  application_date: '2020-09-04',
+  comment_count: '20',
+  status: 'declined',},
+  {name: 'Testas Testas',
+  application_date: '2020-09-01',
+  comment_count: '10',
+  status: 'seen',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: 'new',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: 'accepted',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: 'seen',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+  {name: 'Testas Testauskas',
+  application_date: '2020-09-01',
+  comment_count: '0',
+  status: '',},
+];
 @Component({
   selector: 'app-applications',
   templateUrl: './applications.component.html',
@@ -10,40 +75,22 @@ import {Component, OnInit, Input} from '@angular/core';
 export class ApplicationsComponent implements OnInit {
 
   //data for testing
-  applications: Application[];
+  
+  displayedColumns: string[] = [ 'application_date','name','status', 'comment_count','action'];
+
+  dataSource = new MatTableDataSource<Application>(data);
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort,{static: true}) sort: MatSort;
+
 
   constructor() {
-    this.applications = [{
-      name: 'Testas Testauskas',
-      application_date: '2020-09-01',
-      comment_count: '0',
-      seen: false,
-      status: '',
-    },
-      {
-        name: 'Testas Testauskas',
-        application_date: '2020-09-01',
-        comment_count: '10',
-        seen: true,
-        status: 'accepted',
-      },
-      {
-        name: 'Testas Testauskas',
-        application_date: '2020-09-01',
-        comment_count: '3',
-        seen: true,
-        status: 'declined',
-      },
-      {
-        name: 'Testas Testauskas',
-        application_date: '2020-09-01',
-        comment_count: '0',
-        seen: false,
-        status: 'possible',
-      },
-    ];
   }
 
+
   ngOnInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+
   }
+
 }
