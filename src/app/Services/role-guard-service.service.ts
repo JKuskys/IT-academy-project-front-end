@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import {AuthServiceService} from './auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 
 @Injectable()
@@ -23,7 +24,12 @@ export class RoleGuardService implements CanActivate {
     const token = localStorage.getItem('token');
     // decode the token to get its payload
     const tokenPayload = this.jwtHelper.decodeToken(token);
-    const roles = JSON.stringify(tokenPayload.roles);
+    let roles: string;
+    if (isNotNullOrUndefined(tokenPayload)) {
+      roles = JSON.stringify(tokenPayload.roles);
+    } else {
+      roles = '';
+    }
     if (
       roles.includes(expectedRole) && this.auth.isAuthenticated()
     ) {
