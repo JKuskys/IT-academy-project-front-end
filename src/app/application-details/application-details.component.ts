@@ -13,16 +13,5 @@ export class ApplicationDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // TODO ONLY TEMPORARY UNTIL BACK IS DONE
-    this.application = {
-      fullName: 'string', phoneNumber: 'string', education: 'string', hobbies: 'string', agreement: true, comment: 'string',
-        academy_time: true, reason: 'string', technologies: 'string', source: 'string', applicationDate: 'string',
-        user: {
-          email: 'string',
-          password: 'string',
-          passwordRepeat: 'string',
-          admin: false
-        }
-    };
   }
 }
