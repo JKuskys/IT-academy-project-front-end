@@ -13,6 +13,5 @@ export interface Application {
   application_date: string;
   email?: string;
   comment_count: string;
-  seen: boolean;
   status: string;
 }
