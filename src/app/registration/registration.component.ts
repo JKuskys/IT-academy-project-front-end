@@ -160,7 +160,6 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(7),
         Validators.maxLength(30),
-
         Validators.pattern('^[a-zA-Z0-9](?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=\\S+$).{7,30}$')
       ]],
       passwordRepeatReg: ['', [
