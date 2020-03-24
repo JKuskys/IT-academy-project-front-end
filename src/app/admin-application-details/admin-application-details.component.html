@@ -1,13 +1,13 @@
-<div id="admin-application-details-wrapper">
-  <app-application-details [application]="application$ | async"></app-application-details>
+<div id="admin-application-details-wrapper" *ngIf='application$ | async as application'>
+  <app-application-details [application]="application"></app-application-details>
   <div id="admin-action-container">
     <div class="admin-action-header">Aplikacijos būsena</div>
-    <mat-radio-group aria-label="Select an option">
-      <mat-radio-button value="1" color="primary">Priimta</mat-radio-button>
-      <mat-radio-button value="2" color="primary">Atmesta</mat-radio-button>
-      <mat-radio-button value="3" color="primary">Potencialus kandidatas</mat-radio-button>
+    <mat-radio-group aria-label="Select an option" id="status" value='{{application.status}}' (change)="onStatusChange($event.value)">
+      <mat-radio-button value="PRIIMTA" color="primary">Priimta</mat-radio-button>
+      <mat-radio-button value="ATMESTA" color="primary">Atmesta</mat-radio-button>
+      <mat-radio-button value="POTENCIALUS" color="primary">Potencialus kandidatas</mat-radio-button>
     </mat-radio-group>
-    <button>Išsaugoti būseną</button>
+    <button (click)="onStatusSaved(application)">Išsaugoti būseną</button>
   </div>
   <div id="admin-comments">
     <div id="admin-comments-header">Komentarai</div>

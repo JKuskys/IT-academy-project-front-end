@@ -19,6 +19,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
 
   public application$: Observable<Application>;
   public comments$: Observable<Comment[]>;
+  public currentStatus?: string;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
               private commentService: CommentService, private jwtHelper: JwtHelper) { }
@@ -43,5 +44,15 @@ export class AdminApplicationDetailsComponent implements OnInit {
     // TODO post to backend here
     console.log(newComment);
     this.commentService.addComment(newComment).subscribe(res => { this.comments$ = this.commentService.getComments(); });
+  }
+  onStatusSaved(application: Application): void {
+    if (this.currentStatus) {
+      application.status = this.currentStatus;
+      this.applicationService.updateApplication({ id: this.route.snapshot.paramMap.get('id') }, application)
+        .subscribe(res => { console.log('Saved'); /* TODO maybe add some saved status message? */ });
+    }
+  }
+  onStatusChange(value: string): void{
+    this.currentStatus = value;
   }
 }
