@@ -1,4 +1,6 @@
-
+padding-bottom{
+  padding-bottom: 30vh;
+}
 
 //for textareas
 .scroll::-webkit-scrollbar {
@@ -85,7 +87,7 @@ body {
 
 @media only screen and (min-width: 1001px){
   .login-wrapper {
-    max-height: 80vh; 
+    max-height: 80vh;
     width: 38vw;
   }
 }
