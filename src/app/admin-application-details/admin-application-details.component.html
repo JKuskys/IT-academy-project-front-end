@@ -1,5 +1,12 @@
 <div id="admin-application-details-wrapper">
-  <app-application-details [application]="application$ | async"></app-application-details>
+  <mat-progress-spinner
+    style="margin:0 auto;"
+    color="primary"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  >
+  </mat-progress-spinner>
+  <app-application-details [hidden]="isLoading" [application]="application "></app-application-details>
   <div id="admin-action-container">
     <div class="admin-action-header">Aplikacijos būsena</div>
     <mat-radio-group aria-label="Select an option">

@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.loginInfo = {
       email: this.loginForm.get('emailLogin').value,
-      password: this.loginForm.get('passwordLogin').value,     
+      password: this.loginForm.get('passwordLogin').value,
 
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.serverErrorMessage = error;
         }
-      this.isLoading = true;
+      this.isLoading = false;
       }
     );
   }

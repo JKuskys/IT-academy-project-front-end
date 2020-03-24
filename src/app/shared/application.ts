@@ -1,6 +1,5 @@
 export interface Application {
   id?: number;
-  fullName: string;
   phoneNumber: string;
   education: string;
   hobbies: string;
