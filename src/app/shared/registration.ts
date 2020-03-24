@@ -2,7 +2,6 @@ import {User} from './user';
 
 export interface Info {
   id?: number;
-  fullName: string;
   phoneNumber: string;
   education: string;
   hobbies: string;
