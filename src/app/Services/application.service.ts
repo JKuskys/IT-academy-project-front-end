@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { Info } from '../shared/registration';
+import {Application} from '../shared/application';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class ApplicationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getApplications(): Observable<Info[]> {
-    return this.httpClient.get<Info[]>(`${this.proxyurl}${this.url}${this.apiPath}/applications`);
+  getApplications(): Observable<Application[]> {
+    return this.httpClient.get<Application[]>(`${this.proxyurl}${this.url}${this.apiPath}/applications`);
   }
-  getApplication({ id }): Observable<Info> {
-    return this.httpClient.get<Info>(`${this.proxyurl}${this.url}${this.apiPath}/applications/${id}`);
+  getApplication({ id }): Observable<Application> {
+    return this.httpClient.get<Application>(`${this.proxyurl}${this.url}${this.apiPath}/applications/${id}`);
   }
 }

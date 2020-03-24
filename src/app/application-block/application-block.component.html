@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-auto align-self-center">
       <div align="right">
-        {{application.name}} | {{application.application_date.substring(5)}}
+        {{application.fullName}} | {{application.applicationDate.substring(5)}}
       </div>
     </div>
     <div class="col-sm align-self-center ">
@@ -12,7 +12,7 @@
       <div *ngIf="application.status === ''" class=" p-1 status-null">Nenustatyta</div>
     </div>
     <div class="col-sm align-self-center " align="right">
-      {{application.comment_count}}
+      {{application.commentCount}}
       <i class="fas fa-comment"></i>
 
       <button class="fas fa-info-circle"></button>

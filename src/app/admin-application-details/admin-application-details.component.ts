@@ -4,6 +4,7 @@ import {Info} from '../shared/registration';
 import {ActivatedRoute} from '@angular/router';
 import {ApplicationService} from '../Services/application.service';
 import {switchMap} from 'rxjs/operators';
+import {Application} from '../shared/application';
 
 @Component({
   selector: 'app-admin-application-details',
@@ -12,7 +13,7 @@ import {switchMap} from 'rxjs/operators';
 })
 export class AdminApplicationDetailsComponent implements OnInit {
 
-  public application$: Observable<Info>;
+  public application$: Observable<Application>;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService) { }
 

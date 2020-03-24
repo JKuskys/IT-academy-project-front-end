@@ -1,17 +1,17 @@
 export interface Application {
   id?: number;
-  name: string;
-  phone_number?: string;
-  education?: string;
-  free_time?: string;
-  agreement?: boolean;
-  comment?: string;
-  academy_time?: boolean;
-  reason?: string;
-  technologies?: string;
-  source?: string;
-  application_date: string;
+  fullName: string;
+  phoneNumber: string;
+  education: string;
+  hobbies: string;
+  agreementNeeded?: boolean;
+  comment: string;
+  academyTimeSuitable?: boolean;
+  reason: string;
+  technologies: string;
+  source: string;
+  applicationDate: string;
   email?: string;
-  comment_count: string;
+  commentCount: string;
   status: string;
 }

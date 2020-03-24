@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Info} from '../shared/registration';
+import {Application} from '../shared/application';
 
 @Component({
   selector: 'app-application-details',
@@ -8,7 +8,7 @@ import {Info} from '../shared/registration';
 })
 export class ApplicationDetailsComponent implements OnInit {
 
- @Input() application: Info;
+ @Input() application: Application;
 
   constructor() { }
 

@@ -4,68 +4,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-const data: Application[] = [
-  {name: 'Bestas Testausk',
-  application_date: '2020-09-04',
-  comment_count: '20',
-  status: 'declined',},
-  {name: 'Testas Testas',
-  application_date: '2020-09-01',
-  comment_count: '10',
-  status: 'seen',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: 'new',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: 'accepted',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: 'seen',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-  {name: 'Testas Testauskas',
-  application_date: '2020-09-01',
-  comment_count: '0',
-  status: '',},
-];
+import {Router} from '@angular/router';
+import {element} from 'protractor';
+import {Observable} from 'rxjs';
+import {ApplicationService} from '../Services/application.service';
+
+
 @Component({
   selector: 'app-applications',
   templateUrl: './applications.component.html',
@@ -74,23 +18,31 @@ const data: Application[] = [
 
 export class ApplicationsComponent implements OnInit {
 
-  //data for testing
-  
-  displayedColumns: string[] = [ 'application_date','name','status', 'comment_count','action'];
 
-  dataSource = new MatTableDataSource<Application>(data);
+  displayedColumns: string[] = ['applicationDate', 'fullName', 'status', 'commentCount', 'action'];
+
+  dataSource = new MatTableDataSource<Application>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort,{static: true}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
-  constructor() {
+  constructor(private router: Router,
+              private applicationService: ApplicationService) {
+
   }
 
 
   ngOnInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.applicationService.getApplications().subscribe(data => {
+      console.log(data);
+      this.dataSource.data = data;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
 
+  openApplication(element: Application) {
+    this.router.navigate(['applications/' + element.id]);
   }
 
 }

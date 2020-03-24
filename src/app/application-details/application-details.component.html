@@ -6,7 +6,7 @@
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">El. paštas</div>
-    <div class="application-details-content">{{application.user.email}}</div>
+    <div class="application-details-content">{{application.email}}</div>
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Telefono numeris</div>
@@ -22,11 +22,11 @@
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Galimybė pasirašyti sutartį</div>
-    <div class="application-details-content">{{application.agreement ? "Taip (" + application.comment + ")":"Ne (" + application.comment + ")"}}</div>
+    <div class="application-details-content">{{application.agreementNeeded ? "Taip (" + application.comment + ")":"Ne (" + application.comment + ")"}}</div>
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Galimybė ateiti akademijos laiku (14-18 val. darbo dienomis)</div>
-    <div class="application-details-content">{{application.academy_time ? "Taip":"Ne"}}</div>
+    <div class="application-details-content">{{application.academyTimeSuitable ? "Taip":"Ne"}}</div>
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Ėjimo į akademiją priežastis</div>

@@ -32,7 +32,7 @@ table {
     width: 100%;
     padding-left: 5vw;
     padding-right: 5vw;
-  }   
+  }
 }
 
 .container-content{
@@ -90,4 +90,12 @@ table {
 }
 .not-seen-style{
   padding-left: 6px
+}
+button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
 }
