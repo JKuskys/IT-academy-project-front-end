@@ -15,23 +15,14 @@ export class ApplicationDetailsComponent implements OnInit {
   ngOnInit(): void {
     // TODO ONLY TEMPORARY UNTIL BACK IS DONE
     this.application = {
-    name: 'string',
-    phone_number: 'string',
-    education: 'string',
-    free_time: 'string',
-    agreement: true,
-    comment: 'string',
-    academy_time: true,
-    reason: 'string',
-    technologies: 'string',
-    source: 'string',
-    application_date: 'string',
-      user: {
-        email: 'string',
-        password: 'string',
-        passwordRepeat: 'string',
-        admin: false
-      }
+      fullName: 'string', phoneNumber: 'string', education: 'string', hobbies: 'string', agreement: true, comment: 'string',
+        academy_time: true, reason: 'string', technologies: 'string', source: 'string', applicationDate: 'string',
+        user: {
+          email: 'string',
+          password: 'string',
+          passwordRepeat: 'string',
+          admin: false
+        }
     };
   }
 }

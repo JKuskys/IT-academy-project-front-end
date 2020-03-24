@@ -93,7 +93,7 @@ const appRoutes: Routes = [
     ApplicationDetailsComponent,
     AdminApplicationDetailsComponent,
     AdminCommentComponent,
-    AdminCommentWriteComponent
+    AdminCommentWriteComponent,
     ApplicationBlockComponent,
     ApplicationsComponent
   ],
