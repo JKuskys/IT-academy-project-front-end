@@ -1,0 +1,45 @@
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,1),
+  0 1px 1px 0 rgba(0,0,0,1),
+  0 1px 3px 0 rgba(0,0,0,1);
+}
+button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+.seen-style{
+  padding-left: 7px;
+  padding-right: 1px;
+}
+.not-seen-style{
+  padding-left: 6px
+}
+.status-null{
+  background-color: rgba(105, 105, 105, 0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-passed{
+  background-color: rgba(46,183,3,0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-declined{
+  background-color: rgba(255, 0, 10, 0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-possible{
+  background-color: rgba(255, 127, 0, 0.81);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}

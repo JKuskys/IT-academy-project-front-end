@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
 import {UserService} from '../Services/user.service';
-import {ModalService} from '../Services/modal/modal.service';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,18 +18,19 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private modalService: ModalService,
+    private router: Router,
     private dialog: MatDialogRef<any>) {
     this.loginForm = this.setForm();
   }
+
   loginInfo: LoginInfo;
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
 
- 
+
   ngOnInit(): void {
-    this.serverErrorMessage = '';  
+    this.serverErrorMessage = '';
   }
 
   onSubmit() {
@@ -38,36 +41,26 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.get('passwordLogin').value,
     };
     this.userService.submitLogin(this.loginInfo).subscribe(
-      () => {
+      response => {
+        localStorage.setItem('token', response.token);
         this.serverErrorMessage = '';
-        this.closeModal('login');
+        this.closeDialog('login');
       },
       error => (this.serverErrorMessage = error)
     );
   }
-  
 
- closeDialog(id: string){
-
-   this.dialog.close(id)
-      
- }
-  openModal(id: string) {
-    this.modalService.open(id);
+  closeDialog(id: string) {
+    this.dialog.close(id);
   }
 
-  closeModal(id: string) {
-    this.modalService.close(id);
-    this.loginForm.reset();
-    this.loginForm = this.setForm();
-  }
 
   setForm() {
     return this.fb.group({
       emailLogin: ['', [
         Validators.required,
         Validators.maxLength(30),
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'),
+        Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\\.[a-zA-z]{2,4}$'),
       ]],
       passwordLogin: ['', [
         Validators.required,

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalComponent } from './modal.component';
+import { ApplicationBlockComponent } from './application-block.component';
 
-describe('RegistrationComponent', () => {
-  let component: ModalComponent;
-  let fixture: ComponentFixture<ModalComponent>;
+describe('ApplicationBlockComponent', () => {
+  let component: ApplicationBlockComponent;
+  let fixture: ComponentFixture<ApplicationBlockComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalComponent ]
+      declarations: [ ApplicationBlockComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalComponent);
+    fixture = TestBed.createComponent(ApplicationBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
