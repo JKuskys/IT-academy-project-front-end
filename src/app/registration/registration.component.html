@@ -1,4 +1,4 @@
-<mat-dialog-content id="dialog" >
+<mat-dialog-content id="dialog">
   <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
       <span aria-hidden="true">&times;</span>
@@ -258,11 +258,23 @@
         <div *ngIf="registrationForm.controls.passwordReg.errors?.required">
           Slaptažodis yra privalomas
         </div>
-        <div *ngIf="registrationForm.controls.passwordReg.errors?.pattern">
-          Slaptažodis privalo turėti bent vieną skaičių, didžiają raidę, ilgesnis nei 7 symboliai ir negali turėti tarpų
+        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasNumber')">
+          Slaptažodis privalo turėti bent vieną skaičių
+        </div>
+        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasCapitalCase')">
+          Slaptažodis privalo turėti bent vieną didžiają raidę
+        </div>
+        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasSmallCase')">
+          Slaptažodis privalo turėti bent vieną mažąją raidę
+        </div>
+        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasGaps')">
+          Slaptažodis negali turėti tarpų
+        </div>
+        <div *ngIf="registrationForm.controls.passwordReg.errors?.minlength">
+          Slaptažodis privalo būti ilgesnis nei 7 simboliai
         </div>
         <div *ngIf="registrationForm.controls.passwordReg.errors?.maxlength">
-          Slaptažodis privalo būti trumpesnis nei 30 symbolių
+          Slaptažodis privalo būti trumpesnis nei 30 simbolių
         </div>
       </div>
       <div class="form-group">
@@ -287,7 +299,15 @@
       <span class="align-bottom mt-4 padding-bottom">
                 <p>{{ this.serverErrorMessage }}</p>
                 <mat-hint>Registruotis galėsite užpildę visus laukus</mat-hint>
+         <mat-progress-spinner
+           style="margin:0 auto;"
+           color="primary"
+           *ngIf="isLoading"
+           mode="indeterminate"
+         >
+      </mat-progress-spinner>
                 <button
+                  [hidden]="isLoading"
                   hintLabel="Max 10 characters"
                   mat-stroked-button
                   color="primary"

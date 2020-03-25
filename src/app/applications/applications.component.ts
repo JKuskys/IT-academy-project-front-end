@@ -7,8 +7,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Router} from '@angular/router';
 import {element} from 'protractor';
 import {Observable} from 'rxjs';
-import {ApplicationService} from '../Services/application.service';
-import { DecimalPipe } from '@angular/common';
+import {ApplicationService} from '../Services/application/application.service';
+
 
 @Component({
   selector: 'app-applications',
@@ -30,7 +30,6 @@ export class ApplicationsComponent implements OnInit {
               private applicationService: ApplicationService) {
 
   }
-  decimalPipe = new DecimalPipe(navigator.language);
 
 
   ngOnInit(): void {
@@ -60,6 +59,6 @@ export class ApplicationsComponent implements OnInit {
     this.router.navigate(['applications/' + element.id]);
   }
 
-  
+
 
 }

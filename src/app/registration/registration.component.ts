@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Info} from '../shared/registration';
-import {UserService} from '../Services/user.service';
+import {UserService} from '../Services/account/user.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SuccessfulRegistrationComponent} from '../successful-registration/successful-registration.component';
+import {CustomValidators} from '../Services/universal/custom-validators';
+import {PhoneNumberService} from '../Services/universal/phone-number.service';
+
 
 @Component({
   selector: 'app-registration',
@@ -18,16 +21,18 @@ export class RegistrationComponent implements OnInit {
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;
+  isLoading = false;
+
   constructor(
     private fb: FormBuilder,
-    private httpService: HttpClient,
     private userService: UserService,
     private dialog: MatDialogRef<any>,
-    private dialogNew: MatDialog) {
+    private dialogNew: MatDialog,
+    private phoneNumberService: PhoneNumberService) {
     this.registrationForm = this.setForm();
   }
   ngOnInit(): void {
-    this.httpService.get('./assets/phone-codes.json').subscribe(
+    this.phoneNumberService.getPhoneCodes().subscribe(
       data => {
         this.arrCodes = data as string[];
       },
@@ -49,9 +54,9 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
+    this.isLoading = true;
     this.info = {
       // id: Math.floor(Math.random() * 10),
-      fullName: this.registrationForm.get('firstAndLastName').value,
       phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
       education: this.registrationForm.get('schoolName').value,
       hobbies: this.registrationForm.get('hobbies').value,
@@ -70,6 +75,7 @@ export class RegistrationComponent implements OnInit {
         email: this.registrationForm.get('emailReg').value,
         password: this.registrationForm.get('passwordReg').value,
         passwordRepeat: this.registrationForm.get('passwordRepeatReg').value,
+        fullName: this.registrationForm.get('firstAndLastName').value,
         admin: false,
       }
     };
@@ -82,7 +88,7 @@ export class RegistrationComponent implements OnInit {
           this.closeDialog();
           this.openDialog();
         },
-        error => (this.serverErrorMessage = error)
+        error => (this.serverErrorMessage = error, this.isLoading = false)
       );
     } else {
       this.passwordNotMatch = true;
@@ -154,9 +160,17 @@ export class RegistrationComponent implements OnInit {
       ]],
       passwordReg: ['', [
         Validators.required,
-        Validators.minLength(7),
         Validators.maxLength(30),
-        Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$')
+        // 1. check if it's longer than 7 symbols
+        Validators.minLength(7),
+        // 2. check whether the entered password has a number
+        CustomValidators.patternValidator(/\d/, {hasNumber: true}),
+        // 3. check whether the entered password has upper case letter
+        CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+        // 4. check whether the entered password has a lower-case letter
+        CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+        // 5. check if there are no gaps
+        CustomValidators.patternValidator(/^\S*$/, {hasGaps: true}),
       ]],
       passwordRepeatReg: ['', [
         Validators.required,

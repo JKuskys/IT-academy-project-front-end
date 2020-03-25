@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginComponent} from '../login/login.component';
-import {AuthServiceService} from '../Services/auth-service.service';
+import {AuthServiceService} from '../Services/authorization/auth-service.service';
 import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
-import {RoleGuardService} from '../Services/role-guard-service.service';
+import {RoleGuardService} from '../Services/authorization/role-guard-service.service';
 
 @Component({
   selector: 'app-header',
@@ -29,10 +29,14 @@ export class HeaderComponent implements OnInit {
 
   adminCheck(): boolean {
     if (
-      this.roleGuardService.hasPermissions('ADMIN') && this.logInCheck()
+      this.logInCheck() && isNotNullOrUndefined(localStorage.getItem('roles'))
     ) {
-      return true;
+      if (localStorage.getItem('roles').includes('ADMIN')) {
+        return true;
+      }
     }
+    return false;
+
   }
 
   openApplications() {
@@ -42,7 +46,7 @@ export class HeaderComponent implements OnInit {
   onLogOut() {
     this.router.navigate(['home']).catch();
     localStorage.setItem('token', '');
-
+    localStorage.setItem('roles', '');
   }
 
   ngOnInit(): void {

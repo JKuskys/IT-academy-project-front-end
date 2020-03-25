@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {from, Observable} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {from, Observable, Subscription} from 'rxjs';
 import {Info} from '../shared/registration';
+import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
-import {ApplicationService} from '../Services/application.service';
+import {ApplicationService} from '../Services/application/application.service';
 import {switchMap} from 'rxjs/operators';
+import {CommentService} from '../Services/application/comment.service';
+import {JwtHelper} from '../Services/universal/JwtHelper.service';
+import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
 
 @Component({
@@ -12,19 +16,58 @@ import {Application} from '../shared/application';
   styleUrls: ['./admin-application-details.component.scss']
 })
 export class AdminApplicationDetailsComponent implements OnInit {
+  isLoading = false;
+  private routeSub: Subscription;
+  public application: Application;
+  public comments$: Observable<Comment[]>;
+  public currentStatus?: string;
 
-  public application$: Observable<Application>;
-
-  constructor(private route: ActivatedRoute, private applicationService: ApplicationService) { }
+  constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
+              private commentService: CommentService, private jwtHelper: JwtHelper) {
+  }
 
   ngOnInit(): void {
-    this.application$ = from(this.route.paramMap).pipe(
-      switchMap(params => {
-        return this.applicationService.getApplication({ id: params.get('id') });
-      })
-    );
+    this.isLoading = true;
+    this.routeSub = this.route.params.subscribe(params => {
+      this.applicationService.getApplication({id: params.id}).subscribe(data => {
+        this.application = data;
+        this.isLoading = false;
+        if (this.application.status === 'NAUJA') {
+          this.application.status = 'PERZIURETA';
+          this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+        }
+      });
+    });
+    // TODO change to specific application comments later
+    this.comments$ = this.commentService.getComments();
   }
+
   onCommentSaved(input: string): void {
-    console.log('to do call to back to update comment with content: ' + input);
+    let newComment: Comment;
+    newComment = {
+      authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
+      commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+      comment: input,
+      applicationId: 1 // TODO change later
+    };
+    // TODO post to backend here
+    console.log(newComment);
+    this.commentService.addComment(newComment).subscribe(res => {
+      this.comments$ = this.commentService.getComments();
+    });
+  }
+
+  onStatusSaved(application: Application): void {
+    if (this.currentStatus) {
+      application.status = this.currentStatus;
+      this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, application)
+        .subscribe(res => {
+          console.log('Saved'); /* TODO maybe add some saved status message? */
+        });
+    }
+  }
+
+  onStatusChange(value: string): void {
+    this.currentStatus = value;
   }
 }
