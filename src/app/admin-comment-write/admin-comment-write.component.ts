@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import {blankValidator} from '../shared/blank-validator';
 
 @Component({
   selector: 'app-admin-comment-write',
@@ -13,6 +14,7 @@ export class AdminCommentWriteComponent implements OnInit {
   commentForm = this.fb.group({
     commentBody: [null, [
       Validators.required,
+      blankValidator()
     ]]
   });
 
@@ -22,7 +24,6 @@ export class AdminCommentWriteComponent implements OnInit {
   }
 
   onCommentSaved() {
-    console.log(this.commentForm.get('commentBody').value);
-    this.commentSave.emit(this.commentForm.get('commentBody').value);
+    this.commentSave.emit(this.commentForm.get('commentBody').value.trim());
   }
 }

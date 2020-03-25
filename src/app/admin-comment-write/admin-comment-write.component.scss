@@ -28,3 +28,7 @@
   min-width: 100px;
   margin-top: .5rem;
 }
+.admin-comment-content button:disabled{
+  background: #b5c5e3;
+  border-color: #a3b7dc;
+}
