@@ -9,7 +9,7 @@
   <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
   <div id="admin-action-container" [hidden]="isLoading">
     <div class="admin-action-header">Aplikacijos būsena</div>
-    <mat-radio-group aria-label="Select an option" id="status" value='{{application.status}}' (change)="onStatusChange($event.value)">
+    <mat-radio-group aria-label="Select an option" id="status" *ngIf="application" value='{{application.status}}' (change)="onStatusChange($event.value)">
       <mat-radio-button value="PRIIMTA" color="primary">Priimta</mat-radio-button>
       <mat-radio-button value="ATMESTA" color="primary">Atmesta</mat-radio-button>
       <mat-radio-button value="POTENCIALUS" color="primary">Potencialus kandidatas</mat-radio-button>
