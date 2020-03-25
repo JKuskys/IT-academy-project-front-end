@@ -29,9 +29,13 @@ export class AdminApplicationDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.routeSub = this.route.params.subscribe(params => {
-      this.applicationService.getApplication({id: params['id']}).subscribe(data => {
+      this.applicationService.getApplication({id: params.id}).subscribe(data => {
         this.application = data;
         this.isLoading = false;
+        if (this.application.status === 'NAUJA') {
+          this.application.status = 'PERZIURETA';
+          this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+        }
       });
     });
     // TODO change to specific application comments later
