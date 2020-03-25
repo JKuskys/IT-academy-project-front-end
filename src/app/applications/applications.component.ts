@@ -7,7 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Router} from '@angular/router';
 import {element} from 'protractor';
 import {Observable} from 'rxjs';
-import {ApplicationService} from '../Services/application.service';
+import {ApplicationService} from '../Services/application/application.service';
 
 
 @Component({
@@ -48,6 +48,6 @@ export class ApplicationsComponent implements OnInit {
     this.router.navigate(['applications/' + element.id]);
   }
 
-  
+
 
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
-import {UserService} from '../Services/user.service';
+import {UserService} from '../Services/account/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 
@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
-    
+
     constructor(
     private fb: FormBuilder,
     private userService: UserService,

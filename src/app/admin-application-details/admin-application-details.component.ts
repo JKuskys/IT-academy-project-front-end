@@ -3,10 +3,10 @@ import {from, Observable, Subscription} from 'rxjs';
 import {Info} from '../shared/registration';
 import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
-import {ApplicationService} from '../Services/application.service';
+import {ApplicationService} from '../Services/application/application.service';
 import {switchMap} from 'rxjs/operators';
-import {CommentService} from '../Services/comment.service';
-import {JwtHelper} from '../Services/JwtHelper.service';
+import {CommentService} from '../Services/application/comment.service';
+import {JwtHelper} from '../Services/universal/JwtHelper.service';
 import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
 
