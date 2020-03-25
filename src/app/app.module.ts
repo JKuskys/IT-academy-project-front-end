@@ -10,11 +10,11 @@ import {LoginComponent} from './login/login.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { SuccessfulRegistrationComponent } from './successful-registration/successful-registration.component';
-import { MatSliderModule } from '@angular/material/slider';
+import {SuccessfulRegistrationComponent} from './successful-registration/successful-registration.component';
+import {MatSliderModule} from '@angular/material/slider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule,MatDialogRef} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatCardModule} from '@angular/material/card';
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -63,7 +63,8 @@ import {AuthServiceService} from './Services/authorization/auth-service.service'
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RoleGuardService} from './Services/authorization/role-guard-service.service';
 import {ApplicationsComponent} from './applications/applications.component';
-
+import {StudentPageComponent} from './student-page/student-page.component';
+import {StudentCommentComponent} from './student-comment/student-comment.component';
 
 
 @NgModule({
@@ -80,7 +81,9 @@ import {ApplicationsComponent} from './applications/applications.component';
     AdminCommentComponent,
     AdminCommentWriteComponent,
     ApplicationBlockComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    StudentPageComponent,
+    StudentCommentComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -139,7 +142,7 @@ import {ApplicationsComponent} from './applications/applications.component';
     AuthServiceService,
     AuthGuardService,
     JwtHelperService,
-    { provide: MatDialogRef, useValue: {} }
+    {provide: MatDialogRef, useValue: {}}
 
   ],
   bootstrap: [AppComponent]
