@@ -1,0 +1,27 @@
+<div id="student-application-details-wrapper">
+  <mat-progress-spinner
+    style="margin:0 auto;"
+    color="primary"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  >
+  </mat-progress-spinner>
+  <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
+  <div id="student-action-container" [hidden]="isLoading">
+    <div class="student-action-header">Aplikacijos būsena</div>
+    <div [ngSwitch]="application.status">
+      <div class="p-4 status-declined" *ngSwitchCase="'ATMESTA'">Atmesta</div>
+      <div class="p-4 status-possible"*ngSwitchCase="'PRIIMTA'">Priimta</div>
+      <div class="p-4 status-seen" *ngSwitchDefault>Gauta</div>
+    </div>
+  </div>
+  <div id="student-comments" [hidden]="isLoading">
+    <div id="student-comments-header"[hidden]="commentsEmpty()">Komentarai</div>
+    <div class="comment" *ngFor="let comment of comments ">
+      <app-student-comment [comment]="comment"></app-student-comment>
+    </div>
+    <hr>
+  </div>
+</div>
+
+

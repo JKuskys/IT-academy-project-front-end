@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['applications']);
         }
         if (localStorage.getItem('roles').includes('USER')){
-          this.router.navigate(['profile']);
+          this.router.navigate(['application']);
         }
           },
 
