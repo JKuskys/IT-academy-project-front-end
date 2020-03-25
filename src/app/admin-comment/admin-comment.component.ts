@@ -13,7 +13,8 @@ export class AdminCommentComponent implements OnInit {
   @Input() comment: Comment;
   inEditMode: boolean;
   @Input() isEditable: boolean;
-  @Output() commentSave = new EventEmitter<string>();
+  @Output() commentSave = new EventEmitter<Comment>();
+  @Output() commentDelete = new EventEmitter<number>();
 
   constructor(private fb: FormBuilder) { }
 
@@ -34,6 +35,10 @@ export class AdminCommentComponent implements OnInit {
     }
   }
   onCommentSaved() {
-    this.commentSave.emit(this.commentForm.get('commentBody').value.trim());
+    this.comment.comment = this.commentForm.get('commentBody').value.trim();
+    this.commentSave.emit(this.comment);
+  }
+  onCommentDeleted() {
+    this.commentDelete.emit(this.comment.id);
   }
 }

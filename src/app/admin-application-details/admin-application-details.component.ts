@@ -19,7 +19,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
   isLoading = false;
   private routeSub: Subscription;
   public application: Application;
-  public comments$: Observable<Comment[]>;
+  public comments: Comment[];
   public currentStatus?: string;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
@@ -30,16 +30,19 @@ export class AdminApplicationDetailsComponent implements OnInit {
     this.isLoading = true;
     this.routeSub = this.route.params.subscribe(params => {
       this.applicationService.getApplication({id: params.id}).subscribe(data => {
-        this.application = data;
-        this.isLoading = false;
-        if (this.application.status === 'NAUJA') {
-          this.application.status = 'PERZIURETA';
-          this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-        }
+        // TODO change to specific application comments later
+        this.commentService.getComments().subscribe(commentData => {
+          this.application = data;
+          this.comments = commentData;
+          this.isLoading = false;
+          if (this.application.status === 'NAUJA') {
+            this.application.status = 'PERZIURETA';
+            this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+          }
+        });
       });
     });
-    // TODO change to specific application comments later
-    this.comments$ = this.commentService.getComments();
+
   }
 
   onCommentSaved(input: string): void {
@@ -48,12 +51,11 @@ export class AdminApplicationDetailsComponent implements OnInit {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
       comment: input,
-      applicationId: 1 // TODO change later
+      applicationId: this.application.id
     };
-    // TODO post to backend here AND get only one comment
-    console.log(newComment);
+    // TODO post to backend here
     this.commentService.addComment(newComment).subscribe(res => {
-      this.comments$ = this.commentService.getComments();
+      this.comments.push(newComment);
     });
   }
 
@@ -75,8 +77,13 @@ export class AdminApplicationDetailsComponent implements OnInit {
     return commentAuthor === this.jwtHelper.decodeToken(localStorage.getItem('token')).sub;
   }
 
-  onCommentEdited(comment: string): void {
+  onCommentEdited(comment: Comment): void {
     // TODO get update from backend
     console.log('save to DB');
+  }
+  onCommentDeleted(id: number): void {
+    // TODO delete from backend
+    this.comments = this.comments.filter((value, index, arr) => value.id !== id);
+    console.log('deleted ' + id);
   }
 }
