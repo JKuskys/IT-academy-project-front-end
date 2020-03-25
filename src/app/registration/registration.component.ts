@@ -31,7 +31,6 @@ export class RegistrationComponent implements OnInit {
     private phoneNumberService: PhoneNumberService) {
     this.registrationForm = this.setForm();
   }
-
   ngOnInit(): void {
     this.phoneNumberService.getPhoneCodes().subscribe(
       data => {
