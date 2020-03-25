@@ -9,6 +9,7 @@ import {CommentService} from '../Services/comment.service';
 import {JwtHelper} from '../Services/JwtHelper.service';
 import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-application-details',
@@ -23,7 +24,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
   public currentStatus?: string;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
-              private commentService: CommentService, private jwtHelper: JwtHelper) {
+              private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -61,7 +62,9 @@ export class AdminApplicationDetailsComponent implements OnInit {
       application.status = this.currentStatus;
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, application)
         .subscribe(res => {
-          console.log('Saved'); /* TODO maybe add some saved status message? */
+          const config = new MatSnackBarConfig();
+          config.duration = 2000;
+          this.snackBar.open('Būsena išsaugota!', '', config);
         });
     }
   }
