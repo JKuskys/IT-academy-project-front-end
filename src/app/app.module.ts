@@ -127,7 +127,7 @@ import {StudentCommentComponent} from './student-comment/student-comment.compone
     // MatSidenavModule,
     // MatSliderModule,
     // MatSlideToggleModule,
-    // MatSnackBarModule,
+    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatTabsModule,

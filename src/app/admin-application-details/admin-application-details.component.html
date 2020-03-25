@@ -18,8 +18,8 @@
   </div>
   <div id="admin-comments" [hidden]="isLoading">
     <div id="admin-comments-header">Komentarai</div>
-    <div class="comment" *ngFor="let comment of comments$ | async">
-      <app-admin-comment [comment]="comment"></app-admin-comment>
+    <div class="comment" *ngFor="let comment of comments">
+      <app-admin-comment [comment]="comment" [isEditable]="isCommentEditable(comment.authorEmail)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
     </div>
     <hr>
     <app-admin-comment-write (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
