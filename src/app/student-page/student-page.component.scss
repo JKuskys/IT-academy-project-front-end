@@ -1,0 +1,87 @@
+#student-application-details-wrapper{
+  min-height: 85vh;
+  margin: 0 auto;
+  background: white;
+  padding-bottom: 2.5vh;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+  box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+}
+
+#student-action-container{
+  display: flex;
+  width: 100%;
+  padding: .375rem .75rem;
+  flex-direction: column;
+}
+
+#student-comments{
+  padding: .375rem .75rem;
+}
+
+#student-comments-header{
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: .75rem;
+  margin-top: 1rem;
+}
+
+#student-action-container button{
+  background: #6486C4;
+  height: 40px;
+  border-radius: 5px;
+  color: #fff;
+  border-color: #5D7EB8;
+  width: 13vw;
+  min-width: 150px;
+}
+@media only screen and (max-width: 1000px){
+  #student-application-details-wrapper{
+    width: 100%;
+  }
+
+}
+
+@media only screen and (min-width: 1001px){
+  #student-application-details-wrapper{
+    width: 50%;
+    padding-right: 2.5vw;
+    padding-left: 2.5vw;
+    padding-top: 2.5vh;
+  }
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.student-action-header{
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+}
+
+hr{
+  width: 100%;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.status-declined{
+  background-color: rgba(255, 0, 10, 0.55);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-possible{
+  background-color: rgba(255, 127, 0, 0.81);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
+.status-seen{
+  background-color: rgba(206, 205, 195, 0.81);
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+}
