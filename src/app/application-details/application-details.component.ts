@@ -8,10 +8,19 @@ import {Application} from '../shared/application';
 })
 export class ApplicationDetailsComponent implements OnInit {
 
- @Input() application: Application;
+  @Input() application: Application;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  noStatus(): boolean {
+    if (this.application.status !== 'ATMESTA' && this.application.status !== 'PRIIMTA' && this.application.status !== 'POTENCIALUS') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

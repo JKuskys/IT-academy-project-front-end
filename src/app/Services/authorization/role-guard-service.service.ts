@@ -9,6 +9,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 
+
 @Injectable()
 export class RoleGuardService implements CanActivate {
   public jwtHelper: JwtHelperService = new JwtHelperService();

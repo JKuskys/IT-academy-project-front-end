@@ -1,32 +1,50 @@
-<div id="application-details-wrapper" *ngIf="application">
-  <div class="application-header">Paraiška {{application.id}}</div>
-  <div class="application-detail-container">
-    <div class="application-details-header">Vardas ir pavardė</div>
-    <div class="application-details-content">{{application.fullName}}</div>
+<div class="application-details-wrapper" *ngIf="application">
+
+    <div class="row">
+      <div class="col-7">
+        <div class="application-header">{{application.fullName}}</div>
+        <div class="application-header-second">{{application.applicationDate}}</div>
+      </div>
+      <div class="col-4 ">
+          <div class="block status-declined" *ngIf ="application.status==='ATMESTA'">
+            Atmesta
+          </div>
+          <div class="block status-accepted" *ngIf="application.status==='PRIIMTA'">Priimta</div>
+          <div class="block status-possible" *ngIf="application.status==='POTENCIALUS'">Potencialus</div>
+          <div class="block status-seen" *ngIf="noStatus()">Nenustatyta</div>
+        </div>
+    </div>
+
+  <div class="application-detail-contacts">
+    <div class="row">
+      <div class="col-auto">
+        <i class="fas fa-phone-square-alt icon-padding"></i>
+        {{application.phoneNumber}}
+      </div>
+      <div class="col-auto">
+        <i class="fas fa-envelope icon-padding"></i>
+        {{application.email}}
+      </div>
+      <div class="col-auto">
+        <i class="fas fa-book-open icon-padding"></i>
+        {{application.education}}
+      </div>
+    </div>
   </div>
-  <div class="application-detail-container">
-    <div class="application-details-header">El. paštas</div>
-    <div class="application-details-content">{{application.email}}</div>
-  </div>
-  <div class="application-detail-container">
-    <div class="application-details-header">Telefono numeris</div>
-    <div class="application-details-content">{{application.phoneNumber}}</div>
-  </div>
-  <div class="application-detail-container">
-    <div class="application-details-header">Mokymosi įstaiga</div>
-    <div class="application-details-content">{{application.education}}</div>
-  </div>
+  <mat-divider></mat-divider>
+  <br>
   <div class="application-detail-container">
     <div class="application-details-header">Pomėgiai</div>
     <div class="application-details-content">{{application.hobbies}}</div>
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Galimybė pasirašyti sutartį</div>
-    <div class="application-details-content">{{application.agreementNeeded ? "Taip ":"Ne (" + application.comment + ")"}}</div>
+    <div
+      class="application-details-content">{{application.agreementNeeded ? "Taip " : "Ne (" + application.comment + ")"}}</div>
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Galimybė ateiti akademijos laiku (14-18 val. darbo dienomis)</div>
-    <div class="application-details-content">{{application.academyTimeSuitable ? "Taip":"Ne"}}</div>
+    <div class="application-details-content">{{application.academyTimeSuitable ? "Taip" : "Ne"}}</div>
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Ėjimo į akademiją priežastis</div>
@@ -39,9 +57,5 @@
   <div class="application-detail-container">
     <div class="application-details-header">Iš kur sužinota apie akademiją</div>
     <div class="application-details-content">{{application.source}}</div>
-  </div>
-  <div class="application-detail-container">
-    <div class="application-details-header">Užpildymo data</div>
-    <div class="application-details-content">{{application.applicationDate}}</div>
   </div>
 </div>
