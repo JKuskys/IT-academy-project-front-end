@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comment} from '../shared/comment';
+import {FormBuilder, Validators} from '@angular/forms';
+import {blankValidator} from '../shared/blank-validator';
 
 @Component({
   selector: 'app-admin-comment',
@@ -9,9 +11,29 @@ import {Comment} from '../shared/comment';
 export class AdminCommentComponent implements OnInit {
 
   @Input() comment: Comment;
-  constructor() { }
+  inEditMode: boolean;
+  @Input() isEditable: boolean;
+  @Output() commentSave = new EventEmitter<string>();
+
+  constructor(private fb: FormBuilder) { }
+
+  commentForm = this.fb.group({
+    commentBody: [null, [
+      Validators.required,
+      blankValidator()
+    ]]
+  });
 
   ngOnInit(): void {
+    this.inEditMode = false;
   }
-
+  switchEditMode(): void {
+    this.inEditMode = !this.inEditMode;
+    if (this.inEditMode) {
+      this.commentForm.get('commentBody').setValue(this.comment.comment);
+    }
+  }
+  onCommentSaved() {
+    this.commentSave.emit(this.commentForm.get('commentBody').value.trim());
+  }
 }

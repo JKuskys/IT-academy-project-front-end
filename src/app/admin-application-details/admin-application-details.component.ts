@@ -50,7 +50,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
       comment: input,
       applicationId: 1 // TODO change later
     };
-    // TODO post to backend here
+    // TODO post to backend here AND get only one comment
     console.log(newComment);
     this.commentService.addComment(newComment).subscribe(res => {
       this.comments$ = this.commentService.getComments();
@@ -69,5 +69,14 @@ export class AdminApplicationDetailsComponent implements OnInit {
 
   onStatusChange(value: string): void {
     this.currentStatus = value;
+  }
+
+  isCommentEditable(commentAuthor: string): boolean {
+    return commentAuthor === this.jwtHelper.decodeToken(localStorage.getItem('token')).sub;
+  }
+
+  onCommentEdited(comment: string): void {
+    // TODO get update from backend
+    console.log('save to DB');
   }
 }

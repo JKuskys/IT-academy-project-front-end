@@ -1,7 +1,17 @@
 <div class="admin-comment">
   <div class="admin-comment-header">
-    <div id="admin-comment-author">{{comment.authorEmail}}</div>
+    <div id="admin-comment-author">{{comment.authorEmail}} <a class="author-comment-edit" *ngIf="isEditable && !inEditMode" (click)="switchEditMode()">Edit...</a></div>
     <div id="admin-comment-date">{{comment.commentDate}}</div>
   </div>
-  <div class="admin-comment-content">{{comment.comment}}</div>
+  <div class="admin-comment-content">
+    <div *ngIf="!inEditMode">{{comment.comment}}</div>
+    <div *ngIf="inEditMode">
+      <form [formGroup]="commentForm" (ngSubmit)="onCommentSaved(); switchEditMode();">
+        <div class="admin-comment-content">
+          <textarea id="commentBody" formControlName="commentBody" class="author-comment-edit-field">{{comment.comment}}</textarea>
+          <button type='submit' [disabled]="!commentForm.valid">Išsaugoti</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
