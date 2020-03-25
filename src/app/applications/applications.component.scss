@@ -18,6 +18,15 @@
 table {
   width: 100%;
 }
+.mat-column-commentCount{
+    max-width: 60px;
+}
+.mat-column-applicationDate{
+  max-width: 80px;
+}
+.mat-column-action{
+  max-width: 40px;
+}
 
 .status-passed{
   background-color: rgba(46,183,3,0.55);

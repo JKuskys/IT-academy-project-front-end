@@ -33,11 +33,11 @@ export class ApplicationsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.applicationService.getApplications().subscribe(data => {
       this.isLoading = false;
       this.dataSource.data = data;
       this.dataSource.sort = this.sort;
-    this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.paginator._intl.itemsPerPageLabel='Paraiškų skaičius puslapyje';
       this.paginator._intl.getRangeLabel  = (page: number, pageSize: number, length: number) =>  {
