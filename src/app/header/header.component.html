@@ -1,9 +1,9 @@
 
 <mat-toolbar class="header"><i class="material-icons mr-1"> school </i><a href="#">IT Academy</a>
     <div class="spacer"></div>
-  <button *ngIf="!adminCheck()&&logInCheck()" mat-raised-button (click)="redirect('application')" class="menu-button" id="manoParaiska">Mano paraiška</button>
-  <button *ngIf="adminCheck()" mat-raised-button (click)="redirect('applications')" class="menu-button" id="paraiskos">Paraiškos</button>
-  <button *ngIf="logInCheck()" mat-raised-button (click)="onLogOut()" class="menu-button" id ="logout">Atsijungti</button>
-  <button *ngIf="!logInCheck()" mat-raised-button (click)="openDialog()" class="menu-button" id ="login">Prisijungti</button>
+  <button *ngIf="!adminCheck()&&logInCheck()" mat-raised-button (click)="redirect('application')" class="menu-button button2" id="manoParaiska">Mano paraiška</button>
+  <button *ngIf="adminCheck()" mat-raised-button (click)="redirect('applications')" class="menu-button button2" id="paraiskos">Paraiškos</button>
+  <button *ngIf="logInCheck()" mat-raised-button (click)="onLogOut()" class="menu-button button2" id ="logout">Atsijungti</button>
+  <button *ngIf="!logInCheck()" mat-raised-button (click)="openDialog()" class="menu-button button2" id ="login">Prisijungti</button>
 </mat-toolbar>
 
