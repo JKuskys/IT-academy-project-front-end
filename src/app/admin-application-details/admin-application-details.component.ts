@@ -6,8 +6,8 @@ import {ActivatedRoute} from '@angular/router';
 import {ApplicationService} from '../Services/application.service';
 import {switchMap} from 'rxjs/operators';
 import {CommentService} from '../Services/comment.service';
-import { JwtHelper } from '../Services/JwtHelper.service';
-import { formatDate } from '@angular/common';
+import {JwtHelper} from '../Services/JwtHelper.service';
+import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
 
 @Component({
@@ -23,8 +23,9 @@ export class AdminApplicationDetailsComponent implements OnInit {
   public currentStatus?: string;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
-              private commentService: CommentService, private jwtHelper: JwtHelper) { }
-  
+              private commentService: CommentService, private jwtHelper: JwtHelper) {
+  }
+
   ngOnInit(): void {
     this.isLoading = true;
     this.routeSub = this.route.params.subscribe(params => {
@@ -33,7 +34,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
         this.isLoading = false;
       });
     });
- // TODO change to specific application comments later
+    // TODO change to specific application comments later
     this.comments$ = this.commentService.getComments();
   }
 
@@ -47,16 +48,22 @@ export class AdminApplicationDetailsComponent implements OnInit {
     };
     // TODO post to backend here
     console.log(newComment);
-    this.commentService.addComment(newComment).subscribe(res => { this.comments$ = this.commentService.getComments(); });
+    this.commentService.addComment(newComment).subscribe(res => {
+      this.comments$ = this.commentService.getComments();
+    });
   }
+
   onStatusSaved(application: Application): void {
     if (this.currentStatus) {
       application.status = this.currentStatus;
-      this.applicationService.updateApplication({ id: this.route.snapshot.paramMap.get('id') }, application)
-        .subscribe(res => { console.log('Saved'); /* TODO maybe add some saved status message? */ });
+      this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, application)
+        .subscribe(res => {
+          console.log('Saved'); /* TODO maybe add some saved status message? */
+        });
     }
   }
-  onStatusChange(value: string): void{
+
+  onStatusChange(value: string): void {
     this.currentStatus = value;
   }
 }

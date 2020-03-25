@@ -5,6 +5,7 @@ import {Info} from '../shared/registration';
 import {UserService} from '../Services/user.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SuccessfulRegistrationComponent} from '../successful-registration/successful-registration.component';
+import {CustomValidators} from '../Services/custom-validators';
 
 @Component({
   selector: 'app-registration',
@@ -28,6 +29,7 @@ export class RegistrationComponent implements OnInit {
     private dialogNew: MatDialog) {
     this.registrationForm = this.setForm();
   }
+
   ngOnInit(): void {
     this.httpService.get('./assets/phone-codes.json').subscribe(
       data => {
@@ -51,7 +53,7 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
-    this.isLoading=true;
+    this.isLoading = true;
     this.info = {
       // id: Math.floor(Math.random() * 10),
       phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
@@ -85,7 +87,7 @@ export class RegistrationComponent implements OnInit {
           this.closeDialog();
           this.openDialog();
         },
-        error => (this.serverErrorMessage = error, this.isLoading=false)
+        error => (this.serverErrorMessage = error, this.isLoading = false)
       );
     } else {
       this.passwordNotMatch = true;
@@ -157,9 +159,17 @@ export class RegistrationComponent implements OnInit {
       ]],
       passwordReg: ['', [
         Validators.required,
-        Validators.minLength(7),
         Validators.maxLength(30),
-        Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$')
+        // 1. check if it's longer than 7 symbols
+        Validators.minLength(7),
+        // 2. check whether the entered password has a number
+        CustomValidators.patternValidator(/\d/, {hasNumber: true}),
+        // 3. check whether the entered password has upper case letter
+        CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
+        // 4. check whether the entered password has a lower-case letter
+        CustomValidators.patternValidator(/[a-z]/, {hasSmallCase: true}),
+        // 5. check if there are no gaps
+        CustomValidators.patternValidator(/^\S*$/, {hasGaps: true}),
       ]],
       passwordRepeatReg: ['', [
         Validators.required,
