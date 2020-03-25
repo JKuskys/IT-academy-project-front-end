@@ -39,8 +39,10 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  openApplications() {
-    this.router.navigate(['applications']).catch();
+
+
+  redirect(path: string) {
+    this.router.navigate([path]).catch();
   }
 
   onLogOut() {
