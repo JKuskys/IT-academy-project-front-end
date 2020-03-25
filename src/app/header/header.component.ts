@@ -29,10 +29,14 @@ export class HeaderComponent implements OnInit {
 
   adminCheck(): boolean {
     if (
-      this.roleGuardService.hasPermissions('ADMIN') && this.logInCheck()
+      this.logInCheck() && isNotNullOrUndefined(localStorage.getItem('roles'))
     ) {
-      return true;
+      if (localStorage.getItem('roles').includes('ADMIN')) {
+        return true;
+      }
     }
+    return false;
+
   }
 
   openApplications() {
@@ -42,7 +46,7 @@ export class HeaderComponent implements OnInit {
   onLogOut() {
     this.router.navigate(['home']).catch();
     localStorage.setItem('token', '');
-
+    localStorage.setItem('roles', '');
   }
 
   ngOnInit(): void {
