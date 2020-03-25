@@ -9,6 +9,7 @@ import {CommentService} from '../Services/application/comment.service';
 import {JwtHelper} from '../Services/universal/JwtHelper.service';
 import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-application-details',
@@ -19,27 +20,28 @@ export class AdminApplicationDetailsComponent implements OnInit {
   isLoading = false;
   private routeSub: Subscription;
   public application: Application;
-  public comments$: Observable<Comment[]>;
+  public comments: Comment[];
   public currentStatus?: string;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
-              private commentService: CommentService, private jwtHelper: JwtHelper) {
+              private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.routeSub = this.route.params.subscribe(params => {
       this.applicationService.getApplication({id: params.id}).subscribe(data => {
-        this.application = data;
-        this.isLoading = false;
-        if (this.application.status === 'NAUJA') {
-          this.application.status = 'PERZIURETA';
-          this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-        }
+        this.commentService.getComments({applicationId: this.route.snapshot.paramMap.get('id')}).subscribe(commentData => {
+          this.application = data;
+          this.comments = commentData;
+          this.isLoading = false;
+          if (this.application.status === 'NAUJA') {
+            this.application.status = 'PERZIURETA';
+            this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+          }
+        });
       });
     });
-    // TODO change to specific application comments later
-    this.comments$ = this.commentService.getComments();
   }
 
   onCommentSaved(input: string): void {
@@ -47,13 +49,11 @@ export class AdminApplicationDetailsComponent implements OnInit {
     newComment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-      comment: input,
-      applicationId: 1 // TODO change later
+      comment: input
     };
-    // TODO post to backend here
-    console.log(newComment);
-    this.commentService.addComment(newComment).subscribe(res => {
-      this.comments$ = this.commentService.getComments();
+    this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
+      newComment = res;
+      this.comments.push(newComment);
     });
   }
 
@@ -62,12 +62,27 @@ export class AdminApplicationDetailsComponent implements OnInit {
       application.status = this.currentStatus;
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, application)
         .subscribe(res => {
-          console.log('Saved'); /* TODO maybe add some saved status message? */
+          const config = new MatSnackBarConfig();
+          config.duration = 2000;
+          this.snackBar.open('Būsena išsaugota!', '', config);
         });
     }
   }
 
   onStatusChange(value: string): void {
     this.currentStatus = value;
+  }
+
+  isCommentEditable(commentAuthor: string): boolean {
+    return commentAuthor === this.jwtHelper.decodeToken(localStorage.getItem('token')).sub;
+  }
+
+  onCommentEdited(comment: Comment): void {
+    this.commentService.updateComment(comment, { applicationId: this.application.id }).subscribe();
+  }
+  onCommentDeleted(id: number): void {
+    this.commentService.deleteComment({applicationId: this.application.id, commentId: id}).subscribe(res => {
+      this.comments = this.comments.filter((value, index, arr) => value.id !== id);
+    });
   }
 }

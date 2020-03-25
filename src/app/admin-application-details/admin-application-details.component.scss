@@ -37,6 +37,12 @@
   width: 13vw;
   min-width: 150px;
 }
+
+#admin-action-container button:disabled{
+  background: #b5c5e3;
+  border-color: #a3b7dc;
+}
+
 @media only screen and (max-width: 1000px){
   #admin-application-details-wrapper{
     width: 100%;
@@ -66,3 +72,4 @@ hr{
   margin-top: 3vh;
   margin-bottom: 3vh;
 }
+
