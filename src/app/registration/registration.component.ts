@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Info} from '../shared/registration';
-import {UserService} from '../Services/user.service';
+import {UserService} from '../Services/account/user.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SuccessfulRegistrationComponent} from '../successful-registration/successful-registration.component';
-import {CustomValidators} from '../Services/custom-validators';
+import {CustomValidators} from '../Services/universal/custom-validators';
+import {PhoneNumberService} from '../Services/universal/phone-number.service';
+
 
 @Component({
   selector: 'app-registration',
@@ -23,15 +25,15 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private httpService: HttpClient,
     private userService: UserService,
     private dialog: MatDialogRef<any>,
-    private dialogNew: MatDialog) {
+    private dialogNew: MatDialog,
+    private phoneNumberService: PhoneNumberService) {
     this.registrationForm = this.setForm();
   }
 
   ngOnInit(): void {
-    this.httpService.get('./assets/phone-codes.json').subscribe(
+    this.phoneNumberService.getPhoneCodes().subscribe(
       data => {
         this.arrCodes = data as string[];
       },

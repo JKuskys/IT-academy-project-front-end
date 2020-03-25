@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
-import {UserService} from '../Services/user.service';
+import {UserService} from '../Services/account/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {RoleGuardService} from '../Services/authorization/role-guard-service.service';
 
 
 @Component({
@@ -14,11 +15,12 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
-    
-    constructor(
+
+  constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    private roleGuardService: RoleGuardService,
     private dialog: MatDialogRef<any>) {
     this.loginForm = this.setForm();
   }
@@ -45,17 +47,24 @@ export class LoginComponent implements OnInit {
     this.userService.submitLogin(this.loginInfo).subscribe(
       response => {
         localStorage.setItem('token', response.token);
+        this.roleGuardService.setRole(response.token);
         this.serverErrorMessage = '';
         this.closeDialog('login');
-      },
+        if (localStorage.getItem('roles').includes('ADMIN')){
+          this.router.navigate(['applications']);
+        }
+        if (localStorage.getItem('roles').includes('USER')){
+          this.router.navigate(['profile']);
+        }
+          },
 
       error => {
-        if (error==='Access Denied'){
+        if (error === 'Access Denied') {
           this.serverErrorMessage = 'Neteisingas el. paštas arba slaptažodis';
         } else {
           this.serverErrorMessage = error;
         }
-      this.isLoading = false;
+        this.isLoading = false;
       }
     );
   }

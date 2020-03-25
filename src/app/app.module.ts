@@ -3,7 +3,6 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomePageComponent} from './home-page/home-page.component';
-import {RouterModule, Routes} from '@angular/router';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -54,32 +53,18 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-import { ApplicationDetailsComponent } from './application-details/application-details.component';
-import { AdminApplicationDetailsComponent } from './admin-application-details/admin-application-details.component';
-import { AdminCommentComponent } from './admin-comment/admin-comment.component';
-import { AdminCommentWriteComponent } from './admin-comment-write/admin-comment-write.component';
+import {ApplicationDetailsComponent} from './application-details/application-details.component';
+import {AdminApplicationDetailsComponent} from './admin-application-details/admin-application-details.component';
+import {AdminCommentComponent} from './admin-comment/admin-comment.component';
+import {AdminCommentWriteComponent} from './admin-comment-write/admin-comment-write.component';
 import {ApplicationBlockComponent} from './application-block/application-block.component';
-import {AuthGuardService} from './Services/auth-guard.service';
-import {AuthServiceService} from './Services/auth-service.service';
+import {AuthGuardService} from './Services/authorization/auth-guard.service';
+import {AuthServiceService} from './Services/authorization/auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {RoleGuardService} from './Services/role-guard-service.service';
+import {RoleGuardService} from './Services/authorization/role-guard-service.service';
 import {ApplicationsComponent} from './applications/applications.component';
 
-const appRoutes: Routes = [
-  {path: 'home', component: HomePageComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'applications',
-    component: ApplicationsComponent,
-    data: {
-      expectedRole: 'ADMIN'
-    },
-    canActivate: [RoleGuardService] },
-  {path: 'applications/:id',
-    component: AdminApplicationDetailsComponent,
-  canActivate: [AuthGuardService] },
-{path: '', redirectTo: '/home', pathMatch: 'full'},
-{path: '**', redirectTo: '/home'}
-];
+
 
 @NgModule({
   declarations: [
@@ -101,59 +86,53 @@ const appRoutes: Routes = [
   imports: [
     HttpClientModule,
     BrowserModule,
-    RouterModule.forRoot(appRoutes, {anchorScrolling: 'enabled'}),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatCardModule,
-    A11yModule,
-    ClipboardModule,
-    CdkStepperModule,
-    CdkTableModule,
-    CdkTreeModule,
-    DragDropModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatBottomSheetModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
+    // A11yModule,
+    // ClipboardModule,
+    // CdkStepperModule,
+    // CdkTableModule,
+    // CdkTreeModule,
+    // DragDropModule,
+    // MatAutocompleteModule,
+    // MatBadgeModule,
+    // MatBottomSheetModule,
+    // MatButtonModule,
+    // MatButtonToggleModule,
+    // MatCardModule,
+    // MatCheckboxModule,
+    // MatChipsModule,
+    // MatStepperModule,
+    // MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
+    // MatExpansionModule,
+    // MatGridListModule,
+    // MatIconModule,
+    // MatInputModule,
+    // MatListModule,
+    // MatMenuModule,
+    // MatNativeDateModule,
+    // MatPaginatorModule,
+    // MatProgressBarModule,
+    // MatProgressSpinnerModule,
+    // MatRadioModule,
+    // MatRippleModule,
     MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
+    // MatSidenavModule,
+    // MatSliderModule,
+    // MatSlideToggleModule,
+    // MatSnackBarModule,
+    // MatSortModule,
     MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
+    // MatTabsModule,
+    // MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule,
-    PortalModule,
-    ScrollingModule
+    // MatTreeModule,
+    // PortalModule,
+    // ScrollingModule
   ],
   providers: [
     RoleGuardService,
