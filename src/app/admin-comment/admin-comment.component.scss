@@ -30,12 +30,14 @@
   border: #d6d6d6 solid 1px;
 }
 .admin-comment-content{
+  word-break: break-all;
   display: flex;
   flex-direction: column;
 }
 .admin-comment-content button{
   width: 10vw;
-  align-self: flex-end;
+  margin-left: .5rem;
+  margin-top: .5rem;
   background: #6486C4;
   height: 35px;
   border-radius: 5px;
@@ -46,5 +48,10 @@
 .admin-comment-content button:disabled{
   background: #b5c5e3;
   border-color: #a3b7dc;
+}
+.admin-edit-actions{
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
 }
 

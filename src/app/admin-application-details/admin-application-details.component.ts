@@ -30,8 +30,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
     this.isLoading = true;
     this.routeSub = this.route.params.subscribe(params => {
       this.applicationService.getApplication({id: params.id}).subscribe(data => {
-        // TODO change to specific application comments later
-        this.commentService.getComments().subscribe(commentData => {
+        this.commentService.getComments({applicationId: this.route.snapshot.paramMap.get('id')}).subscribe(commentData => {
           this.application = data;
           this.comments = commentData;
           this.isLoading = false;
@@ -42,7 +41,6 @@ export class AdminApplicationDetailsComponent implements OnInit {
         });
       });
     });
-
   }
 
   onCommentSaved(input: string): void {
@@ -50,11 +48,10 @@ export class AdminApplicationDetailsComponent implements OnInit {
     newComment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-      comment: input,
-      applicationId: this.application.id
+      comment: input
     };
-    // TODO post to backend here
-    this.commentService.addComment(newComment).subscribe(res => {
+    this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
+      newComment = res;
       this.comments.push(newComment);
     });
   }
@@ -78,12 +75,11 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   onCommentEdited(comment: Comment): void {
-    // TODO get update from backend
-    console.log('save to DB');
+    this.commentService.updateComment(comment, { applicationId: this.application.id }).subscribe();
   }
   onCommentDeleted(id: number): void {
-    // TODO delete from backend
-    this.comments = this.comments.filter((value, index, arr) => value.id !== id);
-    console.log('deleted ' + id);
+    this.commentService.deleteComment({applicationId: this.application.id, commentId: id}).subscribe(res => {
+      this.comments = this.comments.filter((value, index, arr) => value.id !== id);
+    });
   }
 }
