@@ -8,6 +8,7 @@ import {SuccessfulRegistrationComponent} from '../successful-registration/succes
 import {CustomValidators} from '../Services/universal/custom-validators';
 import {PhoneNumberService} from '../Services/universal/phone-number.service';
 
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
