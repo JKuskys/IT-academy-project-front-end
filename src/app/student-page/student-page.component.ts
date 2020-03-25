@@ -33,11 +33,12 @@ export class StudentPageComponent implements OnInit {
       this.isLoading = false;
     });
     // TODO change to specific application comments later
+    /*
     this.commentService.getComments().subscribe(data => {
 
       // this.comments = data;
       this.isLoading = false;
-    });
+    });*/
   }
 
   commentsEmpty() {
