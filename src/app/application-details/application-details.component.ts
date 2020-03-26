@@ -17,7 +17,25 @@ export class ApplicationDetailsComponent implements OnInit {
   }
 
   noStatus(): boolean {
-    if (this.application.status !== 'ATMESTA' && this.application.status !== 'PRIIMTA' && this.application.status !== 'POTENCIALUS') {
+    if (this.application.status !== 'ATMESTA' &&
+      this.application.status !== 'PRIIMTA' &&
+      this.application.status !== 'POTENCIALUS') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  noStatusAdmin(): boolean {
+    if (this.noStatus() && localStorage.getItem('roles').includes('ADMIN')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  noStatusUser(): boolean {
+    if (this.noStatus() && localStorage.getItem('roles').includes('USER')) {
       return true;
     } else {
       return false;

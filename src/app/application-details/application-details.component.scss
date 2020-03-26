@@ -11,6 +11,10 @@
   font-size: 15px;
   padding-left: 1rem;
 }
+.icon-padding-one{
+  padding-left: 5px;
+  padding-right :7px ;
+}
 .icon-padding{
   padding-left: 5px;
   padding-right :3px ;
@@ -35,8 +39,11 @@
 .status-possible{
   background-color: rgba(255, 127, 0, 0.45);
 }
-.status-seen{
+.status-null{
   background-color: rgba(206, 205, 195, 0.45);
+}
+.status-null-user{
+  background-color: rgba(0, 81, 255, 0.45);
 }
 
 .application-details-wrapper{
