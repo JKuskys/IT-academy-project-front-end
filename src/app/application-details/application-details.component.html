@@ -6,30 +6,30 @@
         <div class="application-header-second">{{application.applicationDate}}</div>
       </div>
       <div class="col-4 ">
-          <div class="block status-declined" *ngIf ="application.status==='ATMESTA'">
-            Atmesta
-          </div>
+          <div class="block status-declined" *ngIf ="application.status==='ATMESTA'">Atmesta</div>
           <div class="block status-accepted" *ngIf="application.status==='PRIIMTA'">Priimta</div>
           <div class="block status-possible" *ngIf="application.status==='POTENCIALUS'">Potencialus</div>
-          <div class="block status-seen" *ngIf="noStatus()">Nenustatyta</div>
+          <div class="block status-null" *ngIf="noStatusAdmin()">Nenustatyta</div>
+        <div class="block status-null-user" *ngIf="noStatusUser()">Gauta</div>
         </div>
     </div>
 
   <div class="application-detail-contacts">
     <div class="row">
       <div class="col-auto">
-        <i class="fas fa-phone-square-alt icon-padding"></i>
+        <i class="fas fa-phone-square-alt icon-padding-one"></i>
         {{application.phoneNumber}}
       </div>
       <div class="col-auto">
         <i class="fas fa-envelope icon-padding"></i>
         {{application.email}}
       </div>
-      <div class="col-auto">
-        <i class="fas fa-book-open icon-padding"></i>
-        {{application.education}}
-      </div>
+
     </div>
+
+      <i class="fas fa-book-open icon-padding"></i>
+      {{application.education}}
+
   </div>
   <mat-divider></mat-divider>
   <br>
