@@ -18,8 +18,15 @@ export class ApplicationDetailsComponent implements OnInit {
 
   noStatus(): boolean {
     if (this.application.status !== 'ATMESTA' &&
-      this.application.status !== 'PRIIMTA' &&
-      this.application.status !== 'POTENCIALUS') {
+      this.application.status !== 'PRIIMTA') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  potential():boolean{
+    if (this.application.status === 'POTENCIALUS' &&
+      localStorage.getItem('roles').includes('ADMIN')) {
       return true;
     } else {
       return false;
@@ -27,7 +34,9 @@ export class ApplicationDetailsComponent implements OnInit {
   }
 
   noStatusAdmin(): boolean {
-    if (this.noStatus() && localStorage.getItem('roles').includes('ADMIN')) {
+    if (this.noStatus() &&
+      !this.potential() &&
+      localStorage.getItem('roles').includes('ADMIN')) {
       return true;
     } else {
       return false;

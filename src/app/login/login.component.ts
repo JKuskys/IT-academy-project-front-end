@@ -15,7 +15,7 @@ import {RoleGuardService} from '../Services/authorization/role-guard-service.ser
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
-    
+
     constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.userService.submitLogin(this.loginInfo).subscribe(
       response => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('email', response.email);
         this.roleGuardService.setRole(response.token);
         this.serverErrorMessage = '';
         this.closeDialog('login');
