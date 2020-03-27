@@ -28,11 +28,11 @@ export class StudentPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.applicationService.getApplication({id: 1}).subscribe(data => {
-      this.application = data;
+    this.applicationService.getProfileApplication({email: localStorage.getItem('email')}).subscribe(response => {
+      this.application = response;
       this.isLoading = false;
     });
-    // TODO change to specific application comments later
+    // TODO get comments from back
     /*
     this.commentService.getComments().subscribe(data => {
 
