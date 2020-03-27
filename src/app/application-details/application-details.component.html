@@ -39,7 +39,8 @@
   <div class="application-detail-container">
     <div class="application-details-header">Galimybė pasirašyti sutartį</div>
     <div
-      class="application-details-content">{{application.agreementNeeded ? "Taip " : "Ne (" + application.comment + ")"}}</div>
+      class="application-details-content">{{application.agreementNeeded ? "Taip " : "Ne"}}
+      <br>{{application.agreementNeeded ? "" : application.comment}}</div>
   </div>
   <div class="application-detail-container">
     <div class="application-details-header">Galimybė ateiti akademijos laiku (14-18 val. darbo dienomis)</div>
