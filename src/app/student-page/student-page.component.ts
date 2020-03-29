@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
 import {Application} from '../shared/application';
 import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
-import {ApplicationService} from '../Services/application/application.service';
-import {CommentService} from '../Services/application/comment.service';
-import {JwtHelper} from '../Services/universal/JwtHelper.service';
+import {ApplicationService} from '../services/application/application.service';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
@@ -15,15 +12,10 @@ import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 })
 export class StudentPageComponent implements OnInit {
   isLoading = false;
-  declined = 'ATMESTA';
-  accepted = 'PRIIMTA';
-  private routeSub: Subscription;
   public application: Application;
   public comments: Comment[];
-  public currentStatus?: string;
 
-  constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
-              private commentService: CommentService, private jwtHelper: JwtHelper) {
+  constructor(private route: ActivatedRoute, private applicationService: ApplicationService) {
   }
 
   ngOnInit(): void {

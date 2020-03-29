@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Info} from '../shared/registration';
-import {UserService} from '../Services/account/user.service';
+import {Registration} from '../shared/registration';
+import {UserService} from '../services/account/user.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SuccessfulRegistrationComponent} from '../successful-registration/successful-registration.component';
-import {CustomValidators} from '../Services/universal/custom-validators';
-import {PhoneNumberService} from '../Services/universal/phone-number.service';
+import {CustomValidators} from '../services/universal/custom-validators';
+import {PhoneNumberService} from '../services/universal/phone-number.service';
 
 
 @Component({
@@ -17,7 +17,7 @@ import {PhoneNumberService} from '../Services/universal/phone-number.service';
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   arrCodes: string[];
-  info: Info;
+  info: Registration;
   serverErrorMessage: string;
   passwordNotMatch: boolean;
   submission: boolean;

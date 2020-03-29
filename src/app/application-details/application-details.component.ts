@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Application} from '../shared/application';
+import {Status} from '../shared/status';
 
 @Component({
   selector: 'app-application-details',
@@ -17,15 +18,16 @@ export class ApplicationDetailsComponent implements OnInit {
   }
 
   noStatus(): boolean {
-    if (this.application.status !== 'ATMESTA' &&
-      this.application.status !== 'PRIIMTA') {
+    if (this.application.status !== Status.ATMESTA &&
+      this.application.status !== Status.PRIIMTA) {
       return true;
     } else {
       return false;
     }
   }
-  potential():boolean{
-    if (this.application.status === 'POTENCIALUS' &&
+
+  potential(): boolean {
+    if (this.application.status === Status.POTENCIALUS &&
       localStorage.getItem('roles').includes('ADMIN')) {
       return true;
     } else {
@@ -49,5 +51,9 @@ export class ApplicationDetailsComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  get status() {
+    return Status;
   }
 }

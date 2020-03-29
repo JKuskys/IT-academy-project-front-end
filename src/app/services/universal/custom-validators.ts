@@ -19,11 +19,11 @@ export class CustomValidators {
 
   static gapsOnly(error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
-      if (!isNotNullOrUndefined(control.value)) {
+      if(!control.value){
         return null;
       }
-      if (control.value.replace(/\s+/, '') === '') {
-        // if control is empty error
+      if (control.value.replace(/\s+/, '') === '' ) {
+        // if control is only of gaps return error
         return error;
       } else {
         return null;
