@@ -121,12 +121,16 @@ export class RegistrationComponent implements OnInit {
       firstAndLastName: ['', [
         Validators.required,
         Validators.minLength(1),
+        // check if only valid letters
+        CustomValidators.patternValidator(/^[a-zA-Z\s]*$/, {hasLettersOnly: true}),
+        // check if there are only gaps
+        CustomValidators.gapsOnly({hasGaps: true}),
       ]],
       phoneCode: ['+370', []],
       phoneNumber: ['', [
         Validators.required,
         Validators.maxLength(8),
-        Validators.pattern('[0-9 ]{1,8}'),
+        Validators.pattern('^[0-9]*$'),
       ]],
       emailReg: ['', [
         Validators.required,
@@ -135,28 +139,40 @@ export class RegistrationComponent implements OnInit {
       ]],
       schoolName: ['', [
         Validators.required,
-        Validators.maxLength(255)
+        Validators.maxLength(255),
+        // check if there are only gaps
+        CustomValidators.gapsOnly({hasGaps: true}),
       ]],
       hobbies: ['', [
         Validators.required,
-        Validators.maxLength(1500)
+        Validators.maxLength(1500),
+        // check if there are only gaps
+        CustomValidators.gapsOnly({hasGaps: true}),
       ]],
       contract: [true, []],
       contractDescription: ['', [
-        Validators.maxLength(1500)
+        Validators.maxLength(1500),
+        // check if there are only gaps
+        CustomValidators.gapsOnly({hasGaps: true}),
       ]],
       workTime: [true, []],
       drive: ['', [
         Validators.required,
-        Validators.maxLength(1500)
+        Validators.maxLength(1500),
+        // check if there are only gaps
+        CustomValidators.gapsOnly({hasGaps: true}),
       ]],
       experience: ['', [
         Validators.required,
-        Validators.maxLength(1500)
+        Validators.maxLength(1500),
+        // check if there are only gaps
+        CustomValidators.gapsOnly({hasGaps: true}),
       ]],
       fromWhere: ['', [
         Validators.required,
-        Validators.maxLength(1500)
+        Validators.maxLength(1500),
+        // check if there are only gaps
+        CustomValidators.gapsOnly({hasGaps: true}),
       ]],
       passwordReg: ['', [
         Validators.required,
