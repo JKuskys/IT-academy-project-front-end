@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationComponent} from '../registration/registration.component';
 import {Application} from '../shared/application';
-import {AuthServiceService} from '../Services/authorization/auth-service.service';
+import {AuthServiceService} from '../services/authorization/auth-service.service';
 
 @Component({
   selector: 'app-home-page',

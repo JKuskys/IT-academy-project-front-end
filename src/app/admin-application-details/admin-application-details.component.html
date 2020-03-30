@@ -1,6 +1,6 @@
 <div id="admin-application-details-wrapper">
   <mat-progress-spinner
-    style="margin:0 auto;"
+    class="spinner-styler"
     color="primary"
     *ngIf="isLoading"
     mode="indeterminate"
@@ -18,6 +18,7 @@
   </div>
   <div id="admin-comments" [hidden]="isLoading">
     <div id="admin-comments-header">Komentarai</div>
+    <div class="comment-missing-remark" [hidden]="comments.length > 0">Komentarų nėra...</div>
     <div class="comment" *ngFor="let comment of comments">
       <app-admin-comment [comment]="comment" [isEditable]="isCommentEditable(comment.authorEmail)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
     </div>
