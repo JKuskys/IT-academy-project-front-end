@@ -4,14 +4,14 @@
       <a class="author-comment-edit" *ngIf="isEditable && !inEditMode" (click)="switchEditMode()">Keisti...</a>
       <a class="author-comment-edit" *ngIf="isEditable && !inEditMode" (click)="onCommentDeleted()">Trinti...</a>
     </div>
-    <div id="admin-comment-date">{{comment.commentDate}}</div>
+    <div id="admin-comment-date">{{comment.commentDate | date: 'yyyy-MM-dd'}}</div>
   </div>
   <div class="admin-comment-content">
     <div *ngIf="!inEditMode">{{comment.comment}}</div>
     <div *ngIf="inEditMode">
       <form [formGroup]="commentForm" (ngSubmit)="onCommentSaved(); switchEditMode();">
         <div class="admin-comment-content">
-          <textarea id="commentBody" formControlName="commentBody" class="author-comment-edit-field">{{comment.comment}}</textarea>
+          <textarea formControlName="commentBody" class="author-comment-edit-field">{{comment.comment}}</textarea>
           <div class="admin-edit-actions">
             <button type='button' (click)="switchEditMode()">Cancel</button>
             <button type='submit' [disabled]="!commentForm.valid">Išsaugoti</button>

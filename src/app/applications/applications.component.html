@@ -32,7 +32,7 @@
 
       <ng-container matColumnDef="applicationDate">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Aplikacijos data</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="Data">{{ element.applicationDate.substring(5) }}</mat-cell>
+        <mat-cell *matCellDef="let element" data-label="Data">{{ element.applicationDate | date: 'MM-dd' }}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="commentCount">
@@ -50,7 +50,7 @@
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
   </div>
-  
+
     <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
         <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>
     </mat-card>

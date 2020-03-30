@@ -46,11 +46,12 @@ export class AdminApplicationDetailsComponent implements OnInit {
     }
   }
 
-  onCommentSaved(input: string): void {
+  onCommentSaved(input: string, internal: boolean): void {
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-      comment: input
+      comment: input,
+      visibleToApplicant: !internal,
     };
     this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
       this.comments.push(res);
