@@ -1,6 +1,6 @@
 <div class="student-comment">
     <div class="student-comment-header">
-        <div id="student-comment-author">IT akademija</div>
+        <div id="student-comment-author">{{ comment.authorAdmin? 'IT akademija' : comment.authorEmail }}</div>
         <div id="student-comment-date">{{ comment.commentDate }}</div>
     </div>
     <div class="student-comment-content">{{ comment.comment }}</div>
