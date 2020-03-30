@@ -11,7 +11,7 @@
     <div *ngIf="inEditMode">
       <form [formGroup]="commentForm" (ngSubmit)="onCommentSaved(); switchEditMode();">
         <div class="admin-comment-content">
-          <textarea formControlName="commentBody" class="author-comment-edit-field">{{comment.comment}}</textarea>
+          <textarea maxlength="1500" formControlName="commentBody" class="author-comment-edit-field">{{comment.comment}}</textarea>
           <div class="admin-edit-actions">
             <button type='button' (click)="switchEditMode()">Cancel</button>
             <button type='submit' [disabled]="!commentForm.valid">Išsaugoti</button>
