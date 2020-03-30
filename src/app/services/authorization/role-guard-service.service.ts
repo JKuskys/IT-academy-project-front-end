@@ -20,7 +20,7 @@ export class RoleGuardService implements CanActivate {
 
   setRole(token: string) {
     const tokenPayload = this.jwtHelper.decodeToken(token);
-    if (isNotNullOrUndefined(tokenPayload)) {
+    if (tokenPayload) {
       localStorage.setItem('roles', JSON.stringify(tokenPayload.roles));
     } else {
       localStorage.setItem('roles', '');
@@ -35,7 +35,7 @@ export class RoleGuardService implements CanActivate {
     // decode the token to get its payload
     const tokenPayload = this.jwtHelper.decodeToken(token);
     let roles: string;
-    if (isNotNullOrUndefined(tokenPayload)) {
+    if (tokenPayload) {
       roles = JSON.stringify(tokenPayload.roles);
     } else {
       roles = '';

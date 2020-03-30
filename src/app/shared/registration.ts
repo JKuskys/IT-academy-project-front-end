@@ -1,17 +1,10 @@
 import {User} from './user';
+import {Info} from './info';
 
-export interface Info {
-  id?: number;
-  phoneNumber: string;
-  education: string;
-  hobbies: string;
+export interface Registration extends Info{
   agreement: boolean;
-  comment: string;
   academy_time: boolean;
-  reason: string;
-  technologies: string;
-  source: string;
-  applicationDate: string;
   user: User;
 }
+
 

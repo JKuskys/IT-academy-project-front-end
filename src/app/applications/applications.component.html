@@ -1,53 +1,55 @@
 <div class="mx-auto container-padding ">
-    <table mat-table [dataSource]="dataSource" matSort matSortActive="applicationDate" matSortDirection="desc"  class="mat-elevation-z8">
+  <div>
+    <mat-table [dataSource]="dataSource" matSort matSortActive="applicationDate" matSortDirection="desc"  class="mat-elevation-z8">
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Statusas</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Statusas">
+          <div *ngIf="element.status === status.PRIIMTA" order="1" class="status-padding">
+            <span class="status-passed">Patvirtinta</span>
+          </div>
+          <div *ngIf="element.status === status.ATMESTA" order="2" class="status-padding">
+            <span class="status-declined">Atmesta</span>
+          </div>
+          <div *ngIf="element.status === status.POTENCIALUS" order="4" class="status-padding">
+            <span class="status-possible">Potenciali</span>
+          </div>
+          <div *ngIf="element.status === status.PERZIURETA" order="3" class="status-padding">
+            <span class="status-seen">Peržiūrėta</span>
+          </div>
+          <div *ngIf="element.status === status.NAUJA" class="status-padding">
+            <span class="status-new">
+              <p hidden>a</p>
+              Nauja
+            </span>
+          </div>
+        </mat-cell>
+      </ng-container>
 
+      <ng-container matColumnDef="fullName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Vardas Pavardė</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Vardas ir pavardė">{{ element.fullName }}</mat-cell>
+      </ng-container>
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Statusas</th>
-            <td mat-cell *matCellDef="let element">
-                <div *ngIf="element.status === 'PRIIMTA'" order="1" class=" p-1 status-passed">Patvirtinta</div>
-                <div *ngIf="element.status === 'ATMESTA'" order="2" class=" p-1 status-declined">Atmesta</div>
-                <div *ngIf="element.status === 'POTENCIALUS'" order="4" class="p-1 status-possible">Potenciali</div>
-                <div *ngIf="element.status === 'PERZIURETA'" order="3" class="p-1 status-seen">
-                    Peržiūrėta
-                </div>
-                <div *ngIf="element.status === 'NAUJA'" class="p-1 status-new">
-                    <p hidden>a</p>
-                    Nauja
-                </div>
-            </td>
-        </ng-container>
-        <!-- Position Column -->
-        <ng-container matColumnDef="fullName">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Vardas Pavardė</th>
-            <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
-        </ng-container>
+      <ng-container matColumnDef="applicationDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Aplikacijos data</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Data">{{ element.applicationDate | date: 'MM-dd' }}</mat-cell>
+      </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="applicationDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Aplikacijos data</th>
-            <td mat-cell *matCellDef="let element">{{ element.applicationDate.substring(5) }}</td>
-        </ng-container>
+      <ng-container matColumnDef="commentCount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Komentarų skaičius</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Komentarų skaičius">{{ element.commentCount }}</mat-cell>
+      </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="commentCount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Komentarų skaičius</th>
-            <td mat-cell *matCellDef="let element">{{ element.commentCount }}</td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>Daugiau</th>
-            <td mat-cell *matCellDef="let element">
-                <button><mat-icon (click)="openApplication(element)">launch</mat-icon></button>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Daugiau</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Daugiau">
+          <button><mat-icon (click)="openApplication(element)">launch</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
 
     <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
         <mat-progress-spinner color="primary" mode="indeterminate"> </mat-progress-spinner>

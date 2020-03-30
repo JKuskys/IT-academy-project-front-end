@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Info} from '../../shared/registration';
+import {Registration} from '../../shared/registration';
 import {LoginInfo} from '../../shared/login';
 
 @Injectable({
@@ -15,10 +15,10 @@ export class UserService {
   }
 
 
-  submitRegistration(info: Info): Observable<Info> {
+  submitRegistration(info: Registration): Observable<Registration> {
 
     return this.httpClient
-      .post<Info>((this.proxyurl + this.url + `api/applications`), info)
+      .post<Registration>((this.proxyurl + this.url + `api/applications`), info)
       .pipe(catchError(this.errorHandler));
   }
 

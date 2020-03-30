@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
-import {UserService} from '../Services/account/user.service';
+import {UserService} from '../services/account/user.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {RoleGuardService} from '../Services/authorization/role-guard-service.service';
+import {RoleGuardService} from '../services/authorization/role-guard-service.service';
 
 
 @Component({

@@ -1,0 +1,7 @@
+export enum Status {
+  NAUJA = 'NAUJA',
+  PERZIURETA = 'PERZIURETA',
+  ATMESTA = 'ATMESTA',
+  POTENCIALUS = 'POTENCIALUS',
+  PRIIMTA = 'PRIIMTA',
+}

@@ -1,4 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 export class CustomValidators {
   static patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
@@ -13,6 +14,20 @@ export class CustomValidators {
 
       // if true, return no error (no error), else return error passed in the second parameter
       return valid ? null : error;
+    };
+  }
+
+  static gapsOnly(error: ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if(!control.value){
+        return null;
+      }
+      if (control.value.replace(/\s+/, '') === '' ) {
+        // if control is only of gaps return error
+        return error;
+      } else {
+        return null;
+      }
     };
   }
 }

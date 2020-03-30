@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginComponent} from '../login/login.component';
-import {AuthServiceService} from '../Services/authorization/auth-service.service';
+import {AuthServiceService} from '../services/authorization/auth-service.service';
 import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
-import {RoleGuardService} from '../Services/authorization/role-guard-service.service';
+import {RoleGuardService} from '../services/authorization/role-guard-service.service';
 
 @Component({
   selector: 'app-header',
@@ -47,8 +47,9 @@ export class HeaderComponent implements OnInit {
 
   onLogOut() {
     this.router.navigate(['home']).catch();
-    localStorage.setItem('token', '');
+    localStorage.removeItem('token');
     localStorage.setItem('roles', '');
+    localStorage.setItem('email', '');
   }
 
   ngOnInit(): void {
