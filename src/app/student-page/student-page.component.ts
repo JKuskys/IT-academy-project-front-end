@@ -3,9 +3,9 @@ import { Observable, Subscription } from "rxjs";
 import { Application } from "../shared/application";
 import { Comment } from "../shared/comment";
 import { ActivatedRoute } from "@angular/router";
-import { ApplicationService } from "../Services/application/application.service";
-import { CommentService } from "../Services/application/comment.service";
-import { JwtHelper } from "../Services/universal/JwtHelper.service";
+import { ApplicationService } from "../services/application/application.service";
+import { CommentService } from "../services/application/comment.service";
+import { JwtHelper } from "../services/universal/JwtHelper.service";
 import { isNotNullOrUndefined } from "codelyzer/util/isNotNullOrUndefined";
 
 @Component({

@@ -1,6 +1,5 @@
 import {Component, Input,Output,EventEmitter, OnInit} from '@angular/core';
 import {Comment} from '../shared/comment';
-import {CommentService} from '../Services/application/comment.service';
 import {FormBuilder, Validators} from '@angular/forms';
 import {blankValidator} from '../shared/blank-validator';
 
