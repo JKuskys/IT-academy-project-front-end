@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {from, Observable, Subscription} from 'rxjs';
+import {forkJoin, from, Observable, Subscription} from 'rxjs';
 import {Registration} from '../shared/registration';
 import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
@@ -30,23 +30,24 @@ export class AdminApplicationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.routeSub = this.route.params.subscribe(params => {
-      this.applicationService.getApplication({id: params.id}).subscribe(data => {
-        this.commentService.getComments({applicationId: this.route.snapshot.paramMap.get('id')}).subscribe(commentData => {
-          this.application = data;
-          this.comments = commentData;
-          this.isLoading = false;
-          if (this.application.status === Status.NAUJA) {
-            this.application.status = Status.PERZIURETA;
-            this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-          }
-        });
+    forkJoin(this.applicationService.getApplication({id: this.route.snapshot.paramMap.get('id')}),
+      this.commentService.getComments({applicationId: this.route.snapshot.paramMap.get('id')}))
+      .subscribe(res => {
+        this.application = res[0];
+        this.comments = res[1];
+        this.updateApplicationToSeen();
+        this.isLoading = false;
       });
-    });
+  }
+  updateApplicationToSeen(): void {
+    if (this.application.status === Status.NAUJA) {
+      this.application.status = Status.PERZIURETA;
+      this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+    }
   }
 
   onCommentSaved(input: string): void {
-    let newComment: Comment = {
+    const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
       comment: input
