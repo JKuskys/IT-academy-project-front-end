@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {from, Observable, Subscription} from 'rxjs';
-import {Info} from '../shared/registration';
+import {Registration} from '../shared/registration';
 import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
-import {ApplicationService} from '../Services/application/application.service';
+import {ApplicationService} from '../services/application/application.service';
 import {switchMap} from 'rxjs/operators';
-import {CommentService} from '../Services/application/comment.service';
-import {JwtHelper} from '../Services/universal/JwtHelper.service';
+import {CommentService} from '../services/application/comment.service';
+import {JwtHelper} from '../services/universal/JwtHelper.service';
 import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {Status} from '../shared/status';
 
 @Component({
   selector: 'app-admin-application-details',
@@ -19,9 +20,9 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 export class AdminApplicationDetailsComponent implements OnInit {
   isLoading = false;
   private routeSub: Subscription;
-  public application: Application;
-  public comments: Comment[];
-  public currentStatus?: string;
+  application: Application;
+  comments: Comment[];
+  currentStatus?: string;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
               private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
@@ -35,8 +36,8 @@ export class AdminApplicationDetailsComponent implements OnInit {
           this.application = data;
           this.comments = commentData;
           this.isLoading = false;
-          if (this.application.status === 'NAUJA') {
-            this.application.status = 'PERZIURETA';
+          if (this.application.status === Status.NAUJA) {
+            this.application.status = Status.PERZIURETA;
             this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
           }
         });
@@ -45,15 +46,13 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   onCommentSaved(input: string): void {
-    let newComment: Comment;
-    newComment = {
+    let newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
       comment: input
     };
     this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
-      newComment = res;
-      this.comments.push(newComment);
+      this.comments.push(res);
     });
   }
 

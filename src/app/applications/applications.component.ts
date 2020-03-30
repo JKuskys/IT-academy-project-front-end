@@ -1,13 +1,11 @@
 import {Application} from '../shared/application';
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Router} from '@angular/router';
-import {element} from 'protractor';
-import {Observable} from 'rxjs';
-import {ApplicationService} from '../Services/application/application.service';
+import {ApplicationService} from '../services/application/application.service';
+import {Status} from '../shared/status';
 
 
 @Component({
@@ -33,7 +31,7 @@ export class ApplicationsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
+
     this.applicationService.getApplications().subscribe(data => {
       this.isLoading = false;
       this.dataSource.data = data;
@@ -59,6 +57,7 @@ export class ApplicationsComponent implements OnInit {
     this.router.navigate(['applications/' + element.id]);
   }
 
+  get status() { return Status; }
 
 
 }

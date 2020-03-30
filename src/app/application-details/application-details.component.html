@@ -6,8 +6,8 @@
       <div class="application-header-second">{{application.applicationDate}}</div>
     </div>
     <div class="col-4 ">
-      <div class="block status-declined" *ngIf="application.status==='ATMESTA'">Atmesta</div>
-      <div class="block status-accepted" *ngIf="application.status==='PRIIMTA'">Priimta</div>
+      <div class="block status-declined" *ngIf="application.status===status.ATMESTA">Atmesta</div>
+      <div class="block status-accepted" *ngIf="application.status===status.PRIIMTA">Priimta</div>
       <div class="block status-possible" *ngIf="potential()">Potencialus</div>
       <div class="block status-null" *ngIf="noStatusAdmin()">Nenustatyta</div>
       <div class="block status-null-user" *ngIf="noStatusUser()">Gauta</div>

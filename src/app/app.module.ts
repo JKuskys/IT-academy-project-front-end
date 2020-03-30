@@ -33,10 +33,10 @@ import {AdminApplicationDetailsComponent} from './admin-application-details/admi
 import {AdminCommentComponent} from './admin-comment/admin-comment.component';
 import {AdminCommentWriteComponent} from './admin-comment-write/admin-comment-write.component';
 import {ApplicationBlockComponent} from './application-block/application-block.component';
-import {AuthGuardService} from './Services/authorization/auth-guard.service';
-import {AuthServiceService} from './Services/authorization/auth-service.service';
+import {AuthGuardService} from './services/authorization/auth-guard.service';
+import {AuthServiceService} from './services/authorization/auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {RoleGuardService} from './Services/authorization/role-guard-service.service';
+import {RoleGuardService} from './services/authorization/role-guard-service.service';
 import {ApplicationsComponent} from './applications/applications.component';
 import {StudentPageComponent} from './student-page/student-page.component';
 import {StudentCommentComponent} from './student-comment/student-comment.component';
