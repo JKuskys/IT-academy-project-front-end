@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input,Output,EventEmitter, OnInit} from '@angular/core';
 import {Comment} from '../shared/comment';
+import {FormBuilder, Validators} from '@angular/forms';
+import {blankValidator} from '../shared/blank-validator';
 
 @Component({
   selector: 'app-student-comment',
@@ -7,12 +9,25 @@ import {Comment} from '../shared/comment';
   styleUrls: ['./student-comment.component.scss']
 })
 export class StudentCommentComponent implements OnInit {
-  @Input() comment: Comment;
-
-  constructor() {
+  public comments: Comment[];
+  @Output() commentSave = new EventEmitter<Comment>();
+  @Input() comment :Comment;
+  constructor(private fb: FormBuilder) {
   }
+
+  commentForm = this.fb.group({
+    commentBody: [null, [
+      Validators.required,
+      blankValidator()
+    ]]
+  });
+
 
   ngOnInit(): void {
   }
 
+  onCommentSaved() {
+    this.comment.comment = this.commentForm.get('commentBody').value.trim();
+    this.commentSave.emit(this.comment);
+  }
 }
