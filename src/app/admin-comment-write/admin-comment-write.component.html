@@ -1,7 +1,7 @@
 <div class="admin-comment-write-container">
   <form [formGroup]="commentForm" (ngSubmit)="onCommentSaved(); commentForm.reset()">
     <div class="admin-comment-content">
-      <textarea id="commentBody" formControlName="commentBody" placeholder="Naujas komentaras..."></textarea>
+      <textarea maxlength="1500" formControlName="commentBody" placeholder="Naujas komentaras..."></textarea>
       <button type='submit' [disabled]="!commentForm.valid">Išsaugoti</button>
     </div>
   </form>

@@ -5,4 +5,6 @@ export interface Comment {
   authorEmail: string;
   commentDate: string;
   dateModified?: string;
+  visibleToApplicant: boolean;
+  authorAdmin?: boolean;
 }
