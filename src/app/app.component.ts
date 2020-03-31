@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.sessionService.onLogOut();
+    this.sessionService.onTokenExpired();
   }
 
 }
