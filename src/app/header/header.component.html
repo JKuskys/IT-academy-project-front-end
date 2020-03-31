@@ -1,9 +1,19 @@
-
-<mat-toolbar class="header"><i class="material-icons mr-1"> school </i><a href="#">IT Academy</a>
-    <div class="spacer"></div>
-  <button *ngIf="!adminCheck()&&logInCheck()" mat-raised-button (click)="redirect('application')" class="menu-button button2" id="manoParaiska">Mano paraiška</button>
-  <button *ngIf="adminCheck()" mat-raised-button (click)="redirect('applications')" class="menu-button button2" id="paraiskos">Paraiškos</button>
-  <button *ngIf="logInCheck()" mat-raised-button (click)="onLogOut()" class="menu-button button2" id ="logout">Atsijungti</button>
-  <button *ngIf="!logInCheck()" mat-raised-button (click)="openDialog()" class="menu-button button2" id ="login">Prisijungti</button>
+<mat-toolbar class="header" (window:resize)="checkWindowWidth()">
+  <div id="academy"><i class="material-icons mr-1"> school </i><a href="#">IT Academy</a></div>
+  <div id="hamburger-container"><span class="material-icons md-48" id="hamburger" (click)="showHamburgerMenu()">menu</span></div>
+  <div [hidden]="!isMenuShown" id="menu-button-container">
+    <div *ngIf="!adminCheck()&&logInCheck()">
+      <button  mat-raised-button (click)="redirect('application')" class="menu-button button2">Mano paraiška</button>
+    </div>
+    <div *ngIf="adminCheck()">
+      <button  mat-raised-button (click)="redirect('applications')" class="menu-button button2">Paraiškos</button>
+    </div>
+    <div *ngIf="logInCheck()">
+      <button mat-raised-button (click)="onLogOut()" class="menu-button button2">Atsijungti</button>
+    </div>
+    <div *ngIf="!logInCheck()">
+      <button mat-raised-button (click)="openDialog()" class="menu-button button2">Prisijungti</button>
+    </div>
+  </div>
 </mat-toolbar>
 

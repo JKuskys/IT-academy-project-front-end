@@ -56,18 +56,63 @@
     font-size: 18px;
   }
 
-.spacer{
-  flex: 1 1 auto;
+@media only screen and (max-width: 1000px){
+
+  #hamburger-container{
+    height: 8vh;
+    width: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #hamburger{
+    cursor: pointer;
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+  }
+  #menu-button-container{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 8vh;
+  }
+  #menu-button-container div{
+    background: #7694cb;
+    width: 50vw;
+    height: 6.5vh;
+    position: relative;
+    border-top: 1px solid #5177bd;
+    z-index: 10;
+  }
+  #menu-button-container button{
+    width: 100%;
+    height: 100%;
+    background: #7694cb;
+  }
 }
-#login{
-  margin-right: 30px;
+@media only screen and (min-width: 1001px){
+  #hamburger-container{
+    display: none;
+  }
+  .button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  #menu-button-container{
+    display: flex;
+    padding-right: 1vw;
+  }
 }
-#logout{
-  margin-right: 30px;
+.mat-toolbar{
+  display: flex;
+  justify-content: flex-end;
+  height: 8vh;
 }
-#paraiskos{
-  margin-right: 5px;
-}
-.button2:hover {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+#academy{
+  justify-self: flex-start;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
 }
