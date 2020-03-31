@@ -27,9 +27,34 @@
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  font-size: 25px;
   text-align: center;
 }
+
+@media only screen and (max-width: 1000px){
+  @media only screen and (max-width: 600px){
+    .block{
+      font-size: 4vw;
+    }
+  }
+  @media only screen and (min-width: 601px){
+    .block{
+      font-size: 2.5vw;
+    }
+  }
+}
+@media only screen and (min-width: 1001px){
+  @media only screen and (max-width: 1300px){
+    .block{
+      font-size: 2vw;
+    }
+  }
+  @media only screen and (min-width: 1301px){
+    .block{
+      font-size: 25px;
+    }
+  }
+}
+
 .status-declined{
   background-color: rgba(255, 0, 10, 0.45);
 }
