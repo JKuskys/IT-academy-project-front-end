@@ -66,6 +66,9 @@ export class HeaderComponent implements OnInit {
   }
   showHamburgerMenu(): void {
     this.isMenuShown = !this.isMenuShown;
+    if (window.innerWidth > 1000) {
+      this.isMenuShown = true;
+    }
   }
   checkWindowWidth(): void {
     this.isMenuShown = window.innerWidth > 1000;
