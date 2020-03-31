@@ -3,7 +3,9 @@
   text-align: left;
   font-size: 30px;
   padding-left: 1rem;
-  padding-bottom: 5px ;
+  padding-bottom: 5px;
+  word-break: break-word;
+  line-height: 30px;
 }
 .application-header-second{
   width: 100%;
@@ -28,6 +30,7 @@
   align-items: center;
   border-radius: 5px;
   text-align: center;
+  max-height: 5vh;
 }
 
 @media only screen and (max-width: 1000px){
@@ -90,7 +93,5 @@
   word-wrap: break-word;
 }
 .application-detail-contacts{
-  padding-top: 30px;
-  padding-left: .75rem;
-  padding-bottom:.375rem ;
+  padding: 30px .75rem .375rem;
 }
