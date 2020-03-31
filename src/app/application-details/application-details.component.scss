@@ -3,7 +3,9 @@
   text-align: left;
   font-size: 30px;
   padding-left: 1rem;
-  padding-bottom: 5px ;
+  padding-bottom: 5px;
+  word-break: break-word;
+  line-height: 30px;
 }
 .application-header-second{
   width: 100%;
@@ -27,9 +29,35 @@
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  font-size: 25px;
   text-align: center;
+  max-height: 5vh;
 }
+
+@media only screen and (max-width: 1000px){
+  @media only screen and (max-width: 600px){
+    .block{
+      font-size: 4vw;
+    }
+  }
+  @media only screen and (min-width: 601px){
+    .block{
+      font-size: 2.5vw;
+    }
+  }
+}
+@media only screen and (min-width: 1001px){
+  @media only screen and (max-width: 1300px){
+    .block{
+      font-size: 2vw;
+    }
+  }
+  @media only screen and (min-width: 1301px){
+    .block{
+      font-size: 25px;
+    }
+  }
+}
+
 .status-declined{
   background-color: rgba(255, 0, 10, 0.45);
 }
@@ -65,7 +93,5 @@
   word-wrap: break-word;
 }
 .application-detail-contacts{
-  padding-top: 30px;
-  padding-left: .75rem;
-  padding-bottom:.375rem ;
+  padding: 30px .75rem .375rem;
 }
