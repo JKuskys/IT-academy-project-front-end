@@ -13,6 +13,7 @@ import {RoleGuardService} from '../services/authorization/role-guard-service.ser
 })
 export class HeaderComponent implements OnInit {
   private bodyText: string;
+  isMenuShown: boolean;
 
   constructor(private dialog: MatDialog,
               private auth: AuthServiceService,
@@ -43,6 +44,7 @@ export class HeaderComponent implements OnInit {
 
   redirect(path: string) {
     this.router.navigate([path]).catch();
+    this.showHamburgerMenu();
   }
 
   onLogOut() {
@@ -50,15 +52,22 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.setItem('roles', '');
     localStorage.setItem('email', '');
+    this.showHamburgerMenu();
   }
 
   ngOnInit(): void {
     this.bodyText = 'This text can be updated in modal 1';
+    this.checkWindowWidth();
   }
 
   openDialog() {
     this.dialog.open(LoginComponent);
+    this.showHamburgerMenu();
   }
-
-
+  showHamburgerMenu(): void {
+    this.isMenuShown = !this.isMenuShown;
+  }
+  checkWindowWidth(): void {
+    this.isMenuShown = window.innerWidth > 1000;
+  }
 }
