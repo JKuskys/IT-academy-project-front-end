@@ -10,11 +10,12 @@
   <div id="student-action-container" [hidden]="isLoading">
   </div>
   <div id="student-comments" [hidden]="isLoading">
-    <div id="student-comments-header"[hidden]="commentsEmpty()">Komentarai</div>
+    <div id="student-comments-header">Komentarai</div>
+    <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
     <div class="comment" *ngFor="let comment of comments ">
       <app-student-comment [comment]="comment"></app-student-comment>
     </div>
-    <app-admin-comment-write ></app-admin-comment-write>
+    <app-admin-comment-write [hidden]="commentsEmpty()|| isLoading " (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
     <hr>
   </div>
 </div>
