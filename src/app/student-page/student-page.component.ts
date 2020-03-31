@@ -31,11 +31,13 @@ export class StudentPageComponent implements OnInit {
     this.isLoading = true;
     this.applicationService.getProfileApplication({email: localStorage.getItem('email')}).subscribe(response => {
       this.application = response;
-      this.isLoading = false;
+      this.commentService.getStudentComments({applicationId: this.application.id}).subscribe(data => {
+        this.comments = data;
+        this.isLoading = false;
+      });
+
     });
-    this.commentService.getStudentComments({applicationId: this.application.id}).subscribe(data => {
-      this.comments = data;
-    });
+
   }
 
   commentsEmpty() {
