@@ -5,7 +5,6 @@ import {ActivatedRoute} from '@angular/router';
 import {ApplicationService} from '../services/application/application.service';
 import {CommentService} from '../services/application/comment.service';
 import {JwtHelper} from '../services/universal/JwtHelper.service';
-import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {formatDate} from '@angular/common';
 
 @Component({
@@ -40,12 +39,8 @@ export class StudentPageComponent implements OnInit {
 
   }
 
-  commentsEmpty() {
-    if (isNotNullOrUndefined(this.comments)) {
-      return false;
-    } else {
-      return true;
-    }
+  isCommentsEmpty() {
+    return this.comments && this.comments.length === 0;
   }
 
   onCommentSaved(input: string): void {
