@@ -1,7 +1,7 @@
 <div class="student-comment">
     <div class="student-comment-header">
         <div id="student-comment-author">{{ comment.authorAdmin? 'IT akademija' : comment.author }}</div>
-        <div id="student-comment-date">{{ comment.commentDate }}</div>
+        <div id="student-comment-date">{{ comment.commentDate | date: 'yyyy-MM-dd' }}</div>
     </div>
     <div class="student-comment-content">{{ comment.comment }}</div>
 </div>

@@ -8,4 +8,6 @@ export class Info {
   technologies: string;
   source: string;
   applicationDate: string;
+  agreementNeeded?: boolean;
+  academyTimeSuitable?: boolean;
 }
