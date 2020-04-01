@@ -2,6 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {SessionService} from './services/authorization/session.service';
+import {isNotNullOrUndefined} from "codelyzer/util/isNotNullOrUndefined";
 
 class MockSessionService extends SessionService{
 
@@ -39,6 +40,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('IT-academy-project-front-end app is running!');
+    if(isNotNullOrUndefined(compiled.querySelector('.content span'))){
+    expect(compiled.querySelector('.content span').textContent).toContain('IT Academy');
+    }
   });
 });

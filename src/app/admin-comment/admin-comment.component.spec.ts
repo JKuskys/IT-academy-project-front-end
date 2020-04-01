@@ -23,7 +23,6 @@ describe('AdminCommentComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminCommentComponent);
     component = fixture.debugElement.componentInstance;
-    fixture.detectChanges();
     component.comment = {
       id: 1,
       comment: 'Aaaa',
@@ -32,8 +31,9 @@ describe('AdminCommentComponent', () => {
       commentDate: '2020-03-10',
       dateModified: '2020-03-13',
       visibleToApplicant: true,
-      authorAdmin: false
-      }
+      authorAdmin: false,
+      };
+    fixture.detectChanges();
   });
 
   it('should create', () => {
