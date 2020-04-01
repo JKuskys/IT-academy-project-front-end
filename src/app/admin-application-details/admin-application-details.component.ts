@@ -23,6 +23,8 @@ export class AdminApplicationDetailsComponent implements OnInit {
   application: Application;
   comments: Comment[];
   currentStatus?: string;
+  isFeedbackCommentLoading: boolean;
+  isInternalCommentLoading: boolean;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
               private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
@@ -30,6 +32,8 @@ export class AdminApplicationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.isFeedbackCommentLoading = false;
+    this.isInternalCommentLoading = false;
     forkJoin(this.applicationService.getApplication({id: this.route.snapshot.paramMap.get('id')}),
       this.commentService.getComments({applicationId: this.route.snapshot.paramMap.get('id')}))
       .subscribe(res => {
@@ -47,6 +51,11 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   onCommentSaved(input: string, internal: boolean): void {
+    if (!internal) {
+      this.isFeedbackCommentLoading = true;
+    } else {
+      this.isInternalCommentLoading = true;
+    }
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
@@ -55,6 +64,11 @@ export class AdminApplicationDetailsComponent implements OnInit {
     };
     this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
       this.comments.push(res);
+      if (!internal) {
+        this.isFeedbackCommentLoading = false;
+      } else {
+        this.isInternalCommentLoading = false;
+      }
     });
   }
 
