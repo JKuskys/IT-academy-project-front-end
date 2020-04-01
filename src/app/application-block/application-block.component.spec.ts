@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplicationBlockComponent } from './application-block.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ApplicationBlockComponent', () => {
   let component: ApplicationBlockComponent;
@@ -8,7 +9,8 @@ describe('ApplicationBlockComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicationBlockComponent ]
+      declarations: [ ApplicationBlockComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   }));
@@ -16,7 +18,7 @@ describe('ApplicationBlockComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ApplicationBlockComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges();  
   });
 
   it('should create', () => {
