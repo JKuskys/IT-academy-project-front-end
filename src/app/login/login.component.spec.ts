@@ -61,4 +61,7 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('form builder should work', () => {
+    expect(component.setForm).toBeTruthy();
+  });
 });

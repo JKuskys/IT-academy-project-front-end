@@ -16,7 +16,7 @@ describe('PhoneNumberService', () => {
       ]
     })
   }));
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(PhoneNumberService);
@@ -27,4 +27,5 @@ describe('PhoneNumberService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
 });
