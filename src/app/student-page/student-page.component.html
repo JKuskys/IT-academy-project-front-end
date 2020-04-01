@@ -15,6 +15,13 @@
     <div class="comment" *ngFor="let comment of comments ">
       <app-student-comment [comment]="comment"></app-student-comment>
     </div>
+    <mat-progress-spinner
+      class="spinner-styler"
+      color="primary"
+      *ngIf="isCommentLoading"
+      mode="indeterminate"
+    >
+    </mat-progress-spinner>
     <hr [hidden]="isCommentsEmpty() || isLoading">
     <app-admin-comment-write [hidden]="isCommentsEmpty() || isLoading" (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
   </div>
