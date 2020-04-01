@@ -1,13 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RegistrationComponent } from './registration.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { UserService } from '../services/account/user.service';
-import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
+import {RegistrationComponent} from './registration.component';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {UserService} from '../services/account/user.service';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {HttpClient} from '@angular/common/http';
+import {HttpTestingController, HttpClientTestingModule} from '@angular/common/http/testing';
+import {MatRadioGroup, MatRadioModule} from "@angular/material/radio";
 
-class MockUserService extends UserService {};
+class MockUserService extends UserService {
+};
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;
@@ -17,27 +19,31 @@ describe('RegistrationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegistrationComponent ],
+      declarations: [RegistrationComponent],
       imports: [
         ReactiveFormsModule,
         FormsModule,
         MatDialogModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatRadioModule,
       ],
-      providers: [{
-        provide: UserService,
-        useClass: MockUserService
-      }]
+      providers: [
+        {
+          provide: MatDialogRef, useValue: {}
+        }, {
+          provide: UserService,
+          useClass: MockUserService
+        }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegistrationComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     httpClient = TestBed.get(HttpClient);
     httpTestingController = TestBed.get(HttpTestingController);
+    fixture.detectChanges();
   });
 
   it('should create', () => {

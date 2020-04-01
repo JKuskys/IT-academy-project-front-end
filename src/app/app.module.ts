@@ -32,7 +32,6 @@ import {ApplicationDetailsComponent} from './application-details/application-det
 import {AdminApplicationDetailsComponent} from './admin-application-details/admin-application-details.component';
 import {AdminCommentComponent} from './admin-comment/admin-comment.component';
 import {AdminCommentWriteComponent} from './admin-comment-write/admin-comment-write.component';
-import {ApplicationBlockComponent} from './application-block/application-block.component';
 import {AuthGuardService} from './services/authorization/auth-guard.service';
 import {AuthServiceService} from './services/authorization/auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
@@ -55,7 +54,6 @@ import {StudentCommentComponent} from './student-comment/student-comment.compone
     AdminApplicationDetailsComponent,
     AdminCommentComponent,
     AdminCommentWriteComponent,
-    ApplicationBlockComponent,
     ApplicationsComponent,
     StudentPageComponent,
     StudentCommentComponent

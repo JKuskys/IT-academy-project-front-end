@@ -203,7 +203,5 @@ export class RegistrationComponent implements OnInit {
   get passwordRepeatReg() {
     return this.registrationForm.get('passwordRepeatReg');
   }
-  onNoClick(): void {
-    this.dialog.close(false);
-  }
+
 }

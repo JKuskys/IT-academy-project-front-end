@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SuccessfulRegistrationComponent } from './successful-registration.component';
+import {MatDialogRef} from "@angular/material/dialog";
 
 describe('SuccessfulRegistrationComponent', () => {
   let component: SuccessfulRegistrationComponent;
@@ -8,7 +9,11 @@ describe('SuccessfulRegistrationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SuccessfulRegistrationComponent ]
+      declarations: [ SuccessfulRegistrationComponent ],
+      imports: [],
+      providers:[{
+        provide: MatDialogRef, useValue: {}
+      },]
     })
     .compileComponents();
   }));
