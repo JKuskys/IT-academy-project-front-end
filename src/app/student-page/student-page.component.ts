@@ -13,7 +13,8 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./student-page.component.scss']
 })
 export class StudentPageComponent implements OnInit {
-  isLoading:boolean;
+  isLoading: boolean;
+  isCommentLoading: boolean;
   public application: Application;
   comments: Comment[];
 
@@ -28,6 +29,7 @@ export class StudentPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
+    this.isCommentLoading = false;
     this.applicationService.getProfileApplication({email: localStorage.getItem('email')}).subscribe(response => {
       this.application = response;
       this.commentService.getStudentComments({applicationId: this.application.id}).subscribe(data => {
@@ -44,6 +46,7 @@ export class StudentPageComponent implements OnInit {
   }
 
   onCommentSaved(input: string): void {
+    this.isCommentLoading = true;
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
@@ -52,6 +55,7 @@ export class StudentPageComponent implements OnInit {
     };
     this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
       this.comments.push(res);
+      this.isCommentLoading = false;
     });
   }
 }
