@@ -9,7 +9,7 @@
       <div class="block status-declined" *ngIf="application.status===status.ATMESTA">Atmesta</div>
       <div class="block status-accepted" *ngIf="application.status===status.PRIIMTA">Priimta</div>
       <div class="block status-possible" *ngIf="potential()">Potencialus</div>
-      <div class="block status-null" *ngIf="noStatusAdmin()">Nenustatyta</div>
+      <div class="block status-null" *ngIf="noStatusAdmin()">Peržiūrėta</div>
       <div class="block status-null-user" *ngIf="noStatusUser()">Gauta</div>
     </div>
   </div>
@@ -55,7 +55,7 @@
     <div class="application-details-content">{{application.technologies}}</div>
   </div>
   <div class="application-detail-container">
-    <div class="application-details-header">Iš kur sužinota apie akademiją</div>
+    <div class="application-details-header">Apie IT Akademiją sužinojo</div>
     <div class="application-details-content">{{application.source}}</div>
   </div>
 </div>

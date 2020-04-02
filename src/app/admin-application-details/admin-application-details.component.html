@@ -7,6 +7,7 @@
   >
   </mat-progress-spinner>
   <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
+  <hr>
   <div id="admin-action-container" [hidden]="isLoading">
     <div class="admin-action-header">Aplikacijos būsena</div>
     <mat-radio-group aria-label="Select an option" id="status" *ngIf="application" value='{{application.status}}' (change)="onStatusChange($event.value)">
@@ -17,7 +18,7 @@
     <button (click)="onStatusSaved(application)">Išsaugoti būseną</button>
   </div>
   <div class="admin-comments" [hidden]="isLoading">
-    <div class="admin-comments-header">Komentarai</div>
+    <div class="admin-comments-header">Komentarai<div class="admin-comments-header-below">matoma tik IT Akademijos administratoriams</div></div>
     <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
     <div class="comment" *ngFor="let comment of comments">
       <app-admin-comment *ngIf="!comment.visibleToApplicant" [comment]="comment" [isEditable]="isCommentEditable(comment.authorEmail)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
@@ -33,7 +34,7 @@
     <app-admin-comment-write (commentSave)="onCommentSaved($event, true)"></app-admin-comment-write>
   </div>
   <div class="admin-comments" [hidden]="isLoading">
-    <div class="admin-comments-header">Grįžtamasis ryšys</div>
+    <div class="admin-comments-header">Žinutė kandidatui</div>
     <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
     <div class="comment" *ngFor="let comment of comments">
       <app-admin-comment *ngIf="comment.visibleToApplicant" [comment]="comment" [isEditable]="false" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
