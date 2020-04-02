@@ -49,4 +49,13 @@ describe('RegistrationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('contract should return true by default', () => {
+    expect(component.getTrueFalse('contract')).toBeTrue();
+  });
+  it('workTime should return true by default', () => {
+    expect(component.getTrueFalse('workTime')).toBeTrue();
+  });
+  it('form builder should work', () => {
+    expect(component.setForm).toBeTruthy();
+  });
 });
