@@ -17,12 +17,23 @@ export class CustomValidators {
     };
   }
 
-  static gapsOnly(error: ValidationErrors): ValidatorFn {
+  static trueCheck(error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
-      if(!control.value){
+      if (control.value === false) {
+        // if control is only of gaps return error
+        return error;
+      } else {
         return null;
       }
-      if (control.value.replace(/\s+/, '') === '' ) {
+    };
+  }
+
+  static gapsOnly(error: ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (!control.value) {
+        return null;
+      }
+      if (control.value.replace(/\s+/, '') === '') {
         // if control is only of gaps return error
         return error;
       } else {
