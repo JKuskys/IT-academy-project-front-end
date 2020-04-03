@@ -22,7 +22,7 @@
     >
     </mat-progress-spinner>
     <hr [hidden]="isCommentsEmpty() || isLoading">
-    <app-admin-comment-write [hidden]="isCommentsEmpty() || isLoading" (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
+    <app-admin-comment-write [uploadEnabled]="true"  [hidden]="isCommentsEmpty() || isLoading" (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
   </div>
 </div>
 
