@@ -31,6 +31,7 @@ export class RegistrationComponent implements OnInit {
     private phoneNumberService: PhoneNumberService) {
     this.registrationForm = this.setForm();
   }
+
   ngOnInit(): void {
     this.phoneNumberService.getPhoneCodes().subscribe(
       data => {
@@ -192,6 +193,10 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(7),
         Validators.maxLength(30)
+      ]],
+      GDPR: ['', [
+        Validators.required,
+        CustomValidators.trueCheck({isTrue: true})
       ]]
     });
   }
