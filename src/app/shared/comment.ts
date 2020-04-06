@@ -7,4 +7,5 @@ export interface Comment {
   dateModified?: string;
   visibleToApplicant: boolean;
   authorAdmin?: boolean;
+  attachmentName?: string;
 }

@@ -38,6 +38,11 @@ export class CommentService {
       .post(`${this.proxyurl}${this.url}${this.apiPath}/applications/${applicationId}/comments/${commentId}/attachment`,
       formData, { headers });
   }
+  getAttachment({ applicationId, commentId, file }): Observable<Blob> {
+    return this.httpClient
+      .get(`${this.proxyurl}${this.url}${this.apiPath}/applications/${applicationId}/comments/${commentId}/attachment/${file}`,
+        { responseType: 'blob' });
+  }
   updateComment(comment: Comment, { applicationId }): Observable<Comment> {
     return this.httpClient
       .put<Comment>(`${this.proxyurl}${this.url}${this.apiPath}/applications/${applicationId}/comments/${comment.id}`, comment);

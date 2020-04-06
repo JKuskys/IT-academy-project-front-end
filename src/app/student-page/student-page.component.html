@@ -12,7 +12,7 @@
     <div id="student-comments-header">Komentarai</div>
     <div class="comment-missing-remark" [hidden]="!isCommentsEmpty()">Komentarų nėra...</div>
     <div class="comment" *ngFor="let comment of comments ">
-      <app-student-comment [comment]="comment"></app-student-comment>
+      <app-student-comment [comment]="comment" (attachmentDownload)="onAttachmentDownload($event)" ></app-student-comment>
     </div>
     <mat-progress-spinner
       class="spinner-styler"
@@ -22,7 +22,7 @@
     >
     </mat-progress-spinner>
     <hr [hidden]="isCommentsEmpty() || isLoading">
-    <app-admin-comment-write [uploadEnabled]="true"  [hidden]="isCommentsEmpty() || isLoading" (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
+    <app-admin-comment-write [uploadEnabled]="true" [hidden]="isCommentsEmpty() || isLoading" (commentSave)="onCommentSaved($event)"></app-admin-comment-write>
   </div>
 </div>
 

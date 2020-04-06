@@ -9,6 +9,7 @@ import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import {Status} from '../shared/status';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-admin-application-details',
@@ -61,7 +62,10 @@ export class AdminApplicationDetailsComponent implements OnInit {
       this.comments.push(res);
       if (input.attachment) {
         this.commentService.addAttachment({applicationId: this.application.id, commentId: res.id, file: input.attachment})
-          .subscribe(attachmentRes => { this.setCommentLoading(internal, false); } );
+          .subscribe(attachmentRes => {
+            this.setCommentLoading(internal, false);
+            res.attachmentName = input.attachment.name;
+          } );
       } else {
         this.setCommentLoading(internal, false);
       }
@@ -103,5 +107,11 @@ export class AdminApplicationDetailsComponent implements OnInit {
     this.commentService.deleteComment({applicationId: this.application.id, commentId: id}).subscribe(res => {
       this.comments = this.comments.filter((value, index, arr) => value.id !== id);
     });
+  }
+  onAttachmentDownload(comment: Comment): void {
+    this.commentService.getAttachment({applicationId: this.application.id, commentId: comment.id, file: comment.attachmentName})
+      .subscribe(res => {
+        saveAs(res, comment.attachmentName);
+      } );
   }
 }

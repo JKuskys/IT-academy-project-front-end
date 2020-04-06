@@ -6,6 +6,7 @@ import {ApplicationService} from '../services/application/application.service';
 import {CommentService} from '../services/application/comment.service';
 import {JwtHelper} from '../services/universal/JwtHelper.service';
 import {formatDate} from '@angular/common';
+import {saveAs} from 'file-saver';
 
 @Component({
   selector: 'app-student-page',
@@ -58,10 +59,19 @@ export class StudentPageComponent implements OnInit {
 
       if (input.attachment) {
         this.commentService.addAttachment({applicationId: this.application.id, commentId: res.id, file: input.attachment})
-          .subscribe(attachmentRes => { this.isCommentLoading = false; } );
+          .subscribe(attachmentRes => {
+            this.isCommentLoading = false;
+            res.attachmentName = input.attachment.name;
+          } );
       } else {
         this.isCommentLoading = false;
       }
     });
+  }
+  onAttachmentDownload(comment: Comment): void {
+    this.commentService.getAttachment({applicationId: this.application.id, commentId: comment.id, file: comment.attachmentName})
+      .subscribe(res => {
+        saveAs(res, comment.attachmentName);
+      } );
   }
 }
