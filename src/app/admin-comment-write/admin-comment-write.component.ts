@@ -9,10 +9,10 @@ import {blankValidator} from '../shared/blank-validator';
 })
 export class AdminCommentWriteComponent implements OnInit {
 
-  @Output() commentSave = new EventEmitter<string>();
+  @Output() commentSave = new EventEmitter();
   @Input() uploadEnabled: boolean;
-  fileSelected: string;
-  fileSelectedDefault = 'Pasirinkite failą...';
+  selectedFile: File;
+  fileSelectedDefaultName = 'Pasirinkite failą...';
 
   commentForm = this.fb.group({
     commentBody: [null, [
@@ -28,16 +28,18 @@ export class AdminCommentWriteComponent implements OnInit {
     this.onFileNotSelected();
   }
   onFileNotSelected(): void {
-    this.fileSelected = this.fileSelectedDefault;
     this.commentForm.value.attachment = null;
+    this.selectedFile = null;
   }
 
   onCommentSaved() {
-    this.commentSave.emit(this.commentForm.get('commentBody').value.trim());
+    this.commentForm.value.attachment = this.selectedFile;
+    this.commentSave.emit(this.commentForm.value);
+    this.selectedFile = null;
   }
   onFileSelected(event): void {
     if (event.target.files[0]) {
-      this.fileSelected = event.target.files[0].name;
+      this.selectedFile = event.target.files[0];
     } else {
       this.onFileNotSelected();
     }

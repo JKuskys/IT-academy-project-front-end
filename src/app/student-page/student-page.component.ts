@@ -45,17 +45,23 @@ export class StudentPageComponent implements OnInit {
     return this.comments && this.comments.length === 0;
   }
 
-  onCommentSaved(input: string): void {
+  onCommentSaved(input: any): void {
     this.isCommentLoading = true;
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-      comment: input,
+      comment: input.commentBody,
       visibleToApplicant: true,
     };
     this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
       this.comments.push(res);
-      this.isCommentLoading = false;
+
+      if (input.attachment) {
+        this.commentService.addAttachment({applicationId: this.application.id, commentId: res.id, file: input.attachment})
+          .subscribe(attachmentRes => { this.isCommentLoading = false; } );
+      } else {
+        this.isCommentLoading = false;
+      }
     });
   }
 }

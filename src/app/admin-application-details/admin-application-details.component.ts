@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {forkJoin, from, Observable, Subscription} from 'rxjs';
-import {Registration} from '../shared/registration';
 import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
 import {ApplicationService} from '../services/application/application.service';
-import {switchMap} from 'rxjs/operators';
 import {CommentService} from '../services/application/comment.service';
 import {JwtHelper} from '../services/universal/JwtHelper.service';
 import {formatDate} from '@angular/common';
@@ -50,26 +48,32 @@ export class AdminApplicationDetailsComponent implements OnInit {
     }
   }
 
-  onCommentSaved(input: string, internal: boolean): void {
-    if (!internal) {
-      this.isFeedbackCommentLoading = true;
-    } else {
-      this.isInternalCommentLoading = true;
-    }
+  onCommentSaved(input: any, internal: boolean): void {
+    this.setCommentLoading(internal, true);
+
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
-      comment: input,
+      comment: input.commentBody,
       visibleToApplicant: !internal,
     };
     this.commentService.addComment(newComment, {applicationId: this.application.id}).subscribe(res => {
       this.comments.push(res);
-      if (!internal) {
-        this.isFeedbackCommentLoading = false;
+      if (input.attachment) {
+        this.commentService.addAttachment({applicationId: this.application.id, commentId: res.id, file: input.attachment})
+          .subscribe(attachmentRes => { this.setCommentLoading(internal, false); } );
       } else {
-        this.isInternalCommentLoading = false;
+        this.setCommentLoading(internal, false);
       }
     });
+  }
+
+  setCommentLoading(internal: boolean, value: boolean) {
+    if (!internal) {
+      this.isFeedbackCommentLoading = value;
+    } else {
+      this.isInternalCommentLoading = value;
+    }
   }
 
   onStatusSaved(application: Application): void {
