@@ -28,10 +28,12 @@ padding-bottom{
     padding: 25px;
     background: rgba(0, 222, 242, 0.9);
     border-radius: 25px;
+    padding-bottom: 10px;
+    scroll-padding-bottom: 10px;
 }
 html,
 body {
-    height: 700px;
+    height: 800px;
     width: 400px;
     margin: 0;
     padding: 0;
@@ -42,7 +44,7 @@ body {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 700px;
+    height: 800px;
     width: 400px;
     font-family: "Roboto", sans-serif;
 }
@@ -88,7 +90,7 @@ body {
 
 @media only screen and (min-width: 1001px){
   .login-wrapper {
-    max-height: 80vh;
+    max-height: 100vh;
     width: 38vw;
   }
 }
@@ -138,7 +140,7 @@ body {
 
 .login-wrapper .example-full-width,
 .login-wrapper .btn-block .divas{
-    width: 70%;
+    width: 80%;
     height: 100%;
 }
 .login-wrapper mat-card-header {
@@ -193,12 +195,13 @@ body {
 }
 .close {
   font-size: 35px;
-  bottom: 3px;
-  position: relative;
+  outline: none;    
+  position: sticky;
+  top: 0;
+ text-align: left;
+ margin: -10px -20px;
 }
-.exit {
-  outline: none;
-}
+
 
 .borderx {
   border: 1px solid #6486c4;
@@ -210,11 +213,13 @@ input.mat-input-element {
   border: 1px solid #6486c4;
 }
 .mat-dialog-container{
-  max-height:700px;
-
+  max-height:800px;
+  padding-bottom: 10px;
 }
 #dialog{
-  min-height:83vh
+  min-height:80vh;
+  padding-bottom: 10px;
+
 }
 
 vertical-middle{
@@ -223,4 +228,8 @@ vertical-middle{
 }
 ::ng-deep .mat-tooltip {
   font-size: 14px;
+}
+.sticky{
+  position: sticky;
+  bottom: 0;
 }
