@@ -36,6 +36,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 body {
     background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
     background-position: center;
@@ -219,4 +220,7 @@ input.mat-input-element {
 vertical-middle{
   position: absolute;
   margin: auto;
+}
+::ng-deep .mat-tooltip {
+  font-size: 14px;
 }
