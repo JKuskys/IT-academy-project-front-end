@@ -11,7 +11,9 @@ import {blankValidator} from '../shared/blank-validator';
 export class StudentCommentComponent implements OnInit {
   public comments: Comment[];
   @Output() commentSave = new EventEmitter<Comment>();
-  @Input() comment :Comment;
+  @Input() comment: Comment;
+  @Output() attachmentDownload = new EventEmitter<Comment>();
+
   constructor(private fb: FormBuilder) {
   }
 
@@ -26,8 +28,7 @@ export class StudentCommentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onCommentSaved() {
-    this.comment.comment = this.commentForm.get('commentBody').value.trim();
-    this.commentSave.emit(this.comment);
+  onDownload() {
+    this.attachmentDownload.emit(this.comment);
   }
 }

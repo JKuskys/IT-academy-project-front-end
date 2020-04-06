@@ -26,6 +26,7 @@
     "@auth0/angular-jwt": "^4.0.0",
     "angular2-jwt": "^0.2.3",
     "express": "^4.17.1",
+    "file-saver": "^2.0.2",
     "jwt-decode": "^2.2.0",
     "material-ui-phone-number": "^2.2.5",
     "mdbootstrap": "^4.14.1",
