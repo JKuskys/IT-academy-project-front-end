@@ -4,7 +4,8 @@
         <div id="student-comment-date">{{ comment.commentDate | date: 'yyyy-MM-dd' }}</div>
     </div>
     <div class="student-comment-content">{{ comment.comment }}</div>
-    <div class="student-comment-content" *ngIf="comment.attachmentName" (click)="onDownload()">
-      download attachment
+    <div class="student-comment-content attachment-download" *ngIf="comment.attachmentName" (click)="onDownload()">
+      <mat-icon>cloud_download</mat-icon>
+      <div>{{comment.attachmentName}}</div>
     </div>
 </div>

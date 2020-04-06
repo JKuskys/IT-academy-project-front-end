@@ -14,3 +14,15 @@
   .student-comment-header, .student-comment-content{
     padding: .375rem .75rem;
   }
+.attachment-download {
+  word-break: break-word;
+  display: flex;
+  flex-direction: row;
+  color: grey;
+  cursor: pointer;
+  border-top: solid #d6d6d6 1px;
+}
+.attachment-download div {
+  margin-left: .5rem;
+  align-self: center;
+}
