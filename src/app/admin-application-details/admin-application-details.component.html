@@ -31,13 +31,13 @@
     >
     </mat-progress-spinner>
     <hr>
-    <app-admin-comment-write (commentSave)="onCommentSaved($event, true)"></app-admin-comment-write>
+    <app-admin-comment-write [uploadEnabled]="false"  (commentSave)="onCommentSaved($event, true)"></app-admin-comment-write>
   </div>
   <div class="admin-comments" [hidden]="isLoading">
     <div class="admin-comments-header">Žinutė kandidatui</div>
     <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
     <div class="comment" *ngFor="let comment of comments">
-      <app-admin-comment *ngIf="comment.visibleToApplicant" [comment]="comment" [isEditable]="false" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
+      <app-admin-comment *ngIf="comment.visibleToApplicant" [comment]="comment" [isEditable]="false" (attachmentDownload)="onAttachmentDownload($event)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
     </div>
     <mat-progress-spinner
       class="spinner-styler"
@@ -47,7 +47,7 @@
     >
     </mat-progress-spinner>
     <hr>
-    <app-admin-comment-write (commentSave)="onCommentSaved($event, false)"></app-admin-comment-write>
+    <app-admin-comment-write [uploadEnabled]="true" (commentSave)="onCommentSaved($event, false)"></app-admin-comment-write>
   </div>
 </div>
 
