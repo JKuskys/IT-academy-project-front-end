@@ -5,7 +5,7 @@
       <div class="admin-comment-content-below">
         <div>
           <div class="upload-file-wrapper" *ngIf="uploadEnabled">
-            <input type="file" id="attachment" formControlName="attachment" (change)="onFileSelected($event)" accept=".pdf, .doc">
+            <input type="file" id="attachment" formControlName="attachment" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
             <label for="attachment">
               <mat-icon> insert_drive_file</mat-icon>
               <div>{{selectedFile ? selectedFile.name : fileSelectedDefaultName}}</div>
