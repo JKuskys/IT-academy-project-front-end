@@ -46,7 +46,7 @@ export class StudentPageComponent implements OnInit {
   }
 
   addExternalCommentNotification(): void {
-    this.application.newExternalComment = true;
+    this.application.isExternalComment = true;
     this.application.lastExternalCommentAuthor = localStorage.getItem('email');
     this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
   }

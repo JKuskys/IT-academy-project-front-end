@@ -5,8 +5,8 @@ export interface Application extends Info {
   email?: string;
   commentCount: string;
   status: string;
-  newInternalComment: boolean;
+  isInternalComment: boolean;
   lastInternalCommentAuthor: string;
-  newExternalComment: boolean;
+  isExternalComment: boolean;
   lastExternalCommentAuthor: string;
 }

@@ -45,13 +45,13 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   updateApplicationToSeen(): void {
-    if (this.application.newExternalComment === true && this.application.lastExternalCommentAuthor !== localStorage.getItem('email')) {
-      this.application.newExternalComment = false;
+    if (this.application.isExternalComment === true && this.application.lastExternalCommentAuthor !== localStorage.getItem('email')) {
+      this.application.isExternalComment = false;
       this.application.lastExternalCommentAuthor = '';
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
     }
-    if (this.application.newInternalComment === true && this.application.lastInternalCommentAuthor !== localStorage.getItem('email')) {
-      this.application.newInternalComment = false;
+    if (this.application.isInternalComment === true && this.application.lastInternalCommentAuthor !== localStorage.getItem('email')) {
+      this.application.isInternalComment = false;
       this.application.lastInternalCommentAuthor = '';
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
     }
@@ -62,13 +62,13 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   addExternalCommentNotification(): void {
-    this.application.newExternalComment = true;
+    this.application.isExternalComment = true;
     this.application.lastExternalCommentAuthor = localStorage.getItem('email');
     this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
   }
 
   addInternalCommentNotification(): void {
-    this.application.newInternalComment = true;
+    this.application.isInternalComment = true;
     this.application.lastInternalCommentAuthor = localStorage.getItem('email');
     this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
   }
