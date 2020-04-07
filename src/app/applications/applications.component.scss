@@ -1,58 +1,59 @@
-@media only screen and (min-width: 1001px){
-  .container-padding{
+@media only screen and (min-width: 1001px) {
+  .container-padding {
     width: 70vw;
   }
-  .mat-column-commentCount{
+  .mat-column-commentCount {
     max-width: 10%;
   }
-  .mat-column-applicationDate{
+  .mat-column-applicationDate {
     max-width: 20%;
   }
-  .mat-column-action{
+  .mat-column-action {
     max-width: 10%;
   }
-  .mat-column-status{
+  .mat-column-status {
     max-width: 20%;
   }
 
-  .container-padding{
+  .container-padding {
     font-size: 16px;
   }
 
-  .container-title{
+  .container-title {
     padding-top: 5vh;
     padding-bottom: 7vh;
     text-align: center;
     font-size: 35px;
   }
 
-  .seen-style{
+  .seen-style {
     padding-left: 7px;
     padding-right: 1px;
   }
-  .not-seen-style{
+  .not-seen-style {
     padding-left: 6px
   }
-  .status-null{
+  .status-null {
     background-color: rgba(105, 105, 105, 0.55);
     border-radius: 5px;
     width: 100px;
     text-align: center;
   }
 
-  .seen-style{
+  .seen-style {
     padding-left: 7px;
     padding-right: 1px;
   }
-  .not-seen-style{
+  .not-seen-style {
     padding-left: 6px
   }
-  .status-padding{
+  .status-padding {
     padding: .25rem;
   }
 }
-@media only screen and (max-width: 1000px){
-  .container-padding{
+
+@media only screen and (max-width: 1000px) {
+  .container-padding {
     width: 100vw;
     line-height: 1.25;
     min-height: 100vh;
@@ -80,7 +81,7 @@
     float: left;
     font-weight: normal;
   }
-  .mat-cell{
+  .mat-cell {
     padding-right: 10vw;
     padding-left: 10vw;
   }
@@ -90,34 +91,37 @@
   .mat-table .mat-cell:first-child {
     margin-top: 4%;
   }
-  .mat-header-cell{
+  .mat-header-cell {
     padding-right: 0;
   }
-  .mat-row{
+  .mat-row {
     min-height: 0;
   }
-  button{
+  button {
     padding: 0;
   }
-  .mat-column-status:before{
+  .mat-column-status:before {
     background-color: white;
     text-align: left;
   }
 }
+
 mat-tab {
-   max-width: 100%;
+  max-width: 100%;
 }
-.container-padding{
+
+.container-padding {
   background: white;
   font-family: 'Nunito', sans-serif;
   min-height: 85vh;
-  box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+  box-shadow: 0px 0px 15px 0px rgba(110, 110, 110, 0.75);
 }
+
 button {
   background-color: Transparent;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   border: none;
-  cursor:pointer;
+  cursor: pointer;
   overflow: hidden;
   outline:none;
   width: 100%;
@@ -125,27 +129,50 @@ button {
   text-align: left;
 }
 
-.status-null, .status-passed, .status-declined, .status-possible, .status-seen, .status-new{
+.status-null, .status-passed, .status-declined, .status-possible, .status-seen, .status-new {
   border-radius: 5px;
   width: 100px;
   text-align: center;
   display: inline-block;
 }
-.status-passed{
-  background-color: rgba(46,183,3,0.55);
+
+.status-passed {
+  background-color: rgba(46, 183, 3, 0.55);
 }
-.status-declined{
+
+.status-declined {
   background-color: rgba(255, 0, 10, 0.55);
 }
-.status-possible{
+
+.status-possible {
   background-color: rgba(255, 127, 0, 0.81);
 }
-.status-seen{
+
+.status-seen {
   background-color: rgba(206, 205, 195, 0.81);
 }
-.status-new{
+
+.status-new {
   background-color: rgba(0, 81, 255, 0.81);
 }
 
+cell-text-end {
+  display: flex;
+  justify-content: flex-end;
+}
 
+.icon-padding-envelope {
+  padding-right: 3px;
+}
 
+.icon-padding-dialog {
+  padding-right: 3px;
+}
+
+.empty-padding-envelope {
+  padding-right: 20px;
+}
+
+.empty-padding-dialog {
+  padding-right: 14px;
+}

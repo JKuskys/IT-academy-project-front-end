@@ -25,7 +25,7 @@ export class StudentPageComponent implements OnInit {
     private commentService: CommentService,
     private jwtHelper: JwtHelper
   ) {
-    this.isLoading=true;
+    this.isLoading = true;
   }
 
   ngOnInit(): void {

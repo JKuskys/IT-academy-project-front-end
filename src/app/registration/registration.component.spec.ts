@@ -7,6 +7,7 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {HttpClient} from '@angular/common/http';
 import {HttpTestingController, HttpClientTestingModule} from '@angular/common/http/testing';
 import {MatRadioGroup, MatRadioModule} from "@angular/material/radio";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 class MockUserService extends UserService {
 };
@@ -26,6 +27,7 @@ describe('RegistrationComponent', () => {
         MatDialogModule,
         HttpClientTestingModule,
         MatRadioModule,
+        MatCheckboxModule
       ],
       providers: [
         {
