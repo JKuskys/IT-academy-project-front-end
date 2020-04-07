@@ -20,4 +20,8 @@
       </form>
     </div>
   </div>
+  <div class="admin-comment-content attachment-download" *ngIf="comment.attachmentName" (click)="onDownload()">
+    <mat-icon>cloud_download</mat-icon>
+    <div>{{comment.attachmentName}}</div>
+  </div>
 </div>
