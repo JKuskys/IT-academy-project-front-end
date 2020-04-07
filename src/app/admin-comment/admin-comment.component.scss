@@ -55,7 +55,6 @@
   flex-direction: row;
 }
 .attachment-download {
-  word-break: break-word;
   display: flex;
   flex-direction: row;
   color: grey;
@@ -63,7 +62,10 @@
   border-top: solid #d6d6d6 1px;
 }
 .attachment-download div {
-  margin-left: .5rem;
-  align-self: center;
+  margin: auto 0 auto .5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline;
 }
 
