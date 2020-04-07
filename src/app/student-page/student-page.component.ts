@@ -45,15 +45,8 @@ export class StudentPageComponent implements OnInit {
     return this.comments && this.comments.length === 0;
   }
 
-  addExternalCommentNotification(): void {
-    this.application.isExternalComment = true;
-    this.application.lastExternalCommentAuthor = localStorage.getItem('email');
-    this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-  }
-
   onCommentSaved(input: string): void {
     this.isCommentLoading = true;
-    this.addExternalCommentNotification();
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),

@@ -40,10 +40,10 @@
       <ng-container matColumnDef="commentCount">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Komentarų skaičius</mat-header-cell>
         <mat-cell *matCellDef="let element" data-label="Komentarų skaičius">
-          <i *ngIf="!element.isInternalComment||sameAuthor(element.lastInternalCommentAuthor)" class="empty-padding"></i>
-          <i *ngIf="!element.isExternalComment||sameAuthor(element.lastExternalCommentAuthor)" class="empty-padding"></i>
-          <i class="fas fa-comment icon-padding" *ngIf="element.isInternalComment&&!sameAuthor(element.lastInternalCommentAuthor)"></i>
-          <i class="fas fa-envelope icon-padding" *ngIf="element.isExternalComment&&!sameAuthor(element.lastExternalCommentAuthor)"></i>
+          <i *ngIf="!element.newInternalComment||sameAuthor(element.lastInternalCommentAuthor)" class="empty-padding-dialog"></i>
+          <i *ngIf="!element.newExternalComment||sameAuthor(element.lastExternalCommentAuthor)" class="empty-padding-envelope"></i>
+          <i class="fas fa-comment icon-padding-dialog" *ngIf="element.newInternalComment&&!sameAuthor(element.lastInternalCommentAuthor)"></i>
+          <i class="fas fa-envelope icon-padding-envelope" *ngIf="element.newExternalComment&&!sameAuthor(element.lastExternalCommentAuthor)"></i>
           {{ element.commentCount }}
         </mat-cell>
       </ng-container>

@@ -45,41 +45,18 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   updateApplicationToSeen(): void {
-    if (this.application.isExternalComment === true && this.application.lastExternalCommentAuthor !== localStorage.getItem('email')) {
-      this.application.isExternalComment = false;
-      this.application.lastExternalCommentAuthor = '';
-      this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-    }
-    if (this.application.isInternalComment === true && this.application.lastInternalCommentAuthor !== localStorage.getItem('email')) {
-      this.application.isInternalComment = false;
-      this.application.lastInternalCommentAuthor = '';
-      this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-    }
     if (this.application.status === Status.NAUJA) {
       this.application.status = Status.PERZIURETA;
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
     }
   }
 
-  addExternalCommentNotification(): void {
-    this.application.isExternalComment = true;
-    this.application.lastExternalCommentAuthor = localStorage.getItem('email');
-    this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-  }
-
-  addInternalCommentNotification(): void {
-    this.application.isInternalComment = true;
-    this.application.lastInternalCommentAuthor = localStorage.getItem('email');
-    this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
-  }
 
   onCommentSaved(input: string, internal: boolean): void {
     if (!internal) {
       this.isFeedbackCommentLoading = true;
-      this.addExternalCommentNotification();
     } else {
       this.isInternalCommentLoading = true;
-      this.addInternalCommentNotification();
     }
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,

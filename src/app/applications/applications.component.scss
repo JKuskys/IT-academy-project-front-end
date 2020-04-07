@@ -158,11 +158,18 @@ cell-text-end {
   justify-content: flex-end;
 }
 
-.icon-padding {
+.icon-padding-envelope {
   padding-right: 3px;
 }
 
-.empty-padding {
+.icon-padding-dialog {
+  padding-right: 3px;
+}
 
+.empty-padding-envelope {
+  padding-right: 20px;
+}
+
+.empty-padding-dialog {
   padding-right: 14px;
 }
