@@ -28,8 +28,7 @@
 
       <ng-container matColumnDef="fullName">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Vardas Pavardė</mat-header-cell>
-        <mat-cell *matCellDef="let element" data-label="Vardas ir pavardė"
-                  (click)="openApplication(element)">{{ element.fullName }}</mat-cell>
+        <mat-cell *matCellDef="let element" data-label="Vardas ir pavardė" (click)="openApplication(element)"><button>{{ element.fullName }}</button></mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="applicationDate">
