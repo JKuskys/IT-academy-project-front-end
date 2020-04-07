@@ -1,12 +1,13 @@
-<mat-dialog-content id="registration">
+<h1 class="float-right">
     <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
         <span aria-hidden="true">&times;</span>
     </button>
+</h1>
+<h1 class="text-center">
+    Registracija
+</h1>
+<mat-dialog-content id="registration">
     <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-        <mat-card-header>
-            <h1 class="text-center">Registracija</h1>
-        </mat-card-header>
-
         <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="name">Vardas, pavardė</label>
@@ -333,24 +334,25 @@
                     Akademijos siekiant užtikrinti sklandų praktikos vykdymą.
                 </div>
             </div>
-            <span class="align-bottom mt-4 padding-bottom">
-                <p>{{ this.serverErrorMessage }}</p>
-                <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isLoading" mode="indeterminate">
-                </mat-progress-spinner>
-                <button
-                    [hidden]="isLoading"
-                    hintLabel="Max 10 characters"
-                    mat-stroked-button
-                    color="primary"
-                    type="submit"
-                    class="btn-block mt-10 sticky"
-                    [disabled]="!registrationForm.valid"
-                >
-                    Registruotis
-                </button> </span
-            >
+
             <mat-divider></mat-divider><mat-divider></mat-divider>
-            
         </form>
     </div>
-</mat-dialog-content><mat-hint class="sticky">Registruotis galėsite užpildę visus laukus</mat-hint>
+</mat-dialog-content>
+<span class="align-bottom mt-4 padding-bottom">
+    <p>{{ this.serverErrorMessage }}</p>
+    <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isLoading" mode="indeterminate">
+    </mat-progress-spinner>
+    <button
+        [hidden]="isLoading"
+        hintLabel="Max 10 characters"
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        class="btn-block mt-10 sticky"
+        [disabled]="!registrationForm.valid"
+    >
+        Registruotis
+    </button>
+</span>
+<mat-hint class="sticky">Registruotis galėsite užpildę visus laukus</mat-hint>
