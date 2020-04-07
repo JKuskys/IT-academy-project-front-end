@@ -1,349 +1,356 @@
-<mat-dialog-content id="registration">
-  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<h1 class="float-right">
     <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
-      <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
     </button>
-    <mat-card-header>
-      <h1 class="text-center">Registracija</h1>
-    </mat-card-header>
+</h1>
+<h1 class="text-center">
+    Registracija
+</h1>
+<mat-dialog-content id="registration">
+    <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Vardas, pavardė</label>
+                <input
+                    matInput
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    formControlName="firstAndLastName"
+                    maxlength="40"
+                />
+            </div>
 
-    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="name">Vardas, pavardė</label>
-        <input
-          matInput
-          type="text"
-          class="form-control"
-          id="name"
-          formControlName="firstAndLastName"
-          maxlength="40"
-        />
-      </div>
+            <div
+                [hidden]="
+                    registrationForm.controls.firstAndLastName.valid ||
+                    registrationForm.controls.firstAndLastName.pristine
+                "
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.firstAndLastName.hasError('hasGaps')">
+                    Šiame lauke negali būti tik tarpai
+                </div>
+                <div *ngIf="registrationForm.controls.firstAndLastName.hasError('hasLettersOnly')">
+                    Šiame lauke gali būti tik raidės
+                </div>
+                <div *ngIf="registrationForm.controls.firstAndLastName.errors?.required">
+                    Vardas ir pavardė turi būti įvesti
+                </div>
+            </div>
 
-      <div
-        [hidden]="registrationForm.controls.firstAndLastName.valid ||
-                    registrationForm.controls.firstAndLastName.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.firstAndLastName.hasError('hasGaps')">
-          Šiame lauke negali būti tik tarpai
-        </div>
-        <div *ngIf="registrationForm.controls.firstAndLastName.hasError('hasLettersOnly')">
-          Šiame lauke gali būti tik raidės
-        </div>
-        <div *ngIf="registrationForm.controls.firstAndLastName.errors?.required">
-          Vardas ir pavardė turi būti įvesti
-        </div>
-      </div>
+            <div class="form-group container-uncolored ">
+                <label for="sel1">Telefono numeris</label>
+                <div class="row" id="sel1">
+                    <div class="col-md-3 pr-0">
+                        <select formControlName="phoneCode" class="form-control inline">
+                            <option [value]="name.dial_code" *ngFor="let name of arrCodes">{{
+                                name.code + " | " + name.dial_code
+                            }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-9 pl-0">
+                        <input
+                            type="phoneNumber"
+                            class="form-control inline"
+                            id="phoneNumber"
+                            formControlName="phoneNumber"
+                            maxlength="8"
+                        />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div
+                [hidden]="registrationForm.controls.phoneNumber.valid || registrationForm.controls.phoneNumber.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.phoneNumber.errors?.maxlength">
+                    Telefono numeris privalo būti 8 skaičių ilgumo
+                </div>
 
-      <div class="form-group container-uncolored ">
-        <label for="sel1">Telefono numeris</label>
-        <div class="row" id="sel1">
-          <div class="col-md-3 pr-0">
-            <select formControlName="phoneCode" class="form-control inline">
-              <option [value]="name.dial_code" *ngFor="let name of arrCodes">{{
-                name.code + " | " + name.dial_code
-                }}</option>
-            </select>
-          </div>
-          <div class="col-md-9 pl-0">
-            <input
-              type="phoneNumber"
-              class="form-control inline"
-              id="phoneNumber"
-              formControlName="phoneNumber"
-              maxlength="8"
-            />
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div
-        [hidden]="registrationForm.controls.phoneNumber.valid || registrationForm.controls.phoneNumber.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.phoneNumber.errors?.maxlength">
-          Telefono numeris privalo būti 8 skaičių ilgumo
-        </div>
+                <div *ngIf="registrationForm.controls.phoneNumber.errors?.required">
+                    Telefono numeris yra privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.phoneNumber.errors?.pattern">
+                    Telefono numeris tūrėtų būti tik iš skaičių
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">El. paštas</label>
+                <input
+                    matInput
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    formControlName="emailReg"
+                    maxlength="50"
+                />
+            </div>
+            <div
+                [hidden]="registrationForm.controls.emailReg.valid || registrationForm.controls.emailReg.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.emailReg.errors?.required">
+                    Elektroninis paštas yra privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.emailReg.errors?.pattern">
+                    Neteisingas elektroninis paštas
+                </div>
+                <div *ngIf="registrationForm.controls.emailReg.errors?.maxLength">
+                    Per ilgas elektroninis paštas
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Mokymosi įstaiga, kurioje šiuo metu mokaisi</label>
 
-        <div *ngIf="registrationForm.controls.phoneNumber.errors?.required">
-          Telefono numeris yra privalomas
-        </div>
-        <div
-          *ngIf="registrationForm.controls.phoneNumber.errors?.pattern">
-          Telefono numeris tūrėtų būti tik iš skaičių
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="name">El. paštas</label>
-        <input
-          matInput
-          type="email"
-          class="form-control"
-          id="email"
-          formControlName="emailReg"
-          maxlength="50"
-        />
-      </div>
-      <div
-        [hidden]="registrationForm.controls.emailReg.valid || registrationForm.controls.emailReg.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.emailReg.errors?.required">
-          Elektroninis paštas yra privalomas
-        </div>
-        <div *ngIf="registrationForm.controls.emailReg.errors?.pattern">
-          Neteisingas elektroninis paštas
-        </div>
-        <div *ngIf="registrationForm.controls.emailReg.errors?.maxLength">
-          Per ilgas elektroninis paštas
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="name">Mokymosi įstaiga, kurioje šiuo metu mokaisi</label>
-
-        <input
-          matInput
-          type="text"
-          class="form-control"
-          id="school"
-          formControlName="schoolName"
-          maxlength="50"
-        />
-      </div>
-      <div
-        [hidden]="registrationForm.controls.schoolName.valid || registrationForm.controls.schoolName.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.schoolName.errors?.required">
-          Šis laukas privalomas
-        </div>
-        <div *ngIf="registrationForm.controls.schoolName.hasError('hasGaps')">
-          Šiame lauke negali būti tik tarpai
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="hobbies">Ką veiki kai nesimokai? Kokie tavo pomėgiai?</label>
-        <textarea
-          matInput
-          rows="5"
-          type="text"
-          class="form-control resize"
-          id="hobbies"
-          formControlName="hobbies"
-          maxlength="1500"
-        ></textarea>
-      </div>
-      <div
-        [hidden]="registrationForm.controls.hobbies.valid || registrationForm.controls.hobbies.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.hobbies.errors?.required">
-          Šis laukas privalomas
-        </div>
-        <div *ngIf="registrationForm.controls.hobbies.hasError('hasGaps')">
-          Šiame lauke negali būti tik tarpai
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Ar bus galimybė pasirašyti trišalę praktikos sutartį, jei ne pakomentuok plačiau</label>
-        <br/>
-        <mat-radio-group aria-label="Select an option" formControlName="contract">
-          <mat-radio-button value="true" [checked]="true" color="primary">Taip</mat-radio-button>
-          <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
-        </mat-radio-group>
-        <div
-          [hidden]="registrationForm.controls.contract.valid || registrationForm.controls.contract.pristine"
-          class="alert alert-danger"
-        >
-          <div *ngIf="registrationForm.controls.contract.errors?.required">
-            Šis laukas privalomas
-          </div>
-        </div>
-        <textarea
-          [hidden]="getTrueFalse('contract')"
-          matInput
-          rows="5"
-          type="text"
-          class="form-control scroll resize"
-          formControlName="contractDescription"
-          maxlength="1500"
-        ></textarea>
-        <div
-          [hidden]="registrationForm.controls.contractDescription.valid || registrationForm.controls.contractDescription.pristine"
-          class="alert alert-danger"
-        >
-          <div *ngIf="registrationForm.controls.contractDescription.hasError('hasGaps')">
-            Šiame lauke negali būti tik tarpai
-          </div>
-        </div>
-      </div>
-      <label>Numatytas praktikos laikas darbo dienomis 14-18 val. Ar galėsi akademijai skirti tiek laiko?</label>
-      <br/>
-      <mat-radio-group aria-label="Select an option" formControlName="workTime">
-        <mat-radio-button value="true" [checked]="true" color="primary">Taip</mat-radio-button>
-        <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
-      </mat-radio-group>
-      <div class="form-group">
-        <label for="hobbies">Kodėl nori dalyvauti IT akademijoje? Kas tave „veža“ joje dalyvauti?</label>
-        <textarea
-          matInput
-          rows="5"
-          type="text"
-          class="form-control resize"
-          id="drive"
-          formControlName="drive"
-          maxlength="1500"
-        ></textarea>
-      </div>
-      <div
-        [hidden]="registrationForm.controls.drive.valid || registrationForm.controls.drive.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.drive.errors?.required">
-          Šis laukas privalomas
-        </div>
-        <div *ngIf="registrationForm.controls.drive.hasError('hasGaps')">
-          Šiame lauke negali būti tik tarpai
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="experience"
-        >Kokios technologijos tau labiausiai patinka ir su kokiomis iš jų jau turi patirties? Jei teko
-          dirbti prie konkretaus projekto, pasidalink jo nuoroda</label
-        >
-        <textarea
-          matInput
-          rows="5"
-          type="text"
-          class="form-control resize"
-          id="experience"
-          formControlName="experience"
-          maxlength="1500"
-        ></textarea>
-      </div>
-      <div
-        [hidden]="registrationForm.controls.experience.valid || registrationForm.controls.experience.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.experience.errors?.required">
-          Šis laukas privalomas
-        </div>
-        <div *ngIf="registrationForm.controls.experience.hasError('hasGaps')">
-          Šiame lauke negali būti tik tarpai
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="fromWhere">Iš kur sužinojai apie IT akademiją?</label>
-        <textarea
-          matInput
-          rows="5"
-          type="text"
-          class="form-control resize"
-          id="fromWhere"
-          formControlName="fromWhere"
-          maxlength="255"
-        ></textarea>
-      </div>
-      <div
-        [hidden]="registrationForm.controls.fromWhere.valid || registrationForm.controls.fromWhere.pristine"
-        class="alert alert-danger"
-      >
-        <div *ngIf="registrationForm.controls.fromWhere.errors?.required">
-          Šis laukas privalomas
-        </div>
-        <div *ngIf="registrationForm.controls.fromWhere.hasError('hasGaps')">
-          Šiame lauke negali būti tik tarpai
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password1">Slaptažodis</label>
-        <input matInput type="password" id="password1" class="form-control" formControlName="passwordReg"
-               maxlength="30"/>
-      </div>
-      <div
-        [hidden]="(registrationForm.controls.passwordReg.valid
-                || registrationForm.controls.passwordReg.pristine)&&(this.passwordRepeatReg.value === ''||this.passwordReg.value !== '')"
-        class="alert alert-danger"
-      >
-
-        <div *ngIf="registrationForm.controls.passwordReg.errors?.required">
-          Slaptažodis yra privalomas
-        </div>
-        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasNumber')">
-          Slaptažodis privalo turėti bent vieną skaičių
-        </div>
-        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasCapitalCase')">
-          Slaptažodis privalo turėti bent vieną didžiają raidę
-        </div>
-        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasSmallCase')">
-          Slaptažodis privalo turėti bent vieną mažąją raidę
-        </div>
-        <div *ngIf="registrationForm.controls.passwordReg.hasError('hasGaps')">
-          Slaptažodis negali turėti tarpų
-        </div>
-        <div *ngIf="registrationForm.controls.passwordReg.errors?.minlength">
-          Slaptažodis privalo būti ilgesnis nei 7 simboliai
-        </div>
-        <div *ngIf="registrationForm.controls.passwordReg.errors?.maxlength">
-          Slaptažodis privalo būti trumpesnis nei 30 simbolių
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password2">Pakartoti slaptažodį</label>
-        <input
-          matInput
-          type="password"
-          id="password2"
-          class="form-control"
-          formControlName="passwordRepeatReg"
-          maxlength="30"
-        />
-      </div>
-      <div
-
-        [hidden]="validatePasswords()"
-        class="alert alert-danger">
-        <div *ngIf="this.passwordReg.value != this.passwordRepeatReg.value">
-          Slaptažodžiai turi sutapti
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="vertical-middle">
-          <mat-checkbox
-            labelPosition="after"
-            formControlName="GDPR"
-          ></mat-checkbox>
-          &nbsp;
-          <a href="https://academy-project-2020.herokuapp.com/gdpr" target="_blank">Sutinku,</a>
-          kad mano asmens duomenys (vardas, pavardė, telefono numeris, elektroninis paštas) būtų tvarkomi IT Akademijos
-          siekiant užtikrinti sklandų praktikos vykdymą.
-        </div>
-      </div>
-      <span class="align-bottom mt-4 padding-bottom">
-                <p>{{ this.serverErrorMessage }}</p>
-                <mat-hint>Registruotis galėsite užpildę visus laukus</mat-hint>
-         <mat-progress-spinner
-           class="spinner-styler"
-           color="primary"
-           *ngIf="isLoading"
-           mode="indeterminate"
-         >
-      </mat-progress-spinner>
-                <button
-                  [hidden]="isLoading"
-                  hintLabel="Max 10 characters"
-                  mat-stroked-button
-                  color="primary"
-                  type="submit"
-                  class="btn-block mt-10"
-                  [disabled]="!registrationForm.valid"
+                <input
+                    matInput
+                    type="text"
+                    class="form-control"
+                    id="school"
+                    formControlName="schoolName"
+                    maxlength="50"
+                />
+            </div>
+            <div
+                [hidden]="registrationForm.controls.schoolName.valid || registrationForm.controls.schoolName.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.schoolName.errors?.required">
+                    Šis laukas privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.schoolName.hasError('hasGaps')">
+                    Šiame lauke negali būti tik tarpai
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="hobbies">Ką veiki kai nesimokai? Kokie tavo pomėgiai?</label>
+                <textarea
+                    matInput
+                    rows="5"
+                    type="text"
+                    class="form-control resize"
+                    id="hobbies"
+                    formControlName="hobbies"
+                    maxlength="1500"
+                ></textarea>
+            </div>
+            <div
+                [hidden]="registrationForm.controls.hobbies.valid || registrationForm.controls.hobbies.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.hobbies.errors?.required">
+                    Šis laukas privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.hobbies.hasError('hasGaps')">
+                    Šiame lauke negali būti tik tarpai
+                </div>
+            </div>
+            <div class="form-group">
+                <label
+                    >Ar bus galimybė pasirašyti trišalę praktikos sutartį, jei ne pakomentuok plačiau<span
+                        #tooltip="matTooltip"
+                        matTooltip="Tai sutartis, kuri yra pasirašoma tarp tarp Tavęs, IT Akademijos ir trečiosios šalies: Tavo mokymo įstaigos (kai kurios ugdymo įstaigos trišales praktikos sutartis suteikia tik tam tikrais studijų metais)."
+                        class="material-icons"
+                    >
+                        info
+                    </span></label
                 >
-                    Registruotis
-                </button>
-            </span>
-      <mat-divider></mat-divider>
-      <mat-divider></mat-divider>
-    </form>
-  </div>
+                <br />
+                <mat-radio-group aria-label="Select an option" formControlName="contract">
+                    <mat-radio-button value="true" [checked]="true" color="primary">Taip</mat-radio-button>
+                    <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
+                </mat-radio-group>
+                <div
+                    [hidden]="registrationForm.controls.contract.valid || registrationForm.controls.contract.pristine"
+                    class="alert alert-danger"
+                >
+                    <div *ngIf="registrationForm.controls.contract.errors?.required">
+                        Šis laukas privalomas
+                    </div>
+                </div>
+                <textarea
+                    [hidden]="getTrueFalse('contract')"
+                    matInput
+                    rows="5"
+                    type="text"
+                    class="form-control scroll resize"
+                    formControlName="contractDescription"
+                    maxlength="1500"
+                ></textarea>
+                <div
+                    [hidden]="
+                        registrationForm.controls.contractDescription.valid ||
+                        registrationForm.controls.contractDescription.pristine
+                    "
+                    class="alert alert-danger"
+                >
+                    <div *ngIf="registrationForm.controls.contractDescription.hasError('hasGaps')">
+                        Šiame lauke negali būti tik tarpai
+                    </div>
+                </div>
+            </div>
+            <label>Numatytas praktikos laikas darbo dienomis 14-18 val. Ar galėsi akademijai skirti tiek laiko?</label>
+            <br />
+            <mat-radio-group aria-label="Select an option" formControlName="workTime">
+                <mat-radio-button value="true" [checked]="true" color="primary">Taip</mat-radio-button>
+                <mat-radio-button value="false" color="primary">Ne</mat-radio-button>
+            </mat-radio-group>
+            <div class="form-group">
+                <label for="hobbies">Kodėl nori dalyvauti IT akademijoje? Kas tave „veža“ joje dalyvauti?</label>
+                <textarea
+                    matInput
+                    rows="5"
+                    type="text"
+                    class="form-control resize"
+                    id="drive"
+                    formControlName="drive"
+                    maxlength="1500"
+                ></textarea>
+            </div>
+            <div
+                [hidden]="registrationForm.controls.drive.valid || registrationForm.controls.drive.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.drive.errors?.required">
+                    Šis laukas privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.drive.hasError('hasGaps')">
+                    Šiame lauke negali būti tik tarpai
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="experience"
+                    >Kokios technologijos tau labiausiai patinka ir su kokiomis iš jų jau turi patirties? Jei teko
+                    dirbti prie konkretaus projekto, pasidalink jo nuoroda</label
+                >
+                <textarea
+                    matInput
+                    rows="5"
+                    type="text"
+                    class="form-control resize"
+                    id="experience"
+                    formControlName="experience"
+                    maxlength="1500"
+                ></textarea>
+            </div>
+            <div
+                [hidden]="registrationForm.controls.experience.valid || registrationForm.controls.experience.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.experience.errors?.required">
+                    Šis laukas privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.experience.hasError('hasGaps')">
+                    Šiame lauke negali būti tik tarpai
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fromWhere">Iš kur sužinojai apie IT akademiją?</label>
+                <textarea
+                    matInput
+                    rows="5"
+                    type="text"
+                    class="form-control resize"
+                    id="fromWhere"
+                    formControlName="fromWhere"
+                    maxlength="255"
+                ></textarea>
+            </div>
+            <div
+                [hidden]="registrationForm.controls.fromWhere.valid || registrationForm.controls.fromWhere.pristine"
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.fromWhere.errors?.required">
+                    Šis laukas privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.fromWhere.hasError('hasGaps')">
+                    Šiame lauke negali būti tik tarpai
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password1">Slaptažodis</label>
+                <input
+                    matInput
+                    type="password"
+                    id="password1"
+                    class="form-control"
+                    formControlName="passwordReg"
+                    maxlength="30"
+                />
+            </div>
+            <div
+                [hidden]="
+                    (registrationForm.controls.passwordReg.valid || registrationForm.controls.passwordReg.pristine) &&
+                    (this.passwordRepeatReg.value === '' || this.passwordReg.value !== '')
+                "
+                class="alert alert-danger"
+            >
+                <div *ngIf="registrationForm.controls.passwordReg.errors?.required">
+                    Slaptažodis yra privalomas
+                </div>
+                <div *ngIf="registrationForm.controls.passwordReg.hasError('hasNumber')">
+                    Slaptažodis privalo turėti bent vieną skaičių
+                </div>
+                <div *ngIf="registrationForm.controls.passwordReg.hasError('hasCapitalCase')">
+                    Slaptažodis privalo turėti bent vieną didžiają raidę
+                </div>
+                <div *ngIf="registrationForm.controls.passwordReg.hasError('hasSmallCase')">
+                    Slaptažodis privalo turėti bent vieną mažąją raidę
+                </div>
+                <div *ngIf="registrationForm.controls.passwordReg.hasError('hasGaps')">
+                    Slaptažodis negali turėti tarpų
+                </div>
+                <div *ngIf="registrationForm.controls.passwordReg.errors?.minlength">
+                    Slaptažodis privalo būti ilgesnis nei 7 simboliai
+                </div>
+                <div *ngIf="registrationForm.controls.passwordReg.errors?.maxlength">
+                    Slaptažodis privalo būti trumpesnis nei 30 simbolių
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password2">Pakartoti slaptažodį</label>
+                <input
+                    matInput
+                    type="password"
+                    id="password2"
+                    class="form-control"
+                    formControlName="passwordRepeatReg"
+                    maxlength="30"
+                />
+            </div>
+            <div [hidden]="validatePasswords()" class="alert alert-danger">
+                <div *ngIf="this.passwordReg.value != this.passwordRepeatReg.value">
+                    Slaptažodžiai turi sutapti
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="vertical-middle">
+                    <mat-checkbox labelPosition="after" formControlName="GDPR"></mat-checkbox>
+                    &nbsp;
+                    <a href="https://academy-project-2020.herokuapp.com/gdpr" target="_blank">Sutinku,</a>
+                    kad mano asmens duomenys (vardas, pavardė, telefono numeris, elektroninis paštas) būtų tvarkomi IT
+                    Akademijos siekiant užtikrinti sklandų praktikos vykdymą.
+                </div>
+            </div>
+        </form>
+    </div>
 </mat-dialog-content>
+<span class="align-bottom mt-4 padding-bottom">
+    <p>{{ this.serverErrorMessage }}</p>
+    <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isLoading" mode="indeterminate">
+    </mat-progress-spinner>
+    <button
+        [hidden]="isLoading"
+        hintLabel="Max 10 characters"
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        class="btn-block mt-10 sticky"
+        [disabled]="!registrationForm.valid"
+    >
+        Registruotis
+    </button>
+</span>
+<mat-hint class="sticky">Registruotis galėsite užpildę visus laukus</mat-hint>
