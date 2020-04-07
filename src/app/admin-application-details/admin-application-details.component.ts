@@ -9,7 +9,7 @@ import {CommentService} from '../services/application/comment.service';
 import {JwtHelper} from '../services/universal/JwtHelper.service';
 import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 import {Status} from '../shared/status';
 
 @Component({
@@ -43,18 +43,43 @@ export class AdminApplicationDetailsComponent implements OnInit {
         this.isLoading = false;
       });
   }
+
   updateApplicationToSeen(): void {
+    if (this.application.newExternalComment === true && this.application.lastExternalCommentAuthor !== localStorage.getItem('email')) {
+      this.application.newExternalComment = false;
+      this.application.lastExternalCommentAuthor = '';
+      this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+    }
+    if (this.application.newInternalComment === true && this.application.lastInternalCommentAuthor !== localStorage.getItem('email')) {
+      this.application.newInternalComment = false;
+      this.application.lastInternalCommentAuthor = '';
+      this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+    }
     if (this.application.status === Status.NAUJA) {
       this.application.status = Status.PERZIURETA;
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
     }
   }
 
+  addExternalCommentNotification(): void {
+    this.application.newExternalComment = true;
+    this.application.lastExternalCommentAuthor = localStorage.getItem('email');
+    this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+  }
+
+  addInternalCommentNotification(): void {
+    this.application.newInternalComment = true;
+    this.application.lastInternalCommentAuthor = localStorage.getItem('email');
+    this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, this.application).subscribe();
+  }
+
   onCommentSaved(input: string, internal: boolean): void {
     if (!internal) {
       this.isFeedbackCommentLoading = true;
+      this.addExternalCommentNotification();
     } else {
       this.isInternalCommentLoading = true;
+      this.addInternalCommentNotification();
     }
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
@@ -93,8 +118,9 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   onCommentEdited(comment: Comment): void {
-    this.commentService.updateComment(comment, { applicationId: this.application.id }).subscribe();
+    this.commentService.updateComment(comment, {applicationId: this.application.id}).subscribe();
   }
+
   onCommentDeleted(id: number): void {
     this.commentService.deleteComment({applicationId: this.application.id, commentId: id}).subscribe(res => {
       this.comments = this.comments.filter((value, index, arr) => value.id !== id);
