@@ -34,6 +34,8 @@
 }
 .admin-comment-content-below{
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .admin-comment-content-below div{
   margin-top: .5rem;
@@ -43,21 +45,17 @@
 .admin-comment-content-below div div{
   margin-top: 0;
 }
+.upload-file-wrapper{
+  margin: 0 0.25rem 0 0;
+}
 @media only screen and (max-width: 1000px){
-  .admin-comment-content-below{
-    flex-direction: column;
-  }
-  .upload-file-wrapper{
-    margin: 0;
+  #attachment + label div{
+    max-width: calc(100vw - 104px - 2.25rem - 24px);
   }
 }
 @media only screen and (min-width: 1001px){
-  .admin-comment-content-below{
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .upload-file-wrapper{
-    margin: 0 0.25rem 0 0;
+  #attachment + label div{
+    max-width: calc(45vw - 10vw - 4px - 2.25rem - 24px);
   }
 }
 .upload-file-wrapper{
@@ -80,10 +78,13 @@
   background-color: white;
   margin: auto;
   display: flex;
-  word-break: break-word;
 }
 #attachment + label div {
   margin: auto 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline;
 }
 
 #attachment:focus + label,
