@@ -25,7 +25,13 @@ export class StudentPageComponent implements OnInit {
     private commentService: CommentService,
     private jwtHelper: JwtHelper
   ) {
-    this.isLoading=true;
+    this.isLoading = true;
+  }
+
+  displayNumber = 5;
+
+  increaseBy(nr: number){
+    this.displayNumber= this.displayNumber+nr;
   }
 
   ngOnInit(): void {

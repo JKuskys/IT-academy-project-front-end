@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {forkJoin, from, Observable, Subscription} from 'rxjs';
 import {Comment} from '../shared/comment';
 import {ActivatedRoute} from '@angular/router';
@@ -7,7 +7,7 @@ import {CommentService} from '../services/application/comment.service';
 import {JwtHelper} from '../services/universal/JwtHelper.service';
 import {formatDate} from '@angular/common';
 import {Application} from '../shared/application';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
 import {Status} from '../shared/status';
 import {saveAs} from 'file-saver';
 
@@ -29,6 +29,12 @@ export class AdminApplicationDetailsComponent implements OnInit {
               private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
   }
 
+  displayNumber = 5;
+
+  increaseBy(nr: number){
+    this.displayNumber= this.displayNumber+nr;
+  }
+
   ngOnInit(): void {
     this.isLoading = true;
     this.isFeedbackCommentLoading = false;
@@ -42,6 +48,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
         this.isLoading = false;
       });
   }
+
   updateApplicationToSeen(): void {
     if (this.application.status === Status.NAUJA) {
       this.application.status = Status.PERZIURETA;
@@ -49,9 +56,9 @@ export class AdminApplicationDetailsComponent implements OnInit {
     }
   }
 
+
   onCommentSaved(input: any, internal: boolean): void {
     this.setCommentLoading(internal, true);
-
     const newComment: Comment = {
       authorEmail: this.jwtHelper.decodeToken(localStorage.getItem('token')).sub,
       commentDate: formatDate(new Date(), 'yyyy-MM-dd', 'en'),
@@ -101,8 +108,9 @@ export class AdminApplicationDetailsComponent implements OnInit {
   }
 
   onCommentEdited(comment: Comment): void {
-    this.commentService.updateComment(comment, { applicationId: this.application.id }).subscribe();
+    this.commentService.updateComment(comment, {applicationId: this.application.id}).subscribe();
   }
+
   onCommentDeleted(id: number): void {
     this.commentService.deleteComment({applicationId: this.application.id, commentId: id}).subscribe(res => {
       this.comments = this.comments.filter((value, index, arr) => value.id !== id);

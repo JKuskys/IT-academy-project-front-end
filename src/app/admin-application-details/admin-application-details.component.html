@@ -17,37 +17,53 @@
     </mat-radio-group>
     <button (click)="onStatusSaved(application)">Išsaugoti būseną</button>
   </div>
-  <div class="admin-comments" [hidden]="isLoading">
-    <div class="admin-comments-header">Komentarai<div class="admin-comments-header-below">matoma tik IT Akademijos administratoriams</div></div>
-    <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
-    <div class="comment" *ngFor="let comment of comments">
-      <app-admin-comment *ngIf="!comment.visibleToApplicant" [comment]="comment" [isEditable]="isCommentEditable(comment.authorEmail)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
-    </div>
-    <mat-progress-spinner
-      class="spinner-styler"
-      color="primary"
-      *ngIf="isInternalCommentLoading"
-      mode="indeterminate"
-    >
-    </mat-progress-spinner>
-    <hr>
-    <app-admin-comment-write [uploadEnabled]="false"  (commentSave)="onCommentSaved($event, true)"></app-admin-comment-write>
-  </div>
-  <div class="admin-comments" [hidden]="isLoading">
-    <div class="admin-comments-header">Žinutė kandidatui</div>
-    <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
-    <div class="comment" *ngFor="let comment of comments">
-      <app-admin-comment *ngIf="comment.visibleToApplicant" [comment]="comment" [isEditable]="false" (attachmentDownload)="onAttachmentDownload($event)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
-    </div>
-    <mat-progress-spinner
-      class="spinner-styler"
-      color="primary"
-      *ngIf="isFeedbackCommentLoading"
-      mode="indeterminate"
-    >
-    </mat-progress-spinner>
-    <hr>
-    <app-admin-comment-write [uploadEnabled]="true" (commentSave)="onCommentSaved($event, false)"></app-admin-comment-write>
-  </div>
+  <hr>
+  <mat-tab-group class="tab-container">
+    <mat-tab >
+      <ng-template mat-tab-label>
+        <div class="admin-comments-header">Komentarai
+          <div class="admin-comments-header-below">matoma tik IT Akademijos administratoriams</div>
+        </div>
+      </ng-template>
+      <div class="admin-comments" [hidden]="isLoading">
+        <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
+        <div class="comment" *ngFor="let comment of comments | slice:0:displayNumber">
+          <app-admin-comment *ngIf="!comment.visibleToApplicant" [comment]="comment" [isEditable]="isCommentEditable(comment.authorEmail)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
+        </div>
+        <button *ngIf="comments.length>displayNumber" (click)="increaseBy(5)" class="show-more">Rodyti daugiau</button>
+        <mat-progress-spinner
+          class="spinner-styler"
+          color="primary"
+          *ngIf="isInternalCommentLoading"
+          mode="indeterminate"
+        > 
+        </mat-progress-spinner>
+        <hr>
+        <app-admin-comment-write (commentSave)="onCommentSaved($event, true)"></app-admin-comment-write>
+      </div>
+    </mat-tab>
+    <mat-tab >
+      <ng-template mat-tab-label >
+        <div class="admin-comments-header">Žinutė kandidatui</div>
+      </ng-template>
+      <div class="admin-comments" [hidden]="isLoading">
+        <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
+        <div class="comment" *ngFor="let comment of comments | slice:0:displayNumber">
+          <app-admin-comment *ngIf="comment.visibleToApplicant" [comment]="comment" [isEditable]="false" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
+        </div>
+        <button *ngIf="comments.length>displayNumber" (click)="increaseBy(5)" class="show-more">Rodyti daugiau</button>
+        <mat-progress-spinner
+          class="spinner-styler"
+          color="primary"
+          *ngIf="isFeedbackCommentLoading"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
+        <hr>
+        <app-admin-comment-write (commentSave)="onCommentSaved($event, false)"></app-admin-comment-write>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
 </div>
 

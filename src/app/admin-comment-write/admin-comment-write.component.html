@@ -5,7 +5,7 @@
       <div class="admin-comment-content-below">
         <div>
           <div class="upload-file-wrapper" *ngIf="uploadEnabled">
-            <input type="file" id="attachment" formControlName="attachment" (change)="onFileSelected($event)" accept=".pdf, .doc">
+            <input type="file" id="attachment" formControlName="attachment" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
             <label for="attachment">
               <mat-icon> insert_drive_file</mat-icon>
               <div>{{selectedFile ? selectedFile.name : fileSelectedDefaultName}}</div>
@@ -13,6 +13,9 @@
           </div>
         </div>
         <button type='submit' [disabled]="!commentForm.valid">Išsaugoti</button>
+      </div>
+      <div *ngIf="uploadEnabled && !commentForm.controls.attachment.valid" class="alert alert-danger">
+        {{commentForm.controls.attachment.errors.message}}
       </div>
     </div>
   </form>

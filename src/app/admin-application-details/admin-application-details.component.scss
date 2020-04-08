@@ -21,13 +21,6 @@
   padding: .375rem .75rem;
 }
 
-.admin-comments-header{
-  font-size: 20px;
-  text-align: left;
-  margin-bottom: .75rem;
-  margin-top: 1rem;
-}
-
 #admin-action-container button{
   background: #6486C4;
   height: 40px;
@@ -47,7 +40,14 @@
   #admin-application-details-wrapper{
     width: 100%;
   }
-
+  .tab-container{
+    width: 100%;
+  }
+  .admin-comments-header{
+    text-align: left;
+    font-size: 18px;
+    width: 20vh;
+  }
 }
 
 @media only screen and (min-width: 1001px){
@@ -56,6 +56,12 @@
     padding-right: 2.5vw;
     padding-left: 2.5vw;
     padding-top: 2.5vh;
+  }
+  .admin-comments-header{
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: .75rem;
+  margin-top: 1rem;
   }
 }
 .mat-radio-button ~ .mat-radio-button {
@@ -81,5 +87,15 @@ hr{
 .admin-comments-header-below{
   color: grey;
   font-size: 14px;
+  text-align: center;
 }
 
+.show-more{
+    background: #6486C4;
+    height: 40px;
+    border-radius: 5px;
+    color: #fff;
+    border-color: #5D7EB8;
+    width: 13vw;
+    min-width: 150px;
+  }
