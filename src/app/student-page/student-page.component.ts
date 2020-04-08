@@ -30,8 +30,8 @@ export class StudentPageComponent implements OnInit {
 
   displayNumber = 5;
 
-  increaseBy(nr: number){
-    this.displayNumber= this.displayNumber+nr;
+  increaseBy(nr: number) {
+    this.displayNumber = this.displayNumber + nr;
   }
 
   ngOnInit(): void {
