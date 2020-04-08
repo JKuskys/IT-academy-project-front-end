@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginInfo} from '../shared/login';
 import {UserService} from '../services/account/user.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {RoleGuardService} from '../services/authorization/role-guard-service.service';
+import {RegistrationComponent} from "../registration/registration.component";
+import {ForgotPasswordComponent} from "../forgot-password/forgot-password.component";
 
 
 @Component({
@@ -16,12 +18,13 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
 
-    constructor(
+  constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
     private roleGuardService: RoleGuardService,
-    private dialog: MatDialogRef<any>) {
+    private dialog: MatDialog,
+    private dialogRef: MatDialogRef<any>) {
     this.loginForm = this.setForm();
   }
 
@@ -30,6 +33,10 @@ export class LoginComponent implements OnInit {
   passwordNotMatch: boolean;
   submission: boolean;
 
+  openPasswordReminder(): void {
+    this.closeDialog('login');
+    this.dialog.open(ForgotPasswordComponent);
+  }
 
   ngOnInit(): void {
     this.serverErrorMessage = '';
@@ -51,13 +58,13 @@ export class LoginComponent implements OnInit {
         this.roleGuardService.setRole(response.token);
         this.serverErrorMessage = '';
         this.closeDialog('login');
-        if (localStorage.getItem('roles').includes('ADMIN')){
+        if (localStorage.getItem('roles').includes('ADMIN')) {
           this.router.navigate(['applications']);
         }
-        if (localStorage.getItem('roles').includes('USER')){
+        if (localStorage.getItem('roles').includes('USER')) {
           this.router.navigate(['application']);
         }
-          },
+      },
 
       error => {
         if (error === 'Access Denied') {
@@ -71,7 +78,7 @@ export class LoginComponent implements OnInit {
   }
 
   closeDialog(id: string) {
-    this.dialog.close(id);
+    this.dialogRef.close(id);
   }
 
 

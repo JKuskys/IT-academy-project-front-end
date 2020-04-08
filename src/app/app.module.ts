@@ -41,6 +41,8 @@ import {StudentPageComponent} from './student-page/student-page.component';
 import {StudentCommentComponent} from './student-comment/student-comment.component';
 import { GDPRComponent } from './gdpr/gdpr.component';
 import { MatCheckboxModule} from "@angular/material/checkbox";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import { MatCheckboxModule} from "@angular/material/checkbox";
     ApplicationsComponent,
     StudentPageComponent,
     StudentCommentComponent,
-    GDPRComponent
+    GDPRComponent,
+    ForgotPasswordComponent,
+    PasswordResetComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
