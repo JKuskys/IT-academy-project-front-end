@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Comment} from '../../shared/comment';
 
@@ -25,6 +25,23 @@ export class CommentService {
   }
   addComment(comment: Comment, { applicationId }): Observable<Comment> {
     return this.httpClient.post<Comment>(`${this.proxyurl}${this.url}${this.apiPath}/applications/${applicationId}/comments`, comment);
+  }
+  addAttachment({ applicationId, commentId, file }): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+
+    return this.httpClient
+      .post(`${this.proxyurl}${this.url}${this.apiPath}/applications/${applicationId}/comments/${commentId}/attachment`,
+      formData, { headers });
+  }
+  getAttachment({ applicationId, commentId, file }): Observable<Blob> {
+    return this.httpClient
+      .get(`${this.proxyurl}${this.url}${this.apiPath}/applications/${applicationId}/comments/${commentId}/attachment/${file}`,
+        { responseType: 'blob' });
   }
   updateComment(comment: Comment, { applicationId }): Observable<Comment> {
     return this.httpClient

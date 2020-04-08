@@ -15,6 +15,7 @@ export class AdminCommentComponent implements OnInit {
   @Input() isEditable: boolean;
   @Output() commentSave = new EventEmitter<Comment>();
   @Output() commentDelete = new EventEmitter<number>();
+  @Output() attachmentDownload = new EventEmitter<Comment>();
 
   constructor(private fb: FormBuilder) { }
 
@@ -40,5 +41,8 @@ export class AdminCommentComponent implements OnInit {
   }
   onCommentDeleted() {
     this.commentDelete.emit(this.comment.id);
+  }
+  onDownload() {
+    this.attachmentDownload.emit(this.comment);
   }
 }
