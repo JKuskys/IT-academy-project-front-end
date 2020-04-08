@@ -11,9 +11,10 @@
   <div id="student-comments" [hidden]="isLoading">
     <div id="student-comments-header">Komentarai</div>
     <div class="comment-missing-remark" [hidden]="!isCommentsEmpty()">Komentarų nėra...</div>
-    <div class="comment" *ngFor="let comment of comments ">
+    <div class="comment" *ngFor="let comment of comments | slice:0:displayNumber">
       <app-student-comment [comment]="comment"></app-student-comment>
     </div>
+    <button *ngIf="comments.length>displayNumber" (click)="increaseBy(5)" class="show-more">Rodyti daugiau</button>
     <mat-progress-spinner
       class="spinner-styler"
       color="primary"

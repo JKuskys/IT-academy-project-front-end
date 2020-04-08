@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {forkJoin, from, Observable, Subscription} from 'rxjs';
 import {Registration} from '../shared/registration';
 import {Comment} from '../shared/comment';
@@ -28,6 +28,12 @@ export class AdminApplicationDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
               private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
+  }
+
+  displayNumber = 5;
+
+  increaseBy(nr: number){
+    this.displayNumber= this.displayNumber+nr;
   }
 
   ngOnInit(): void {
