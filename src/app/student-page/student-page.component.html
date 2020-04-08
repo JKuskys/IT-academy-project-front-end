@@ -1,5 +1,26 @@
 <div id="student-application-details-wrapper">
-    <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isLoading" mode="indeterminate">
+  <mat-progress-spinner
+    class="spinner-styler"
+    color="primary"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  >
+  </mat-progress-spinner>
+  <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
+  <hr>
+  <div id="student-comments" [hidden]="isLoading">
+    <div id="student-comments-header">Komentarai</div>
+    <div class="comment-missing-remark" [hidden]="!isCommentsEmpty()">Komentarų nėra...</div>
+    <div class="comment" *ngFor="let comment of comments | slice:0:displayNumber">
+      <app-student-comment [comment]="comment"></app-student-comment>
+    </div>
+    <button *ngIf="comments.length>displayNumber" (click)="increaseBy(5)" class="show-more">Rodyti daugiau</button>
+    <mat-progress-spinner
+      class="spinner-styler"
+      color="primary"
+      *ngIf="isCommentLoading"
+      mode="indeterminate"
+    >
     </mat-progress-spinner>
     <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
     <hr />

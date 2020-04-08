@@ -28,6 +28,12 @@ export class StudentPageComponent implements OnInit {
     this.isLoading = true;
   }
 
+  displayNumber = 5;
+
+  increaseBy(nr: number){
+    this.displayNumber= this.displayNumber+nr;
+  }
+
   ngOnInit(): void {
     this.isLoading = true;
     this.isCommentLoading = false;
