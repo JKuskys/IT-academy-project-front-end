@@ -9,7 +9,7 @@ import {MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  loginForm: FormGroup;
+  resetForm: FormGroup;
   isLoading = false;
   serverErrorMessage: string;
 
@@ -17,7 +17,7 @@ export class ForgotPasswordComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private dialogRef: MatDialogRef<any>) {
-    this.loginForm = this.setForm();
+    this.resetForm = this.setForm();
   }
 
 
@@ -28,10 +28,10 @@ export class ForgotPasswordComponent implements OnInit {
   onSubmit() {
 
     this.isLoading = true;
-    this.userService.sendEmail(this.loginForm.get('emailLogin').value).subscribe(
+    this.userService.sendEmail(this.resetForm.get('emailReset').value).subscribe(
       response => {
         this.closeDialog('forgotPassword');
-        localStorage.setItem('resetPasswordEmail', this.loginForm.get('emailLogin').value);
+        localStorage.setItem('resetPasswordEmail', this.resetForm.get('emailReset').value);
       },
       error => {
         if (error === 'Access Denied') {
@@ -51,7 +51,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   setForm() {
     return this.fb.group({
-      emailLogin: ['', [
+      emailReset: ['', [
         Validators.required,
         Validators.maxLength(30),
         Validators.pattern('[a-zA-z0-9._%+-]+@[a-zA-z0-9.-]+\\.[a-zA-z]{2,4}$'),
