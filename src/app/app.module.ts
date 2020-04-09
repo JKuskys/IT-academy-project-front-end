@@ -43,6 +43,7 @@ import { GDPRComponent } from './gdpr/gdpr.component';
 import { MatCheckboxModule} from "@angular/material/checkbox";
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import {CallbackPipe} from './shared/callback-pipe';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     StudentCommentComponent,
     GDPRComponent,
     ForgotPasswordComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    CallbackPipe
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
