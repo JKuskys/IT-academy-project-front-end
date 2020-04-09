@@ -97,9 +97,9 @@ export class AdminApplicationDetailsComponent implements OnInit {
   onStatusSaved(application: Application): void {
     if (this.currentStatus) {
       this.isStatusChangeLoading = true;
+      application.status = this.currentStatus;
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, application)
         .subscribe(res => {
-          application.status = this.currentStatus;
           const config = new MatSnackBarConfig();
           config.duration = 2000;
           this.snackBar.open('Būsena išsaugota!', '', config);
