@@ -1,128 +1,57 @@
-@media only screen and (max-width: 1025px) {
-    img {
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-        max-height: 20vh;
-        object-fit: cover;
-    }
-    .content-container {
-        flex-direction: column;
-    }
-    .container-padding {
-        width: 100vw;
-    }
-    .content-left {
-        padding-bottom: 0;
-    }
-    .content-right {
-        padding-bottom: 2.5vh;
-    }
-    .content {
-        padding-top: 2.5vh;
-        width: 100%;
-        padding-left: 5vw;
-        padding-right: 5vw;
-    }
-    .content1 {
-        padding-top: 0vh;
-        width: 100%;
-        padding-left: 5vw;
-        padding-right: 5vw;
-        padding-bottom: 0vh;
-    }
-
-    .intro-container {
-        padding-left: 5vw;
-        padding-right: 5vw;
-    }
-    .container-button button {
-        max-width: 30%;
-        min-width: 30%;
-        margin-bottom: 2.5vh;
-    }
+@media only screen and (max-width: 1000px) {
+  img {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    max-height: 20vh;
+    object-fit: cover;
+  }
+  .content-container {
+    flex-direction: column;
+  }
+  .container-padding {
+    width: 100vw;
+  }
+  .container-button button {
+    max-width: 35%;
+    min-width: 35%;
+  }
+  .divider{
+    height: 2vh;
+  }
 }
 @media only screen and (min-width: 1001px) {
-    @media only screen and (max-width: 1300px) {
-        .intro-container {
-            padding-left: 2.5vw;
-            padding-right: 2.5vw;
-        }
-        .container-padding {
-            width: 70vw;
-            height: 30vw;
-        }
-        .content {
-            padding-top: 2.5vh;
-
-            display: flex;
-        }
-        .content1 {
-            padding-top: 2.5vh;
-            display: flex;
-        }
-
-        .content-left {
-            padding-right: 2.5vw;
-            padding-left: 2.5vw;
-        }
-        .content-right {
-            padding-right: 2.5vw;
-            padding-left: 2.5vw;
-            padding-bottom: 2.5vw;
-        }
-        img {
-            width: 100%;
-            max-height: 20vh;
-            overflow: hidden;
-            object-fit: cover;
-        }
-    }
-    @media only screen and (min-width: 1301px) {
-        .container-padding {
-            width: 60vw;
-            height: 40vw;
-        }
-        .content {
-            padding-top: 2.5vh;
-
-            padding-left: 2.5vw;
-            padding-right: 1vw;
-            display: flex;
-        }
-        .content1 {
-            padding-top: 2.5vh;
-
-            display: flex;
-        }
-        img {
-            width: 100%;
-            max-height: 35vh;
-            overflow: hidden;
-            object-fit: cover;
-        }
-        .content-container {
-            flex-direction: row;
-        }
-        .container-button {
-            padding-top: 5vh;
-            padding-bottom: 7.5vh;
-            width: 100%;
-        }
-        .intro-container {
-            margin-top: 2.5vw;
-            padding-left: 2.5vw;
-            padding-right: 2.5vw;
-            
-        }
-    }
-
-    .container-button button {
-        max-width: 20%;
-        min-width: 20%;
-    }
+  img {
+    width: 100%;
+    max-height: 30vh;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  .divider{
+    width: 1.5vw;
+  }
+  .content-container {
+    flex-direction: row;
+  }
+  .container-button button {
+    max-width: 20%;
+    min-width: 20%;
+  }
+  .container-padding {
+    width: 70vw;
+  }
 }
-
+.intro-container{
+  padding-bottom: 3vh;
+}
+.intro-content-container{
+  display: flex;
+  flex-direction: column;
+  padding: 3vh 3vw;
+}
+.container-button{
+  padding: 3vh 0;
+}
 .container-button button {
     background: #6486c4;
     width: 50%;
@@ -132,15 +61,6 @@
     color: #fff;
     border-color: #5d7eb8;
 }
-
-.intro-container {
-    padding-top: 2.5vh;
-}
-
-.container-image {
-    max-height: 30vh;
-}
-
 .container-padding {
     background: white;
     font-family: "Nunito", sans-serif;
@@ -164,11 +84,6 @@ ul li:before {
     font-size: 7.5px;
     position: absolute;
     left: -10px;
-}
-
-.divider_vertical {
-    border-right-color: rgba(169, 169, 169, 0.69);
-    border-right-width: 5px;
 }
 
 .content-container {
