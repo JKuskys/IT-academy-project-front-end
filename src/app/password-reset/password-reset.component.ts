@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../services/account/user.service";
 import {CustomValidators} from "../services/universal/custom-validators";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PasswordReset} from "../shared/passwordReset";
+import {switchMap} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-password-reset',
@@ -18,12 +20,15 @@ export class PasswordResetComponent implements OnInit {
   passwordNotMatch: boolean;
   submission: boolean;
   isLoading = false;
+  paramsId: number;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private userService: UserService) {
     this.resetPasswordForm = this.setForm();
+    this.paramsId = +this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
@@ -43,7 +48,7 @@ export class PasswordResetComponent implements OnInit {
     this.submission = false;
     this.isLoading = true;
     this.info = {
-      email: localStorage.getItem('resetPasswordEmail'),
+      id: this.paramsId,
       newPassword: this.resetPasswordForm.get('passwordReset').value,
       newPasswordRepeat: this.resetPasswordForm.get('passwordRepeatReset').value,
     }

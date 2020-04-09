@@ -65,7 +65,7 @@ import {CallbackPipe} from './shared/callback-pipe';
     GDPRComponent,
     ForgotPasswordComponent,
     PasswordResetComponent,
-    CallbackPipe
+    CallbackPipe,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

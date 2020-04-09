@@ -28,16 +28,16 @@ export class ForgotPasswordComponent implements OnInit {
   onSubmit() {
 
     this.isLoading = true;
-    this.userService.sendEmail(this.resetForm.get('emailReset').value).subscribe(
-      response => {
-        this.closeDialog('forgotPassword');
-        localStorage.setItem('resetPasswordEmail', this.resetForm.get('emailReset').value);
+    this.userService.sendEmail(this.resetForm.get('emailReset').value).subscribe(response => {
+
+
       },
       error => {
         if (error === 'Access Denied') {
           this.serverErrorMessage = 'Neteisingas el. paštas';
         } else {
-          this.serverErrorMessage = error;
+          this.closeDialog('forgotPassword');
+          localStorage.setItem('resetPasswordEmail', this.resetForm.get('emailReset').value);
         }
         this.isLoading = false;
       }

@@ -1,5 +1,5 @@
 export interface PasswordReset {
-  email: string,
+  id: number;
   newPassword: string;
   newPasswordRepeat: string;
 };
