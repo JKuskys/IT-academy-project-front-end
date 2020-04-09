@@ -7,14 +7,14 @@
   >
   </mat-progress-spinner>
   <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
-  <hr>
-  <div id="student-comments" [hidden]="isLoading">
+  <hr [hidden]="isLoading">
+  <div id="student-comments" *ngIf="!isLoading">
     <div id="student-comments-header">Komentarai</div>
     <div class="comment-missing-remark" [hidden]="!isCommentsEmpty()">Komentarų nėra...</div>
-    <div class="comment" *ngFor="let comment of comments | slice:0:displayNumber">
-      <app-student-comment [comment]="comment"></app-student-comment>
+    <div class="comment-missing-remark show-more" *ngIf="comments && comments.length > displayNumber" (click)="increaseBy(5)">Rodyti senesnius...</div>
+    <div class="comment" [hidden]="!comments" *ngFor="let comment of comments | slice: -displayNumber">
+      <app-student-comment [comment]="comment" (attachmentDownload)="onAttachmentDownload($event)"></app-student-comment>
     </div>
-    <button *ngIf="comments.length>displayNumber" (click)="increaseBy(5)" class="show-more">Rodyti daugiau</button>
     <mat-progress-spinner
       class="spinner-styler"
       color="primary"
@@ -22,35 +22,11 @@
       mode="indeterminate"
     >
     </mat-progress-spinner>
-    <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
-    <hr />
-    <div id="student-comments" [hidden]="isLoading">
-        <div id="student-comments-header">Komentarai</div>
-        <div class="comment-missing-remark" [hidden]="!isCommentsEmpty()">Komentarų nėra...</div>
-        <div class="comment" *ngFor="let comment of comments">
-            <app-student-comment
-                [comment]="comment"
-                (attachmentDownload)="onAttachmentDownload($event)"
-            ></app-student-comment>
-        </div>
-        <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isCommentLoading" mode="indeterminate">
-        </mat-progress-spinner>
-        <hr [hidden]="isCommentsEmpty() || isLoading" />
-        <app-admin-comment-write
-            [uploadEnabled]="true"
-            [hidden]="isCommentsEmpty() || isLoading"
-            (commentSave)="onCommentSaved($event)"
-        ></app-admin-comment-write>
-    </div>
-</div>
-<div>
-    <div>
-        <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isCommentLoading" mode="indeterminate">
-        </mat-progress-spinner>
-        <hr [hidden]="isCommentsEmpty() || isLoading" />
-        <app-admin-comment-write
-            [hidden]="isCommentsEmpty() || isLoading"
-            (commentSave)="onCommentSaved($event)"
-        ></app-admin-comment-write>
-    </div>
+    <hr [hidden]="isCommentsEmpty() || isLoading" />
+    <app-admin-comment-write
+      [hidden]="isCommentsEmpty() || isLoading"
+      (commentSave)="onCommentSaved($event)"
+      [uploadEnabled]="true"
+    ></app-admin-comment-write>
+  </div>
 </div>

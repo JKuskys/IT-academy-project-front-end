@@ -29,10 +29,14 @@ export class AdminApplicationDetailsComponent implements OnInit {
               private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
   }
 
-  displayNumber = 5;
+  displayNumberInternal = 5;
+  displayNumberFeedback = 5;
 
-  increaseBy(nr: number){
-    this.displayNumber= this.displayNumber+nr;
+  increaseInternalBy(nr: number) {
+    this.displayNumberInternal = this.displayNumberInternal + nr;
+  }
+  increaseFeedbackBy(nr: number) {
+    this.displayNumberFeedback = this.displayNumberFeedback + nr;
   }
 
   ngOnInit(): void {
@@ -121,5 +125,11 @@ export class AdminApplicationDetailsComponent implements OnInit {
       .subscribe(res => {
         saveAs(res, comment.attachmentName);
       } );
+  }
+  filterInternalComment(comment: Comment) {
+    return !comment.visibleToApplicant;
+  }
+  filterFeedbackComment(comment: Comment) {
+    return comment.visibleToApplicant;
   }
 }

@@ -17,10 +17,6 @@
   flex-direction: column;
 }
 
-.admin-comments{
-  padding: .375rem .75rem;
-}
-
 #admin-action-container button{
   background: #6486C4;
   height: 40px;
@@ -70,7 +66,6 @@
 
 .admin-action-header{
   padding-bottom: .5rem;
-  padding-top: .5rem;
 }
 
 hr{
@@ -83,19 +78,27 @@ hr{
   width: 100%;
   font-style: italic;
   color: grey;
+  margin: 2vh 0;
 }
 .admin-comments-header-below{
   color: grey;
   font-size: 14px;
   text-align: center;
+  margin-bottom: 1.5vh
 }
 
 .show-more{
-    background: #6486C4;
-    height: 40px;
-    border-radius: 5px;
-    color: #fff;
-    border-color: #5D7EB8;
-    width: 13vw;
-    min-width: 150px;
-  }
+  margin: 0 0 1.5vh 0;
+  cursor: pointer;
+}
+
+.admin-comments{
+  margin-top: 1.5vh;
+  padding: 0 0.75rem 0.375rem 0.75rem;
+}
+.tab-container{
+  margin-top: 5vh;
+}
+.admin-comments-header-tab{
+  font-size: 17px;
+}

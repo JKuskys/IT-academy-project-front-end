@@ -7,7 +7,7 @@
   >
   </mat-progress-spinner>
   <app-application-details [hidden]="isLoading" [application]="application"></app-application-details>
-  <hr>
+  <hr *ngIf="!isLoading">
   <div id="admin-action-container" [hidden]="isLoading">
     <div class="admin-action-header">Aplikacijos būsena</div>
     <mat-radio-group aria-label="Select an option" id="status" *ngIf="application" value='{{application.status}}' (change)="onStatusChange($event.value)">
@@ -17,41 +17,39 @@
     </mat-radio-group>
     <button (click)="onStatusSaved(application)">Išsaugoti būseną</button>
   </div>
-  <hr>
-  <mat-tab-group class="tab-container">
+  <mat-tab-group class="tab-container" mat-align-tabs="center" *ngIf="!isLoading">
     <mat-tab >
       <ng-template mat-tab-label>
-        <div class="admin-comments-header">Komentarai
-          <div class="admin-comments-header-below">matoma tik IT Akademijos administratoriams</div>
-        </div>
+        <div class="admin-comments-header-tab">Komentarai</div>
       </ng-template>
       <div class="admin-comments" [hidden]="isLoading">
-        <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
-        <div class="comment" *ngFor="let comment of comments | slice:0:displayNumber">
-          <app-admin-comment *ngIf="!comment.visibleToApplicant" [comment]="comment" [isEditable]="isCommentEditable(comment.authorEmail)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
+        <div class="admin-comments-header-below">Matoma tik IT Akademijos administratoriams</div>
+        <div class="comment-missing-remark" [hidden]="comments && (comments | callback: filterInternalComment).length > 0">Komentarų nėra...</div>
+        <div class="comment-missing-remark show-more" *ngIf="comments && (comments | callback: filterInternalComment).length > displayNumberInternal" (click)="increaseInternalBy(5)">Rodyti senesnius...</div>
+        <div class="comment" *ngFor="let comment of comments | callback: filterInternalComment | slice: -displayNumberInternal">
+          <app-admin-comment [comment]="comment" [isEditable]="isCommentEditable(comment.authorEmail)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
         </div>
-        <button *ngIf="comments.length>displayNumber" (click)="increaseBy(5)" class="show-more">Rodyti daugiau</button>
         <mat-progress-spinner
           class="spinner-styler"
           color="primary"
           *ngIf="isInternalCommentLoading"
           mode="indeterminate"
-        > 
+        >
         </mat-progress-spinner>
-        <hr>
-        <app-admin-comment-write (commentSave)="onCommentSaved($event, true)"></app-admin-comment-write>
+        <hr [hidden]="comments && (comments | callback: filterInternalComment).length === 0">
+        <app-admin-comment-write [uploadEnabled]="false" (commentSave)="onCommentSaved($event, true)"></app-admin-comment-write>
       </div>
     </mat-tab>
     <mat-tab >
       <ng-template mat-tab-label >
-        <div class="admin-comments-header">Žinutė kandidatui</div>
+        <div class="admin-comments-header-tab">Žinutė kandidatui</div>
       </ng-template>
       <div class="admin-comments" [hidden]="isLoading">
-        <div class="comment-missing-remark" [hidden]="comments && comments.length > 0">Komentarų nėra...</div>
-        <div class="comment" *ngFor="let comment of comments | slice:0:displayNumber">
-          <app-admin-comment *ngIf="comment.visibleToApplicant" [comment]="comment" [isEditable]="false" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
+        <div class="comment-missing-remark" [hidden]="comments && (comments | callback: filterFeedbackComment).length > 0">Komentarų nėra...</div>
+        <div class="comment-missing-remark show-more" *ngIf="comments && (comments | callback: filterFeedbackComment).length > displayNumberFeedback" (click)="increaseFeedbackBy(5)">Rodyti senesnius...</div>
+        <div class="comment" *ngFor="let comment of comments | callback: filterFeedbackComment | slice: -displayNumberFeedback">
+          <app-admin-comment [comment]="comment" [isEditable]="false" (attachmentDownload)="onAttachmentDownload($event)" (commentSave)="onCommentEdited($event)" (commentDelete)="onCommentDeleted($event)"></app-admin-comment>
         </div>
-        <button *ngIf="comments.length>displayNumber" (click)="increaseBy(5)" class="show-more">Rodyti daugiau</button>
         <mat-progress-spinner
           class="spinner-styler"
           color="primary"
@@ -59,8 +57,8 @@
           mode="indeterminate"
         >
         </mat-progress-spinner>
-        <hr>
-        <app-admin-comment-write (commentSave)="onCommentSaved($event, false)"></app-admin-comment-write>
+        <hr [hidden]="comments && (comments | callback: filterFeedbackComment).length === 0">
+        <app-admin-comment-write [uploadEnabled]="true" (commentSave)="onCommentSaved($event, false)"></app-admin-comment-write>
       </div>
     </mat-tab>
   </mat-tab-group>
