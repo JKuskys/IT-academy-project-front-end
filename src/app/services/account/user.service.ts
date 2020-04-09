@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Registration} from '../../shared/registration';
 import {LoginInfo} from '../../shared/login';
+import {User} from "../../shared/user";
+import {PasswordReset} from "../../shared/passwordReset";
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,6 @@ export class UserService {
 
 
   submitRegistration(info: Registration): Observable<Registration> {
-
     return this.httpClient
       .post<Registration>((this.proxyurl + this.url + `api/applications`), info)
       .pipe(catchError(this.errorHandler));
@@ -27,6 +28,27 @@ export class UserService {
       .post <LoginInfo>((this.proxyurl + this.url + `auth/login`), loginInfo)
       .pipe(catchError(this.errorHandler));
   }
+
+  sendEmail(email: string): Observable<any> {
+
+    const formData: FormData = new FormData();
+    formData.append('email', email);
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+
+    return this.httpClient
+      .post <LoginInfo>(this.proxyurl + this.url + `api/user/resetPassword`, formData, {headers})
+      .pipe(catchError(this.errorHandler));
+  }
+
+  changePassword(info: PasswordReset): Observable<any>{
+    return this.httpClient
+      .post <PasswordReset>(this.proxyurl + this.url + `api/user/savePassword`, info)
+      .pipe(catchError(this.errorHandler));
+  }
+
 
   private errorHandler(error: HttpErrorResponse) {
     return throwError(error.error.message);

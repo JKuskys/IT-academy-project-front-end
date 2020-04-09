@@ -26,6 +26,9 @@
         <label>Slaptažodis</label>
 
         <input matInput type="password" class="form-control" formControlName="passwordLogin" maxlength="30"/>
+        <div class="align-right">
+
+        </div>
       </div>
       <div
         [hidden]="loginForm.controls.passwordLogin.valid || loginForm.controls.passwordLogin.pristine"
@@ -35,6 +38,7 @@
           Slaptažodis yra privalomas
         </div>
       </div>
+
     </mat-card-content>
     <span class="align-bottom">
             <p [hidden]="isLoading">{{ this.serverErrorMessage }}</p>
@@ -48,6 +52,9 @@
             >
                 Prisijungti
             </button>
+      <div class="align-right">
+        <button (click)="openPasswordReminder()" class="hyperlink" [hidden]="isLoading">Pamiršau slaptažodį</button>
+      </div>
 
             <mat-progress-spinner
               class="spinner-styler"

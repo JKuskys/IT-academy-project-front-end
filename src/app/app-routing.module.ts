@@ -7,12 +7,14 @@ import {RoleGuardService} from './services/authorization/role-guard-service.serv
 import {AdminApplicationDetailsComponent} from './admin-application-details/admin-application-details.component';
 import {StudentPageComponent} from './student-page/student-page.component';
 import {GDPRComponent} from "./gdpr/gdpr.component";
+import {PasswordResetComponent} from "./password-reset/password-reset.component";
 
 
 const routes: Routes = [
   {path: 'gdpr', component: GDPRComponent},
   {path: 'home', component: HomePageComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'updatePassword', component: PasswordResetComponent},
   {path: 'application',
     component: StudentPageComponent,
     data: {
