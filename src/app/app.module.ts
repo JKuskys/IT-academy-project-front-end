@@ -44,6 +44,8 @@ import { MatCheckboxModule} from "@angular/material/checkbox";
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import {CallbackPipe} from './shared/callback-pipe';
+import { EmailSentComponent } from './email-sent/email-sent.component';
+import { PasswordChangedComponent } from './password-changed/password-changed.component';
 
 
 @NgModule({
@@ -66,6 +68,8 @@ import {CallbackPipe} from './shared/callback-pipe';
     ForgotPasswordComponent,
     PasswordResetComponent,
     CallbackPipe,
+    EmailSentComponent,
+    PasswordChangedComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

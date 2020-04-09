@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from "../services/account/user.service";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {EmailSentComponent} from "../email-sent/email-sent.component";
 
 @Component({
   selector: 'app-forgot-password',
@@ -16,7 +17,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private dialogRef: MatDialogRef<any>) {
+    private dialogRef: MatDialogRef<any>,
+    private dialog: MatDialog,) {
     this.resetForm = this.setForm();
   }
 
@@ -29,15 +31,13 @@ export class ForgotPasswordComponent implements OnInit {
 
     this.isLoading = true;
     this.userService.sendEmail(this.resetForm.get('emailReset').value).subscribe(response => {
-
-
       },
       error => {
         if (error === 'Access Denied') {
           this.serverErrorMessage = 'Neteisingas el. paštas';
         } else {
           this.closeDialog('forgotPassword');
-          localStorage.setItem('resetPasswordEmail', this.resetForm.get('emailReset').value);
+          this.dialog.open(EmailSentComponent);
         }
         this.isLoading = false;
       }

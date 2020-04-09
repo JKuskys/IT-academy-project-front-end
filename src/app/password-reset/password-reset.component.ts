@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PasswordReset} from "../shared/passwordReset";
 import {switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {PasswordChangedComponent} from "../password-changed/password-changed.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-password-reset',
@@ -26,7 +28,8 @@ export class PasswordResetComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private userService: UserService) {
+    private userService: UserService,
+    private dialog: MatDialog) {
     this.resetPasswordForm = this.setForm();
     this.paramsId = +this.route.snapshot.paramMap.get('id');
   }
@@ -56,11 +59,17 @@ export class PasswordResetComponent implements OnInit {
     if (this.info.newPassword === this.resetPasswordForm.get('passwordRepeatReset').value) {
       this.userService.changePassword(this.info).subscribe(
         () => {
-          this.serverErrorMessage = '';
-          this.resetPasswordForm.reset();
-          this.router.navigate(['home']);
         },
-        error => (this.serverErrorMessage = error, this.isLoading = false)
+        error => {
+          if (error.toString() === '200') {
+            this.serverErrorMessage = '';
+            this.resetPasswordForm.reset();
+            this.dialog.open(PasswordChangedComponent,{ disableClose: true });
+          } else {
+            this.serverErrorMessage = 'Atsiprašome, bet bandykite veliau dar kartą';
+            this.isLoading = false;
+          }
+        }
       );
     } else {
       this.passwordNotMatch = true;
