@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'gdpr', component: GDPRComponent},
   {path: 'home', component: HomePageComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'updatePassword', component: PasswordResetComponent},
+  {path: 'change-password', component: PasswordResetComponent},
   {path: 'application',
     component: StudentPageComponent,
     data: {

@@ -4,8 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Registration} from '../../shared/registration';
 import {LoginInfo} from '../../shared/login';
-import {User} from "../../shared/user";
-import {PasswordReset} from "../../shared/passwordReset";
+import {PasswordReset} from '../../shared/passwordReset';
 
 @Injectable({
   providedIn: 'root'
@@ -39,13 +38,13 @@ export class UserService {
     headers.append('Accept', 'application/json');
 
     return this.httpClient
-      .post <LoginInfo>(this.proxyurl + this.url + `api/user/resetPassword`, formData, {headers})
+      .post <LoginInfo>(this.proxyurl + this.url + `api/user/reset-password`, formData, {headers})
       .pipe(catchError(this.errorHandler));
   }
 
   changePassword(info: PasswordReset): Observable<any>{
     return this.httpClient
-      .post <PasswordReset>(this.proxyurl + this.url + `api/user/savePassword`, info)
+      .post <PasswordReset>(this.proxyurl + this.url + `api/user/save-password`, info)
       .pipe(catchError(this.errorHandler));
   }
 
