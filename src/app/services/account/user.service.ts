@@ -12,6 +12,7 @@ import {PasswordReset} from '../../shared/passwordReset';
 export class UserService {
   private url = 'https://academy-project-back.herokuapp.com/';
   private proxyurl = 'https://cors-anywhere.herokuapp.com/';
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -42,13 +43,15 @@ export class UserService {
       .pipe(catchError(this.errorHandler));
   }
 
-  changePassword(info: PasswordReset): Observable<any>{
+  changePassword(info: PasswordReset): Observable<any> {
     return this.httpClient
-      .post <PasswordReset>(this.proxyurl + this.url + `api/user/save-password`, info)
-      .pipe(catchError(this.errorHandler));
+      .post <any>(this.proxyurl + this.url + `api/user/save-password`, info)
+      .pipe(catchError(this.errorHandlerForTxt));
   }
 
-
+  private errorHandlerForTxt(error: HttpErrorResponse) {
+    return throwError(error.status);
+  }
   private errorHandler(error: HttpErrorResponse) {
     return throwError(error.error.message);
   }
