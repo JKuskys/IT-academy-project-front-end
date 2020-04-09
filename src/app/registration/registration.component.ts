@@ -122,7 +122,7 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(1),
         // check if only valid letters
-        CustomValidators.patternValidator(/^[a-zA-Z\s]*$/, {hasLettersOnly: true}),
+        CustomValidators.patternValidator(/^[a-žA-Ž\s]*$/, {hasLettersOnly: true}),
         // check if there are only gaps
         CustomValidators.gapsOnly({hasGaps: true}),
       ]],
