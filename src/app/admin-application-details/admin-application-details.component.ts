@@ -24,6 +24,7 @@ export class AdminApplicationDetailsComponent implements OnInit {
   currentStatus?: string;
   isFeedbackCommentLoading: boolean;
   isInternalCommentLoading: boolean;
+  isStatusChangeLoading: boolean;
 
   constructor(private route: ActivatedRoute, private applicationService: ApplicationService,
               private commentService: CommentService, private jwtHelper: JwtHelper, private snackBar: MatSnackBar) {
@@ -43,10 +44,12 @@ export class AdminApplicationDetailsComponent implements OnInit {
     this.isLoading = true;
     this.isFeedbackCommentLoading = false;
     this.isInternalCommentLoading = false;
+    this.isStatusChangeLoading = false;
     forkJoin(this.applicationService.getApplication({id: this.route.snapshot.paramMap.get('id')}),
       this.commentService.getComments({applicationId: this.route.snapshot.paramMap.get('id')}))
       .subscribe(res => {
         this.application = res[0];
+        this.currentStatus = this.application.status;
         this.comments = res[1];
         this.updateApplicationToSeen();
         this.isLoading = false;
@@ -93,12 +96,14 @@ export class AdminApplicationDetailsComponent implements OnInit {
 
   onStatusSaved(application: Application): void {
     if (this.currentStatus) {
-      application.status = this.currentStatus;
+      this.isStatusChangeLoading = true;
       this.applicationService.updateApplication({id: this.route.snapshot.paramMap.get('id')}, application)
         .subscribe(res => {
+          application.status = this.currentStatus;
           const config = new MatSnackBarConfig();
           config.duration = 2000;
           this.snackBar.open('Būsena išsaugota!', '', config);
+          this.isStatusChangeLoading = false;
         });
     }
   }

@@ -15,7 +15,14 @@
       <mat-radio-button value="ATMESTA" color="primary">Atmesta</mat-radio-button>
       <mat-radio-button value="POTENCIALUS" color="primary">Potencialus kandidatas</mat-radio-button>
     </mat-radio-group>
-    <button (click)="onStatusSaved(application)">Išsaugoti būseną</button>
+    <button (click)="onStatusSaved(application)" [disabled]="application && currentStatus === application.status">Išsaugoti būseną</button>
+    <mat-progress-spinner
+      class="spinner-styler"
+      color="primary"
+      *ngIf="isStatusChangeLoading"
+      mode="indeterminate"
+    >
+    </mat-progress-spinner>
   </div>
   <mat-tab-group class="tab-container" mat-align-tabs="center" *ngIf="!isLoading">
     <mat-tab >
