@@ -1,166 +1,195 @@
-@media only screen and (max-width: 1000px){
-  img {
-    width: 100%;
-    height: auto;
-    overflow: hidden;
-    max-height: 30vh;
-    object-fit: cover;
-  }
-  .content-container{
-    flex-direction: column;
-  }
-  .container-padding{
-    width: 100vw;
-  }
-  .content-left{
-    padding-bottom: 0;
-  }
-  .content-right{
-    padding-bottom: 2.5vh;
-  }
-  .content{
-    width: 100%;
-    padding-left: 5vw;
-    padding-right: 5vw;
-  }
+@media only screen and (max-width: 1025px) {
+    img {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        max-height: 20vh;
+        object-fit: cover;
+    }
+    .content-container {
+        flex-direction: column;
+    }
+    .container-padding {
+        width: 100vw;
+    }
+    .content-left {
+        padding-bottom: 0;
+    }
+    .content-right {
+        padding-bottom: 2.5vh;
+    }
+    .content {
+        padding-top: 2.5vh;
+        width: 100%;
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+    .content1 {
+        padding-top: 0vh;
+        width: 100%;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        padding-bottom: 0vh;
+    }
 
-  .intro-container{
-    padding-left: 5vw;
-    padding-right: 5vw;
-  }
-  .container-button button{
-    max-width: 30%;
-    min-width: 30%;
-  }
+    .intro-container {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+    .container-button button {
+        max-width: 30%;
+        min-width: 30%;
+        margin-bottom: 2.5vh;
+    }
 }
-@media only screen and (min-width: 1001px){
-  @media only screen and (max-width: 1300px){
-    .container-padding{
-      width: 70vw;
-    }
-  }
-  @media only screen and (min-width: 1301px){
-    .container-padding{
-      width: 60vw;
-    }
-  }
+@media only screen and (min-width: 1001px) {
+    @media only screen and (max-width: 1300px) {
+        .intro-container {
+            padding-left: 2.5vw;
+            padding-right: 2.5vw;
+        }
+        .container-padding {
+            width: 70vw;
+            height: 30vw;
+        }
+        .content {
+            padding-top: 2.5vh;
 
-  img {
-    width: 100%;
-    max-height: 30vh;
-    overflow: hidden;
-    object-fit: cover;
-  }
-  .content-container{
-    flex-direction: row;
-  }
-  .content{
+            display: flex;
+        }
+        .content1 {
+            padding-top: 2.5vh;
+            display: flex;
+        }
+
+        .content-left {
+            padding-right: 2.5vw;
+            padding-left: 2.5vw;
+        }
+        .content-right {
+            padding-right: 2.5vw;
+            padding-left: 2.5vw;
+            padding-bottom: 2.5vw;
+        }
+        img {
+            width: 100%;
+            max-height: 20vh;
+            overflow: hidden;
+            object-fit: cover;
+        }
+    }
+    @media only screen and (min-width: 1301px) {
+        .container-padding {
+            width: 60vw;
+            height: 40vw;
+        }
+        .content {
+            padding-top: 2.5vh;
+
+            padding-left: 2.5vw;
+            padding-right: 1vw;
+            display: flex;
+        }
+        .content1 {
+            padding-top: 2.5vh;
+
+            display: flex;
+        }
+        img {
+            width: 100%;
+            max-height: 35vh;
+            overflow: hidden;
+            object-fit: cover;
+        }
+        .content-container {
+            flex-direction: row;
+        }
+        .container-button {
+            padding-top: 5vh;
+            padding-bottom: 7.5vh;
+            width: 100%;
+        }
+        .intro-container {
+            margin-top: 2.5vw;
+            padding-left: 2.5vw;
+            padding-right: 2.5vw;
+            
+        }
+    }
+
+    .container-button button {
+        max-width: 20%;
+        min-width: 20%;
+    }
+}
+
+.container-button button {
+    background: #6486c4;
     width: 50%;
-    padding-bottom: 2.5vh;
-  }
-
-  .content-left{
-    padding-left: 2.5vw;
-    padding-right: 1.25vw;
-  }
-
-  .content-right{
-    padding-right: 2.5vw;
-    padding-left: 1.25vw;
-  }
-
-  .intro-container{
-    padding-left: 2.5vw;
-    padding-right: 2.5vw;
-  }
-  .container-button button{
-    max-width: 20%;
-    min-width: 20%;
-  }
+    height: 45px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    border-color: #5d7eb8;
 }
 
-.container-button button{
-  background: #6486C4;
-  width: 50%;
-  height: 45px;
-  border-radius: 5px;
-  font-weight: bold;
-  color: #fff;
-  border-color: #5D7EB8;
+.intro-container {
+    padding-top: 2.5vh;
 }
 
-.intro-container{
-  padding-top: 2.5vh;
+.container-image {
+    max-height: 30vh;
 }
 
-.content{
-  padding-top: 2.5vh;
-
-  display: flex;
-  align-items: center;
+.container-padding {
+    background: white;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    min-height: 85vh;
+    box-shadow: 0px 0px 15px 0px rgba(110, 110, 110, 0.75);
 }
 
-.container-image{
-  max-height: 30vh;
+ul {
+    padding-left: 10px;
 }
 
-.container-padding{
-  background: white;
-  font-family: 'Nunito', sans-serif;
-  font-size: 16px;
-  min-height: 85vh;
-  box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+ul li {
+    list-style-type: none;
+    position: relative;
+    padding-left: 5px;
 }
 
-ul{
-  padding-left: 10px;
+ul li:before {
+    content: "\25BA \0020";
+    font-size: 7.5px;
+    position: absolute;
+    left: -10px;
 }
 
-ul li{
-  list-style-type: none;
-  position: relative;
-  padding-left: 5px;
+.divider_vertical {
+    border-right-color: rgba(169, 169, 169, 0.69);
+    border-right-width: 5px;
 }
 
-ul li:before{
-  content:"\25BA \0020";
-  font-size: 7.5px;
-  position: absolute;
-  left: -10px;
-}
-
-.divider_vertical{
-  border-right-color: rgba(169, 169, 169, 0.69);
-  border-right-width:5px ;
-}
-
-.content-container{
-  display: flex;
+.content-container {
+    display: flex;
 }
 
 .btn-xl {
-  width: 50%;
-  height: 45px;
-  border-radius: 5px;
-  font-weight: bold;
+    width: 50%;
+    height: 45px;
+    border-radius: 5px;
+    font-weight: bold;
 }
 
-.container-image{
-  width: 100%;
+.container-image {
+    width: 100%;
 }
 
-.container-button{
-  padding-bottom: 7.5vh;
-  width: 100%;
+.container-text p {
+    font-size: 18px;
 }
-
-
-
-.container-text p{
-  font-size: 18px;
-}
-
 
 .button2:hover {
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
