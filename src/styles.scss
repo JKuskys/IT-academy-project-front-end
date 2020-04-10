@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body{
+  width:100vw;
+  overflow-x: hidden;
+}
+body{
+  position: relative;
+  background: #EEEEEE;
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+}
+.mat-simple-snackbar > span {
+  width: 100%;
+  text-align: center;
+}
+.spinner-styler{
+  margin:0 auto;
+}

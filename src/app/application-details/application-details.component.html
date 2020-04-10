@@ -1,0 +1,61 @@
+<div class="application-details-wrapper" *ngIf="application">
+
+  <div class="row">
+    <div class="col-7">
+      <div class="application-header">{{application.fullName}}</div>
+      <div class="application-header-second">{{application.applicationDate | date: 'yyyy-MM-dd'}}</div>
+    </div>
+    <div class="col-4 ">
+      <div class="block status-declined" *ngIf="application.status===status.ATMESTA">Atmesta</div>
+      <div class="block status-accepted" *ngIf="application.status===status.PRIIMTA">Priimta</div>
+      <div class="block status-possible" *ngIf="potential()">Potencialus</div>
+      <div class="block status-null" *ngIf="noStatusAdmin()">Peržiūrėta</div>
+      <div class="block status-null-user" *ngIf="noStatusUser()">Gauta</div>
+    </div>
+  </div>
+
+  <div class="application-detail-contacts">
+    <div class="row">
+      <div class="col-auto">
+        <i class="fas fa-phone-square-alt icon-padding-one"></i>
+        {{application.phoneNumber}}
+      </div>
+      <div class="col-auto">
+        <i class="fas fa-envelope icon-padding"></i>
+        {{application.email}}
+      </div>
+
+    </div>
+    <i class="fas fa-book-open icon-padding"></i>
+    {{application.education}}
+
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  <div class="application-detail-container">
+    <div class="application-details-header">Pomėgiai</div>
+    <div class="application-details-content">{{application.hobbies}}</div>
+  </div>
+  <div class="application-detail-container">
+    <div class="application-details-header">Galimybė pasirašyti sutartį</div>
+    <div
+      class="application-details-content">{{application.agreementNeeded ? "Taip " : "Ne"}}
+      <br>{{application.agreementNeeded ? "" : application.comment}}</div>
+  </div>
+  <div class="application-detail-container">
+    <div class="application-details-header">Galimybė ateiti akademijos laiku (14-18 val. darbo dienomis)</div>
+    <div class="application-details-content">{{application.academyTimeSuitable ? "Taip" : "Ne"}}</div>
+  </div>
+  <div class="application-detail-container">
+    <div class="application-details-header">Ėjimo į akademiją priežastis</div>
+    <div class="application-details-content">{{application.reason}}</div>
+  </div>
+  <div class="application-detail-container">
+    <div class="application-details-header">Patinkančios technologijos</div>
+    <div class="application-details-content">{{application.technologies}}</div>
+  </div>
+  <div class="application-detail-container">
+    <div class="application-details-header">Apie IT Akademiją sužinojo</div>
+    <div class="application-details-content">{{application.source}}</div>
+  </div>
+</div>

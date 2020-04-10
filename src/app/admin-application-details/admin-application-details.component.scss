@@ -1,0 +1,104 @@
+#admin-application-details-wrapper{
+  min-height: 85vh;
+  margin: 0 auto;
+  background: white;
+  padding-bottom: 2.5vh;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+  box-shadow: 0px 0px 15px 0px rgba(110,110,110,0.75);
+}
+
+#admin-action-container{
+  display: flex;
+  width: 100%;
+  padding: .375rem .75rem;
+  flex-direction: column;
+}
+
+#admin-action-container button{
+  background: #6486C4;
+  height: 40px;
+  border-radius: 5px;
+  color: #fff;
+  border-color: #5D7EB8;
+  width: 13vw;
+  min-width: 150px;
+}
+
+#admin-action-container button:disabled{
+  background: #b5c5e3;
+  border-color: #a3b7dc;
+}
+
+@media only screen and (max-width: 1000px){
+  #admin-application-details-wrapper{
+    width: 100%;
+  }
+  .tab-container{
+    width: 100%;
+  }
+  .admin-comments-header{
+    text-align: left;
+    font-size: 18px;
+    width: 20vh;
+  }
+}
+
+@media only screen and (min-width: 1001px){
+  #admin-application-details-wrapper{
+    width: 50%;
+    padding-right: 2.5vw;
+    padding-left: 2.5vw;
+    padding-top: 2.5vh;
+  }
+  .admin-comments-header{
+  font-size: 20px;
+  text-align: left;
+  margin-bottom: .75rem;
+  margin-top: 1rem;
+  }
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.admin-action-header{
+  padding-bottom: .5rem;
+}
+
+hr{
+  width: 100%;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+.comment-missing-remark{
+  text-align: center;
+  width: 100%;
+  font-style: italic;
+  color: grey;
+  margin: 2vh 0;
+}
+.admin-comments-header-below{
+  color: grey;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 1.5vh
+}
+
+.show-more{
+  margin: 0 0 1.5vh 0;
+  cursor: pointer;
+}
+
+.admin-comments{
+  margin-top: 1.5vh;
+  padding: 0 0.75rem 0.375rem 0.75rem;
+}
+.tab-container{
+  margin-top: 5vh;
+}
+.admin-comments-header-tab{
+  font-size: 17px;
+}

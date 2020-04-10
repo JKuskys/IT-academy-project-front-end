@@ -1,0 +1,96 @@
+.application-header{
+  width: 100%;
+  text-align: left;
+  font-size: 30px;
+  padding-left: 1rem;
+  padding-bottom: 5px;
+  word-break: break-word;
+  line-height: 30px;
+}
+.application-header-second{
+  width: 100%;
+  text-align: left;
+  font-size: 15px;
+  padding-left: 1rem;
+}
+.icon-padding-one{
+  padding-left: 5px;
+  padding-right :7px ;
+}
+.icon-padding{
+  padding-left: 5px;
+  padding-right :3px ;
+}
+
+.block{
+  width:100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  text-align: center;
+  max-height: 5vh;
+}
+
+@media only screen and (max-width: 1000px){
+  @media only screen and (max-width: 600px){
+    .block{
+      font-size: 4vw;
+    }
+  }
+  @media only screen and (min-width: 601px){
+    .block{
+      font-size: 2.5vw;
+    }
+  }
+}
+@media only screen and (min-width: 1001px){
+  @media only screen and (max-width: 1300px){
+    .block{
+      font-size: 2vw;
+    }
+  }
+  @media only screen and (min-width: 1301px){
+    .block{
+      font-size: 25px;
+    }
+  }
+}
+
+.status-declined{
+  background-color: rgba(255, 0, 10, 0.45);
+}
+.status-accepted {
+  background-color: rgba(46, 183, 3, 0.45);
+}
+.status-possible{
+  background-color: rgba(255, 127, 0, 0.45);
+}
+.status-null{
+  background-color: rgba(206, 205, 195, 0.45);
+}
+.status-null-user{
+  background-color: rgba(0, 81, 255, 0.45);
+}
+
+.application-details-wrapper{
+  padding-top: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  background: white;
+}
+.application-details-header{
+  font-size: 14px;
+  color: grey;
+}
+.application-detail-container{
+  padding: .375rem .75rem;
+}
+.application-details-content{
+  margin-left: 1rem;
+  word-wrap: break-word;
+}
+.application-detail-contacts{
+  padding: 30px .75rem .375rem;
+}

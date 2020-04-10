@@ -1,0 +1,51 @@
+<div class="mx-auto container-padding ">
+  <div class="container-image">
+    <img
+      src="https://images.pexels.com/photos/1595391/pexels-photo-1595391.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+  </div>
+  <div class="intro-content-container">
+
+    <div class="intro-container">
+      „IT Akademija“ yra dviejų dalių programa, kurią sudaro su studijomis suderinta praktika ir stažuotė mūsų IT
+      departamente. Programa skirta IT ar susijusių specialybių studentams ir tiems, kas sieja savo ateitį su
+      IT. Akademijos studentai turi galimybę pasirinkti norimą stažuotės kryptį kurso pabaigoje ir dirbti
+      su realiais IT projektais.
+    </div>
+
+    <div class="content-container">
+      <div class="column">
+        <div class="container-text">
+          <p><b>Programos dalyviai mokosi:</b></p>
+
+          <ul>
+            <li>programavimo;</li>
+            <li>duomenų analizės;</li>
+            <li>informacinių sistemų priežiūros;</li>
+            <li>testavimo;</li>
+            <li>komandinio darbo naudojant banko specifines technologijas, procesus ir praktikas;</li>
+            <li>darbo su duomenimis.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="column">
+        <div class="container-text">
+          <p><b>Prisijunk, jeigu tu:</b></p>
+
+          <ul>
+            <li>Sieki su IT susijusio išsilavinimo ar mėgini praktiškai atrasti save šioje srityje;</li>
+            <li>Ateityje nori būti įvairiapusis IT specialistas, kuris sugeba ne tik programuoti;</li>
+            <li>Degi noru tobulėti, rodai iniciatyvą ir jau turi bazinius gebėjimus;</li>
+            <li>Skirsi pusę darbo dienos (14-18 val.) teorinėms ir praktinėms užduotims;</li>
+            <li>Puikiai kalbi ir rašai angliškai.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center container-button">
+      <button *ngIf="!logInCheck()" (click)="openDialog()" class="btn-rounded float-center button2">
+        Registruotis
+      </button>
+    </div>
+  </div>
+</div>

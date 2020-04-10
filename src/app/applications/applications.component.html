@@ -1,0 +1,68 @@
+<div class="mx-auto container-padding ">
+  <div>
+    <mat-table [dataSource]="dataSource" matSort matSortActive="applicationDate" matSortDirection="desc"
+               class="mat-elevation-z8">
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Statusas</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Statusas">
+          <div *ngIf="element.status === status.PRIIMTA" order="1" class="status-padding">
+            <span class="status-passed">Patvirtinta</span>
+          </div>
+          <div *ngIf="element.status === status.ATMESTA" order="2" class="status-padding">
+            <span class="status-declined">Atmesta</span>
+          </div>
+          <div *ngIf="element.status === status.POTENCIALUS" order="4" class="status-padding">
+            <span class="status-possible">Potenciali</span>
+          </div>
+          <div *ngIf="element.status === status.PERZIURETA" order="3" class="status-padding">
+            <span class="status-seen">Peržiūrėta</span>
+          </div>
+          <div *ngIf="element.status === status.NAUJA" class="status-padding">
+            <span class="status-new">
+              <p hidden>a</p>
+              Nauja
+            </span>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fullName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Vardas Pavardė</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Vardas ir pavardė" (click)="openApplication(element)"><button>{{ element.fullName }}</button></mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="applicationDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Aplikacijos data</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Data">{{ element.applicationDate | date: 'MM-dd' }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="commentCount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Komentarų skaičius</mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Komentarų skaičius">
+          <i *ngIf="!element.newInternalComment||sameAuthor(element.lastInternalCommentAuthor)" class="empty-padding-dialog"></i>
+          <i *ngIf="!element.newExternalComment||sameAuthor(element.lastExternalCommentAuthor)" class="empty-padding-envelope"></i>
+          <i class="fas fa-comment icon-padding-dialog" *ngIf="element.newInternalComment&&!sameAuthor(element.lastInternalCommentAuthor)"></i>
+          <i class="fas fa-envelope icon-padding-envelope" *ngIf="element.newExternalComment&&!sameAuthor(element.lastExternalCommentAuthor)"></i>
+          {{ element.commentCount }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element" data-label="Daugiau">
+          <button>
+            <mat-icon (click)="openApplication(element)">launch</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  </mat-card>
+
+  <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

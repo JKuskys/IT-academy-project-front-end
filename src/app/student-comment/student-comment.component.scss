@@ -1,0 +1,30 @@
+
+.student-comment{
+    margin-bottom: 1.5vh;
+    -webkit-box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+    -moz-box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+    box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+    border-radius: 5px;
+  }
+  .student-comment-header{
+    border-bottom: solid #d6d6d6 1px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .student-comment-header, .student-comment-content{
+    padding: .375rem .75rem;
+  }
+.attachment-download {
+  display: flex;
+  flex-direction: row;
+  color: grey;
+  cursor: pointer;
+  border-top: solid #d6d6d6 1px;
+}
+.attachment-download div {
+  margin: auto 0 auto .5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline;
+}

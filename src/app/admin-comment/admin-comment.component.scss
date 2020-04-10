@@ -1,0 +1,72 @@
+.admin-comment{
+  margin-bottom: 1.5vh;
+  -webkit-box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+  -moz-box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+  box-shadow: 0px 1px 5px 1px rgba(140,140,140,0.5);
+  border-radius: 5px;
+}
+.admin-comment-header{
+  border-bottom: solid #d6d6d6 1px;
+  display: flex;
+  justify-content: space-between;
+}
+.admin-comment-header, .admin-comment-content{
+  padding: .375rem .75rem;
+}
+#admin-comment-date{
+  min-width: 100px;
+  text-align: right;
+}
+.author-comment-edit{
+  color: grey;
+  font-style: italic;
+  padding-left: .5rem;
+}
+.author-comment-edit:hover{
+  color: grey;
+  cursor: pointer;
+}
+.author-comment-edit-field{
+  width: 100%;
+  border: #d6d6d6 solid 1px;
+}
+.admin-comment-content{
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+}
+.admin-comment-content button{
+  width: 10vw;
+  margin-left: .5rem;
+  margin-top: .5rem;
+  background: #6486C4;
+  height: 35px;
+  border-radius: 5px;
+  color: #fff;
+  border-color: #5D7EB8;
+  min-width: 100px;
+}
+.admin-comment-content button:disabled{
+  background: #b5c5e3;
+  border-color: #a3b7dc;
+}
+.admin-edit-actions{
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+.attachment-download {
+  display: flex;
+  flex-direction: row;
+  color: grey;
+  cursor: pointer;
+  border-top: solid #d6d6d6 1px;
+}
+.attachment-download div {
+  margin: auto 0 auto .5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline;
+}
+

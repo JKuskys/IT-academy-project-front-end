@@ -1,0 +1,22 @@
+<div class="admin-comment-write-container">
+  <form [formGroup]="commentForm" (ngSubmit)="onCommentSaved(); commentForm.reset()">
+    <div class="admin-comment-content">
+      <textarea maxlength="1500" formControlName="commentBody" placeholder="Naujas komentaras..."></textarea>
+      <div class="admin-comment-content-below">
+        <div>
+          <div class="upload-file-wrapper" *ngIf="uploadEnabled">
+            <input type="file" id="attachment" formControlName="attachment" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx">
+            <label for="attachment">
+              <mat-icon> insert_drive_file</mat-icon>
+              <div>{{selectedFile ? selectedFile.name : fileSelectedDefaultName}}</div>
+            </label>
+          </div>
+        </div>
+        <button type='submit' [disabled]="!commentForm.valid">Išsaugoti</button>
+      </div>
+      <div *ngIf="uploadEnabled && !commentForm.controls.attachment.valid" class="alert alert-danger">
+        {{commentForm.controls.attachment.errors.message}}
+      </div>
+    </div>
+  </form>
+</div>

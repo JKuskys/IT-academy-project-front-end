@@ -1,0 +1,246 @@
+padding-bottom{
+  padding-bottom: 30vh;
+}
+
+//for textareas
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+.resize {
+    resize: none;
+}
+//to add padding to all blocks of input
+.container-uncolored {
+    margin: auto;
+    max-width: 100%;
+    background: rgba(235, 239, 242, 0);
+    border-radius: 5px;
+}
+//to show items in one line(phone number)
+.inline {
+    display: inline;
+}
+
+.container-reg-colored {
+    margin: auto;
+    max-width: 850px;
+    min-width: 400px;
+    padding: 25px;
+    background: rgba(0, 222, 242, 0.9);
+    border-radius: 25px;
+    padding-bottom: 10px;
+    scroll-padding-bottom: 10px;
+}
+html,
+body {
+    height: 800px;
+    width: 400px;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 800px;
+    width: 400px;
+    font-family: "Roboto", sans-serif;
+}
+.app-header {
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+
+@media only screen and (max-width: 1000px){
+  .login-wrapper {
+    min-height: 70vh;
+    width: 100%;
+  }
+
+  .login-wrapper .example-form {
+    min-width: 100%;
+    max-width: 100vw;
+    width: 100vw;
+  }
+
+
+
+  #sel1{
+    width: 100%;
+    padding: 0;
+    margin:0;
+  }
+
+  #sel1 .col-md-3{
+     max-width: 50%;
+    padding:0;
+   }
+  #sel1 .col-md-9{
+    max-width: 50%;
+    padding:0;
+  }
+}
+
+@media only screen and (min-width: 1001px){
+  .login-wrapper {
+    max-height: 100vh;
+    width: 38vw;
+  }
+}
+
+
+.positronx {
+    text-decoration: none;
+    color: #ffffff;
+}
+.box {
+    position: relative;
+    top: 0;
+    opacity: 1;
+    float: left;
+    padding: 60px 50px 40px 50px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    z-index: 5;
+    max-width: 330px;
+}
+.box.back {
+    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    top: -20px;
+    opacity: 0.8;
+    z-index: -1;
+}
+.box:before {
+    content: "";
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: -10px;
+    background: rgba(255, 255, 255, 0.6);
+    left: 0;
+    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    z-index: -1;
+}
+
+.login-wrapper .example-full-width,
+.login-wrapper .btn-block .divas{
+    width: 80%;
+    height: 100%;
+}
+.login-wrapper mat-card-header {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: 700;
+}
+.login-wrapper mat-card-header mat-card-title {
+    font-size: 30px;
+    margin: 0;
+}
+.login-wrapper .mat-card {
+    padding: 40px 70px 50px;
+}
+.login-wrapper .mat-stroked-button {
+    border: 1px solid currentColor;
+    line-height: 54px;
+    background: #fff7fa;
+}
+.login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0.8375em 0;
+}
+.text-area{
+    width:100px;
+    height:100px;
+}
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 10px
+  }
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 2px;
+  border-radius: 5px;
+  background: #5A7BB6;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 0, 0, 0);
+}
+.close {
+  font-size: 35px;
+  outline: none;    
+  position: sticky;
+  top: 0;
+ text-align: left;
+ margin: -20px -14px;
+}
+
+
+.borderx {
+  border: 1px solid #6486c4;
+}
+input.mat-input-element {
+  border: 1px solid #6486c4;
+}
+.form-control {
+  border: 1px solid #6486c4;
+}
+.mat-dialog-container{
+  max-height:800px;
+  padding-bottom: 10px;
+}
+#dialog{
+  min-height:80vh;
+  padding-bottom: 10px;
+
+}
+
+vertical-middle{
+  position: absolute;
+  margin: auto;
+}
+::ng-deep .mat-tooltip {
+  font-size: 14px;
+}
+.sticky{
+  position: sticky;
+  bottom: 0;
+}
+.stickytop{
+  position: fixed;
+}
+.test{
+  position: fixed;
+}
+.mat-progress-spinner {
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 0.3;
+}
