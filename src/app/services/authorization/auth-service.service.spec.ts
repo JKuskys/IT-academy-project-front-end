@@ -19,7 +19,9 @@ describe('AuthServiceService', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(AuthServiceService);
   });
-
+  it('should be created', () => {
+    expect(service.isAuthenticated()).toBeFalse();
+  });
   it('should be created', () => {
     expect(service).toBeTruthy();
   });

@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 import {HttpTestingController, HttpClientTestingModule} from '@angular/common/http/testing';
 import {MatRadioGroup, MatRadioModule} from "@angular/material/radio";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 class MockUserService extends UserService {
 };
@@ -22,6 +23,7 @@ describe('RegistrationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [RegistrationComponent],
       imports: [
+        MatTooltipModule,
         ReactiveFormsModule,
         FormsModule,
         MatDialogModule,
@@ -50,6 +52,9 @@ describe('RegistrationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('close dialog should work', () => {
+    expect(component.closeDialog).toBeTruthy();
   });
   it('contract should return true by default', () => {
     expect(component.getTrueFalse('contract')).toBeTrue();

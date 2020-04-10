@@ -1,13 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ApplicationsComponent } from './applications.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import {ApplicationsComponent} from './applications.component';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {RouterTestingModule} from '@angular/router/testing';
 import {ApplicationService} from '../services/application/application.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {Status} from "../shared/status";
 
-class MockApplicationService extends ApplicationService{};
+class MockApplicationService extends ApplicationService {
+};
 
 describe('ApplicationsComponent', () => {
   let component: ApplicationsComponent;
@@ -17,19 +19,19 @@ describe('ApplicationsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicationsComponent ],
+      declarations: [ApplicationsComponent],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [  
+      imports: [
         RouterTestingModule,
         HttpClientTestingModule,
         RouterTestingModule
-       ],
+      ],
       providers: [{
         provide: ApplicationService,
         useClass: MockApplicationService
       }]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -39,7 +41,16 @@ describe('ApplicationsComponent', () => {
     httpClient = TestBed.get(HttpClient);
     httpTestingController = TestBed.get(HttpTestingController);
   });
-
+  it('same author should return false', () => {
+    localStorage.setItem('email', 'tests');
+    expect(component.sameAuthor('tests')).toBeTrue();
+  });
+  it('status getter should work', () => {
+    expect(component.status).toBeTruthy();
+  });
+  it('open application should work', () => {
+    expect(component.openApplication).toBeTruthy();
+  });
   it('should create', () => {
     expect(component).toBeTruthy();
   });

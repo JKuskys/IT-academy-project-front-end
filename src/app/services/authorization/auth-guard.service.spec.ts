@@ -10,7 +10,7 @@ class MockAuthServiceService extends AuthServiceService {};
 
 describe('AuthGuardService', () => {
   let service: AuthGuardService;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ RouterTestingModule ],
@@ -24,12 +24,14 @@ describe('AuthGuardService', () => {
       }]
     })
   }));
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(AuthGuardService);
   });
-
+  it('by default user should not be authorized', () => {
+    expect(service.canActivate()).toBeFalse();
+  });
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
