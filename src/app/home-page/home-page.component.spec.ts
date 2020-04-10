@@ -28,6 +28,9 @@ describe('HomePageComponent', () => {
     fixture.detectChanges();
   });
 
+  it('logInCheck should return false', () => {
+    expect(component.logInCheck()).toBeFalse();
+  });
   it('should create', () => {
     expect(component).toBeTruthy();
   });
