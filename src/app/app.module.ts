@@ -40,14 +40,12 @@ import {ApplicationsComponent} from './body/applications/applications.component'
 import {StudentPageComponent} from './body/student-page/student-page.component';
 import {StudentCommentComponent} from './body/student-comment/student-comment.component';
 import { GDPRComponent } from './body/gdpr/gdpr.component';
-import { MatCheckboxModule} from "@angular/material/checkbox";
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { ForgotPasswordComponent } from './body/forgot-password/forgot-password.component';
 import { PasswordResetComponent } from './body/password-reset/password-reset.component';
 import {CallbackPipe} from './shared/types/callback-pipe';
 import { EmailSentComponent } from './body/email-sent/email-sent.component';
 import { PasswordChangedComponent } from './body/password-changed/password-changed.component';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers, reducers, metaReducers } from './reducers';
 
 
 @NgModule({
@@ -99,9 +97,6 @@ import { reducers, metaReducers, reducers, metaReducers } from './reducers';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
   ],
   providers: [
     RoleGuardService,
