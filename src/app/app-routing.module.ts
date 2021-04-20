@@ -1,4 +1,4 @@
-ng update @angular/core@10 @angular/cli@10import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomePageComponent} from './body/home-page/home-page.component';
 import {LoginComponent} from './body/login/login.component';
@@ -6,8 +6,8 @@ import {ApplicationsComponent} from './body/applications/applications.component'
 import {RoleGuardService} from './services/authorization/role-guard-service.service';
 import {AdminApplicationDetailsComponent} from './body/admin-application-details/admin-application-details.component';
 import {StudentPageComponent} from './body/student-page/student-page.component';
-import {GDPRComponent} from "./body/gdpr/gdpr.component";
-import {PasswordResetComponent} from "./body/password-reset/password-reset.component";
+import {GDPRComponent} from './body/gdpr/gdpr.component';
+import {PasswordResetComponent} from './body/password-reset/password-reset.component';
 
 
 const routes: Routes = [
