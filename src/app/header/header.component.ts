@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {LoginComponent} from '../login/login.component';
+import {LoginComponent} from '../body/login/login.component';
 import {AuthServiceService} from '../services/authorization/auth-service.service';
 import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';

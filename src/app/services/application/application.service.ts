@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {Email} from '../../shared/email';
-import {Application} from '../../shared/application';
+import {Email} from '../../shared/types/email';
+import {Application} from '../../shared/types/application';
 import {catchError} from 'rxjs/operators';
-import {LoginInfo} from '../../shared/login';
+import {LoginInfo} from '../../shared/types/login';
 
 @Injectable({
   providedIn: 'root'

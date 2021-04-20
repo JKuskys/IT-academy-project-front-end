@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Registration} from '../../shared/registration';
-import {LoginInfo} from '../../shared/login';
-import {PasswordReset} from '../../shared/passwordReset';
+import {Registration} from '../../shared/types/registration';
+import {LoginInfo} from '../../shared/types/login';
+import {PasswordReset} from '../../shared/types/passwordReset';
 
 @Injectable({
   providedIn: 'root'

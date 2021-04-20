@@ -2,15 +2,15 @@ import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HomePageComponent} from './home-page/home-page.component';
+import {HomePageComponent} from './body/home-page/home-page.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LoginComponent} from './login/login.component';
-import {RegistrationComponent} from './registration/registration.component';
+import {LoginComponent} from './body/login/login.component';
+import {RegistrationComponent} from './body/home-page/registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SuccessfulRegistrationComponent} from './successful-registration/successful-registration.component';
+import {SuccessfulRegistrationComponent} from './body/successful-registration/successful-registration.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
@@ -28,24 +28,26 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {ApplicationDetailsComponent} from './application-details/application-details.component';
-import {AdminApplicationDetailsComponent} from './admin-application-details/admin-application-details.component';
-import {AdminCommentComponent} from './admin-comment/admin-comment.component';
-import {AdminCommentWriteComponent} from './admin-comment-write/admin-comment-write.component';
+import {ApplicationDetailsComponent} from './body/application-details/application-details.component';
+import {AdminApplicationDetailsComponent} from './body/admin-application-details/admin-application-details.component';
+import {AdminCommentComponent} from './body/admin-comment/admin-comment.component';
+import {AdminCommentWriteComponent} from './body/admin-comment-write/admin-comment-write.component';
 import {AuthGuardService} from './services/authorization/auth-guard.service';
 import {AuthServiceService} from './services/authorization/auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RoleGuardService} from './services/authorization/role-guard-service.service';
-import {ApplicationsComponent} from './applications/applications.component';
-import {StudentPageComponent} from './student-page/student-page.component';
-import {StudentCommentComponent} from './student-comment/student-comment.component';
-import { GDPRComponent } from './gdpr/gdpr.component';
+import {ApplicationsComponent} from './body/applications/applications.component';
+import {StudentPageComponent} from './body/student-page/student-page.component';
+import {StudentCommentComponent} from './body/student-comment/student-comment.component';
+import { GDPRComponent } from './body/gdpr/gdpr.component';
 import { MatCheckboxModule} from "@angular/material/checkbox";
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { PasswordResetComponent } from './password-reset/password-reset.component';
-import {CallbackPipe} from './shared/callback-pipe';
-import { EmailSentComponent } from './email-sent/email-sent.component';
-import { PasswordChangedComponent } from './password-changed/password-changed.component';
+import { ForgotPasswordComponent } from './body/forgot-password/forgot-password.component';
+import { PasswordResetComponent } from './body/password-reset/password-reset.component';
+import {CallbackPipe} from './shared/types/callback-pipe';
+import { EmailSentComponent } from './body/email-sent/email-sent.component';
+import { PasswordChangedComponent } from './body/password-changed/password-changed.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers, reducers, metaReducers } from './reducers';
 
 
 @NgModule({
@@ -97,6 +99,9 @@ import { PasswordChangedComponent } from './password-changed/password-changed.co
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
   ],
   providers: [
     RoleGuardService,
