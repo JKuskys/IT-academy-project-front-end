@@ -1,0 +1,68 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <button type="button" class="close float-right exit" aria-label="Close" (click)="closeDialog()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <mat-card-header>
+    <h1 class="text-center">Prisijungimas</h1>
+  </mat-card-header>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <div class="form-group">
+        <label>El. paštas</label>
+        <input matInput type="email" class="form-control" id="email" formControlName="email"/>
+      </div>
+      <div
+        [hidden]="loginForm.controls.email.valid || loginForm.controls.email.pristine"
+        class="alert alert-danger"
+      >
+        <div *ngIf="loginForm.controls.email.errors?.required">
+          Elektroninis paštas yra privalomas
+        </div>
+        <div *ngIf="loginForm.controls.email.errors?.pattern">
+          Neteisingas elektroninis paštas
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Slaptažodis</label>
+
+        <input matInput type="password" class="form-control" formControlName="password" maxlength="30"/>
+        <div class="align-right">
+
+        </div>
+      </div>
+      <div
+        [hidden]="loginForm.controls.password.valid || loginForm.controls.password.pristine"
+        class="alert alert-danger"
+      >
+        <div *ngIf="loginForm.controls.password.errors?.required">
+          Slaptažodis yra privalomas
+        </div>
+      </div>
+
+    </mat-card-content>
+    <span class="align-bottom" >
+            <p [hidden]="isLoading$ | async">{{ this.errorMessage$ | async }}</p>
+            <button
+              [hidden]="isLoading$ | async"
+              mat-stroked-button
+              color="primary"
+              type="submit"
+              class="btn-block mt-10"
+              [disabled]="!loginForm.valid"
+            >
+                Prisijungti
+            </button>
+      <div class="align-right">
+        <button (click)="openPasswordReminder()" class="hyperlink" type="button" [hidden]="isLoading$ | async">Pamiršau slaptažodį</button>
+      </div>
+
+            <mat-progress-spinner
+              class="spinner-styler"
+              color="primary"
+              *ngIf="isLoading$ | async"
+              mode="indeterminate"
+            >
+            </mat-progress-spinner>
+        </span>
+  </form>
+</div>

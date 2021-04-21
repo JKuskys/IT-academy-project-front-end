@@ -2,50 +2,45 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {Registration} from '../../shared/types/registration';
-import {LoginInfo} from '../../shared/types/login';
-import {PasswordReset} from '../../shared/types/passwordReset';
+import {EmailPayload, PasswordResetPayload, SignInPayload, SignUpPayload} from '../../shared/types/account';
+import {API_PATHS} from '../../shared/constants/other.const';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url = 'https://academy-project-back.herokuapp.com/';
-  private proxyurl = 'https://cors-anywhere.herokuapp.com/';
-
   constructor(private httpClient: HttpClient) {
   }
 
-
-  submitRegistration(info: Registration): Observable<Registration> {
+  submitRegistration(payload: SignUpPayload): Observable<any> {
     return this.httpClient
-      .post<Registration>((this.proxyurl + this.url + `api/applications`), info)
+      .post<SignUpPayload>((API_PATHS.proxy + API_PATHS.backEnd + API_PATHS.applications), payload)
       .pipe(catchError(this.errorHandler));
   }
 
-  submitLogin(loginInfo: LoginInfo): Observable<LoginInfo> {
+  submitLogin(payload: SignInPayload): Observable<any> {
     return this.httpClient
-      .post <LoginInfo>((this.proxyurl + this.url + `auth/login`), loginInfo)
+      .post <SignInPayload>((API_PATHS.proxy + API_PATHS.backEnd + API_PATHS.login), payload)
       .pipe(catchError(this.errorHandler));
   }
 
-  sendEmail(email: string): Observable<any> {
+  sendEmail(payload: EmailPayload): Observable<any> {
 
     const formData: FormData = new FormData();
-    formData.append('email', email);
+    formData.append('email', payload.email);
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
 
     return this.httpClient
-      .post <LoginInfo>(this.proxyurl + this.url + `api/user/reset-password`, formData, {headers})
+      .post <SignInPayload>(API_PATHS.proxy + API_PATHS.backEnd + API_PATHS.resetPassword, formData, {headers})
       .pipe(catchError(this.errorHandler));
   }
 
-  changePassword(info: PasswordReset): Observable<any> {
+  changePassword(info: PasswordResetPayload): Observable<any> {
     return this.httpClient
-      .post <any>(this.proxyurl + this.url + `api/user/save-password`, info)
+      .post <any>(API_PATHS.proxy + API_PATHS.backEnd + API_PATHS.changePassword, info)
       .pipe(catchError(this.errorHandlerForTxt));
   }
 

@@ -6,7 +6,7 @@ import {HomePageComponent} from './body/home-page/home-page.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LoginComponent} from './body/login/login.component';
+import {LoginComponent} from './header/login/login.component';
 import {RegistrationComponent} from './body/home-page/registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,25 +28,50 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {ApplicationDetailsComponent} from './body/application-details/application-details.component';
+import {ApplicationDetailsComponent} from './shared/components/application-details/application-details.component';
 import {AdminApplicationDetailsComponent} from './body/admin-application-details/admin-application-details.component';
-import {AdminCommentComponent} from './body/admin-comment/admin-comment.component';
-import {AdminCommentWriteComponent} from './body/admin-comment-write/admin-comment-write.component';
+import {AdminCommentComponent} from './body/admin-application-details/admin-comment/admin-comment.component';
+import {AdminCommentWriteComponent} from './shared/components/admin-comment-write/admin-comment-write.component';
 import {AuthGuardService} from './services/authorization/auth-guard.service';
 import {AuthServiceService} from './services/authorization/auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {RoleGuardService} from './services/authorization/role-guard-service.service';
 import {ApplicationsComponent} from './body/applications/applications.component';
 import {StudentPageComponent} from './body/student-page/student-page.component';
-import {StudentCommentComponent} from './body/student-comment/student-comment.component';
+import {StudentCommentComponent} from './body/student-page/student-comment/student-comment.component';
 import { GDPRComponent } from './body/gdpr/gdpr.component';
 import { MatCheckboxModule} from '@angular/material/checkbox';
-import { ForgotPasswordComponent } from './body/forgot-password/forgot-password.component';
-import { PasswordResetComponent } from './body/password-reset/password-reset.component';
+import { ForgotPasswordComponent } from './header/login/forgot-password/forgot-password.component';
+import { PasswordResetComponent } from './header/login/forgot-password/password-reset/password-reset.component';
 import {CallbackPipe} from './shared/types/callback-pipe';
 import { EmailSentComponent } from './body/email-sent/email-sent.component';
 import { PasswordChangedComponent } from './body/password-changed/password-changed.component';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import {effects, reducers} from './store';
+import {PhoneNumberGuard} from './shared/guards/phoneNumber.guard';
 
+const angularMaterialImports = [
+  MatCheckboxModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatIconModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+];
 
 @NgModule({
   declarations: [
@@ -73,32 +98,21 @@ import { PasswordChangedComponent } from './body/password-changed/password-chang
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
-    MatCheckboxModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatIconModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+    }),
+    ...angularMaterialImports,
   ],
   providers: [
+    PhoneNumberGuard,
     RoleGuardService,
     AuthServiceService,
     AuthGuardService,
@@ -106,6 +120,7 @@ import { PasswordChangedComponent } from './body/password-changed/password-chang
     {provide: MatDialogRef, useValue: {}}
 
   ],
+  exports: angularMaterialImports,
   bootstrap: [AppComponent]
 })
 export class AppModule {

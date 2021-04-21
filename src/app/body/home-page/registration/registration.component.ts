@@ -1,13 +1,14 @@
 import {Component, OnInit, HostListener} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Registration} from '../../../shared/types/registration';
-import {UserService} from '../../../services/account/user.service';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {SuccessfulRegistrationComponent} from '../../successful-registration/successful-registration.component';
+import {MatDialogRef} from '@angular/material/dialog';
 import {CustomValidators} from '../../../services/universal/custom-validators';
 import {PhoneNumberService} from '../../../services/universal/phone-number.service';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {Store} from '@ngrx/store';
+import {getSignUpError, getIsSignUpLoading, signUp, getIsSignUpLoaded, fetchPhoneNumbers} from '../../../store';
+import {SignUpPayload} from '../../../shared/types/account';
+import {Observable} from 'rxjs';
+import {getPhoneNumbers} from '../../../store/selectors/common.selectors';
 
 @Component({
   selector: 'app-registration',
@@ -15,108 +16,63 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-  registrationForm: FormGroup;
-  arrCodes: string[];
-  info: Registration;
-  serverErrorMessage: string;
-  passwordNotMatch: boolean;
-  submission: boolean;
-  isLoading = false;
+  public registrationForm: FormGroup;
+  public passwordNotMatch: boolean;
+  public submission: boolean;
+
+  public isLoading$: Observable<boolean>;
+  public error$: Observable<string>;
+  public phoneNumbers$: Observable<string[]>;
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
-    private dialog: MatDialogRef<any>,
-    private tooltip:MatTooltipModule,
-    private dialogNew: MatDialog,
-    private phoneNumberService: PhoneNumberService) {
+    private dialogRef: MatDialogRef<any>,
+    private store: Store<{}>) {
     this.registrationForm = this.setForm();
   }
 
   ngOnInit(): void {
-    this.phoneNumberService.getPhoneCodes().subscribe(
-      data => {
-        this.arrCodes = data as string[];
-      },
-      (err: HttpErrorResponse) => {
-        console.log(err.message);
+    this.phoneNumbers$ = this.store.select(getPhoneNumbers);
+    this.isLoading$ = this.store.select(getIsSignUpLoading)
+    this.error$ = this.store.select(getSignUpError)
+    this.store.select(getIsSignUpLoaded).subscribe(
+      (loaded) => {
+        if(loaded) {
+          this.registrationForm.reset();
+          this.closeDialog();
+        }
       });
   }
 
-  validatePasswords(): boolean {
-    if (this.passwordReg.value !== this.passwordRepeatReg.value &&
-      this.passwordRepeatReg.value !== '') {
-      return false;
-    } else {
-      return true;
-    }
+  public validatePasswords(): boolean {
+    return !(this.password.value !== this.passwordRepeat.value && this.passwordRepeat.value !== '')
   }
 
-  onSubmit() {
+  public onSubmit() {
     this.passwordNotMatch = false;
     this.submission = false;
-    this.isLoading = true;
-    this.info = {
-      // id: Math.floor(Math.random() * 10),
-      phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
-      education: this.registrationForm.get('schoolName').value,
-      hobbies: this.registrationForm.get('hobbies').value,
-      agreementNeeded: this.getTrueFalse('contract'),
-      comment: this.registrationForm.get('contractDescription').value,
-      academyTimeSuitable: this.getTrueFalse('workTime'),
-      reason: this.registrationForm.get('drive').value,
-      technologies: this.registrationForm.get('experience').value,
-      source: this.registrationForm.get('fromWhere').value,
-      applicationDate:
-        new Date().getFullYear() + '-' +
-        String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
-        String(new Date().getDate()).padStart(2, '0'),
-      user: {
-        // id: Math.floor(Math.random() * 10),
-        email: this.registrationForm.get('emailReg').value,
-        password: this.registrationForm.get('passwordReg').value,
-        passwordRepeat: this.registrationForm.get('passwordRepeatReg').value,
-        fullName: this.registrationForm.get('firstAndLastName').value,
-        admin: false,
-      }
-    };
-
-    if (this.info.user.password === this.registrationForm.get('passwordRepeatReg').value) {
-      this.userService.submitRegistration(this.info).subscribe(
-        () => {
-          this.serverErrorMessage = '';
-          this.registrationForm.reset();
-          this.closeDialog();
-          this.openDialog();
-        },
-        error => (this.serverErrorMessage = error, this.isLoading = false)
-      );
+    if (this.validatePasswords()) {
+      const info: SignUpPayload = this.getMappedForm();
+      this.store.dispatch(signUp({payload: info}))
     } else {
       this.passwordNotMatch = true;
       this.submission = false;
     }
   }
 
-  openDialog() {
-    this.dialogNew.open(SuccessfulRegistrationComponent);
-  }
-  closeDialog() {
+  public closeDialog() {
     this.registrationForm.reset();
     this.registrationForm = this.setForm();
-    this.dialog.close(RegistrationComponent);
+    this.dialogRef.close(RegistrationComponent);
   }
 
 
-  getTrueFalse(id: string) {
+  public isSelected(id: string) {
     const value = this.registrationForm.get(id).value;
-    if (value === 'true' || value === true) {
-      return true;
-    } else {
-      return false;
-    }
+    return value === 'true' || value === true;
   }
 
-  setForm() {
+  private setForm() {
     return this.fb.group({
       firstAndLastName: ['', [
         Validators.required,
@@ -200,11 +156,36 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  get passwordReg() {
+  private getMappedForm() {
+    return {
+      phoneNumber: this.registrationForm.get('phoneCode').value + this.registrationForm.get('phoneNumber').value,
+      education: this.registrationForm.get('schoolName').value,
+      hobbies: this.registrationForm.get('hobbies').value,
+      agreementNeeded: this.isSelected('contract'),
+      comment: this.registrationForm.get('contractDescription').value,
+      academyTimeSuitable: this.isSelected('workTime'),
+      reason: this.registrationForm.get('drive').value,
+      technologies: this.registrationForm.get('experience').value,
+      source: this.registrationForm.get('fromWhere').value,
+      applicationDate:
+        new Date().getFullYear() + '-' +
+        String(new Date().getMonth() + 1).padStart(2, '0') + '-' +
+        String(new Date().getDate()).padStart(2, '0'),
+      user: {
+        email: this.registrationForm.get('emailReg').value,
+        password: this.registrationForm.get('passwordReg').value,
+        passwordRepeat: this.registrationForm.get('passwordRepeatReg').value,
+        fullName: this.registrationForm.get('firstAndLastName').value,
+        admin: false,
+      }
+    }
+  }
+
+  get password() {
     return this.registrationForm.get('passwordReg');
   }
 
-  get passwordRepeatReg() {
+  get passwordRepeat() {
     return this.registrationForm.get('passwordRepeatReg');
   }
 

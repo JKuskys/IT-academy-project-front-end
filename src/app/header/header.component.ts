@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {LoginComponent} from '../body/login/login.component';
+import {LoginComponent} from './login/login.component';
 import {AuthServiceService} from '../services/authorization/auth-service.service';
 import {Router} from '@angular/router';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {RoleGuardService} from '../services/authorization/role-guard-service.service';
+import {go} from '../store';
+import {ROUTES} from '../shared/constants/routes.const';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-header',
@@ -17,8 +20,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private dialog: MatDialog,
               private auth: AuthServiceService,
-              private  router: Router,
-              private roleGuardService: RoleGuardService) {
+              private store: Store<{}>,) {
   }
 
   logInCheck(): boolean {
@@ -43,12 +45,12 @@ export class HeaderComponent implements OnInit {
 
 
   redirect(path: string) {
-    this.router.navigate([path]).catch();
+    this.store.dispatch(go({path}))
     this.showHamburgerMenu();
   }
 
   onLogOut() {
-    this.router.navigate(['home']).catch();
+    this.store.dispatch(go({path: ROUTES.home}))
     localStorage.removeItem('token');
     localStorage.setItem('roles', '');
     localStorage.setItem('email', '');

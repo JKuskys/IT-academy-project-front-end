@@ -6,16 +6,20 @@ import {
 } from '@angular/router';
 import {AuthServiceService} from './auth-service.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
+import {go} from '../../store';
+import {ROUTES} from '../../shared/constants/routes.const';
+import {Store} from '@ngrx/store';
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RoleGuardService implements CanActivate {
   public jwtHelper: JwtHelperService = new JwtHelperService();
   public auth: AuthServiceService = new AuthServiceService();
 
-  constructor(public router: Router) {
+  constructor(public store: Store<{}>) {
   }
 
   setRole(token: string) {
@@ -45,7 +49,7 @@ export class RoleGuardService implements CanActivate {
     ) {
       return true;
     }
-    this.router.navigate(['home']).catch();
+    this.store.dispatch(go({path: ROUTES.home}))
     return false;
   }
 }

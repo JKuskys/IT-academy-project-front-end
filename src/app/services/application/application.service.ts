@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {Email} from '../../shared/types/email';
 import {Application} from '../../shared/types/application';
 import {catchError} from 'rxjs/operators';
-import {LoginInfo} from '../../shared/types/login';
+import {EmailPayload} from '../../shared/types/account';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +28,9 @@ export class ApplicationService {
     return this.httpClient.put<Application>(`${this.proxyurl}${this.url}${this.apiPath}/applications/${id}`, application);
   }
 
-  getProfileApplication(email: Email): Observable<any> {
+  getProfileApplication(email: EmailPayload): Observable<any> {
     return this.httpClient
-      .post <Email>((`${this.proxyurl}${this.url}${this.apiPath}/users/application`), email)
+      .post <EmailPayload>((`${this.proxyurl}${this.url}${this.apiPath}/users/application`), email)
       .pipe(catchError(this.errorHandler));
   }
 

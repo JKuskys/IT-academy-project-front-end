@@ -44,7 +44,7 @@
                 <div class="row" id="sel1">
                     <div class="col-md-3 pr-0">
                         <select formControlName="phoneCode" class="form-control inline">
-                            <option [value]="name.dial_code" *ngFor="let name of arrCodes">{{
+                            <option [value]="name.dial_code" *ngFor="let name of phoneNumbers$ | async">{{
                                 name.code + " | " + name.dial_code
                             }}</option>
                         </select>
@@ -171,7 +171,7 @@
                     </div>
                 </div>
                 <textarea
-                    [hidden]="getTrueFalse('contract')"
+                    [hidden]="isSelected('contract')"
                     matInput
                     rows="5"
                     type="text"
@@ -283,7 +283,7 @@
             <div
                 [hidden]="
                     (registrationForm.controls.passwordReg.valid || registrationForm.controls.passwordReg.pristine) &&
-                    (this.passwordRepeatReg.value === '' || this.passwordReg.value !== '')
+                    (this.passwordRepeat.value === '' || this.password.value !== '')
                 "
                 class="alert alert-danger"
             >
@@ -321,7 +321,7 @@
                 />
             </div>
             <div [hidden]="validatePasswords()" class="alert alert-danger">
-                <div *ngIf="this.passwordReg.value != this.passwordRepeatReg.value">
+                <div *ngIf="this.password.value != this.passwordRepeat.value">
                     Slaptažodžiai turi sutapti
                 </div>
             </div>
@@ -338,20 +338,20 @@
     </div>
 </mat-dialog-content>
 <span class="align-bottom mt-4 padding-bottom">
-    <p>{{ this.serverErrorMessage }}</p>
-    <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isLoading" mode="indeterminate">
+    <mat-progress-spinner class="spinner-styler" color="primary" *ngIf="isLoading$ | async" mode="indeterminate">
     </mat-progress-spinner>
     <button
-        [hidden]="isLoading"
+        [hidden]="isLoading$ | async"
         hintLabel="Max 10 characters"
         mat-stroked-button
         color="primary"
         type="submit"
         class="btn-block mt-10 sticky"
-        (click)="onSubmit()" 
+        (click)="onSubmit()"
         [disabled]="!registrationForm.valid"
     >
         Registruotis
     </button>
+    <p>{{ error$ | async }}</p>
 </span>
 <mat-hint class="sticky">Registruotis galėsite užpildę visus laukus</mat-hint>

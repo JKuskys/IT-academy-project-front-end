@@ -2,24 +2,25 @@ import {Injectable} from '@angular/core';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {Router} from '@angular/router';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {go} from '../../store';
+import {ROUTES} from '../../shared/constants/routes.const';
+import {Store} from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
-  public jwtHelper: JwtHelperService = new JwtHelperService();
+  private jwtHelper: JwtHelperService= new JwtHelperService()
 
-  constructor(private router: Router) {
+  constructor(private store: Store<{}>) {
   }
 
   onLogOut() {
     window.addEventListener('storage', (event) => {
-        if (event.storageArea == localStorage) {
+        if (event.storageArea === localStorage) {
           const token = localStorage.getItem('token');
           if (!isNotNullOrUndefined(token)) {
-            // Perform logout
-            //Navigate to home
-            this.router.navigate(['home']);
+            this.store.dispatch(go({path: ROUTES.home}))
           }
         }
       }
@@ -34,7 +35,7 @@ export class SessionService {
           localStorage.removeItem('token');
           localStorage.removeItem('email');
           localStorage.removeItem('roles');
-          this.router.navigate(['home']);
+          this.store.dispatch(go({path: ROUTES.home}))
         }
       }
     }, 60 * 100);

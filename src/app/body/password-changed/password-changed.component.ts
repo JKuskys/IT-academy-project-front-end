@@ -1,23 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
-import {Router} from "@angular/router";
+import {MatDialogRef} from '@angular/material/dialog';
+import {Store} from '@ngrx/store';
+import {go} from '../../store';
+import {ROUTES} from '../../shared/constants/routes.const';
 
 @Component({
   selector: 'app-password-changed',
   templateUrl: './password-changed.component.html',
   styleUrls: ['./password-changed.component.scss']
 })
-export class PasswordChangedComponent implements OnInit {
+export class PasswordChangedComponent {
 
   constructor(private dialog: MatDialogRef<any>,
-              private router: Router) {
-  }
-
-  ngOnInit(): void {
+              private store: Store<{}>) {
   }
 
   closeDialog() {
-    this.router.navigate(['home']);
+    this.store.dispatch(go({path: ROUTES.home}))
     this.dialog.close(PasswordChangedComponent);
   }
 }

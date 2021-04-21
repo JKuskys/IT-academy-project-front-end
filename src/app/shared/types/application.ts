@@ -1,4 +1,4 @@
-import {Info} from './info';
+import { Info } from './account';
 
 export interface Application extends Info {
   fullName: string;

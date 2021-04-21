@@ -6,6 +6,9 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Router} from '@angular/router';
 import {ApplicationService} from '../../services/application/application.service';
 import {Status} from '../../shared/types/status';
+import {go} from '../../store';
+import {ROUTES} from '../../shared/constants/routes.const';
+import {Store} from '@ngrx/store';
 
 
 @Component({
@@ -24,7 +27,7 @@ export class ApplicationsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
 
-  constructor(private router: Router,
+  constructor(private store: Store<{}>,
               private applicationService: ApplicationService) {
 
   }
@@ -53,7 +56,7 @@ export class ApplicationsComponent implements OnInit {
   }
 
   openApplication(element: Application) {
-    this.router.navigate(['applications/' + element.id]);
+    this.store.dispatch(go({path: ROUTES.applicationsWithoutId + element.id}))
   }
 
   get status() {

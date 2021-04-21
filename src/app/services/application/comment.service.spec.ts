@@ -9,16 +9,16 @@ describe('CommentService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule
-      ]
+      ],
+      providers: [CommentService]
     })
-  }));
+  });
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
     service = TestBed.inject(CommentService);
     httpClient = TestBed.get(HttpClient);
     httpTestingController = TestBed.get(HttpTestingController);

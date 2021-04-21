@@ -47,10 +47,10 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
   it('adminCheck should return false', () => {
-    expect(component.adminCheck()).toBeFalse();
+    expect(component.adminCheck()).toBeFalsy();
   });
   it('logInCheck should return false', () => {
-    expect(component.logInCheck()).toBeFalse();
+    expect(component.logInCheck()).toBeFalsy();
   });
   it('onLogOut when redirecting should not crash', () => {
     expect(component.onLogOut).toBeTruthy();
